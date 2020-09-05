@@ -1,6 +1,5 @@
 body {
-  font-family:monospace;
-}
-span {
-    color:#738ADB;
+    background-color: black;
+    color: white;
+    font-family:fantasy;
 }
