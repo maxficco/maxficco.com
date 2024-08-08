@@ -1,19 +1,25 @@
 * {
-    margin: 0;
+    margin:0;
     padding: 0;
     box-sizing: border-box;
+    border: 1px solid;
+}
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
+}
+@supports (font-variation-settings: normal) {
+  :root { font-family: InterVariable, sans-serif; }
 }
 body {
-    background-color:black;
-    color:white;
+    background-color: #E6EECC;
+    color: black;
+    margin:20px;
 }
-#header {
-    opacity:0.5;
+.nav * {
+    display:inline-block;
 }
-#side {
+.content {
+    margin-top:40px;
+}
 
-}
-
-#side a {
-    color:#c92424;
-}
