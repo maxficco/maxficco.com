@@ -4,23 +4,36 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <link rel="stylesheet" href="style.css">                                                                                
-        <script src="script.js"></script>
-        <link rel="preconnect" href="https://rsms.me/">
-        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+        <script type="importmap">
+          {
+            "imports": {
+              "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+              "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+            }
+          }
+        </script>
+
+
         <title>Max Ficco</title>
     </head>
     <body>
-        <ul class="nav">
-            <h1>max ficco</h1>
-            <li><a>about</a></li>
-            <li><a>blog</a></li>
-            <li><a>projects</a></li>
-            <li><a>contact</a></li>
-        </ul>
-        <div class="content">
-            <p>work in progress</p>
-        </div>
+        <script type ="module" src="https://threejs.org/build/three.js"></script>
+        <script type="module" src="script.js"></script>
+        <canvas id="bg"></canvas>
+
+        <h1>Max Ficco</h1>
+        <p>Is a kid from Colorado</p>
+        <br>
+        <p>I'm studying computer science and math</p>
+        <p>at the University of Notre Dame</p>
+        <br>
+        <p>I like <a href="projects.html">computers</a> and <a href="music.html">music</a></p>
+        <p>and taking <a href="photos.html">photos</a><p>
+        <p>and I'm trying to <a href="blog.html">write</a> more</p>
+        <br>
+        <p>If you want to say hi my email is max [at] this domain</p>
 
     </body>
 </html>

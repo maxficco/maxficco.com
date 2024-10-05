@@ -2,24 +2,18 @@
     margin:0;
     padding: 0;
     box-sizing: border-box;
-    border: 1px solid;
-}
-:root {
-  font-family: Inter, sans-serif;
-  font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
-}
-@supports (font-variation-settings: normal) {
-  :root { font-family: InterVariable, sans-serif; }
 }
 body {
-    background-color: #E6EECC;
+    background-color: #ffffff;
     color: black;
     margin:20px;
 }
-.nav * {
-    display:inline-block;
+h1 {
+    font-size:25px;
 }
-.content {
-    margin-top:40px;
+canvas {
+	position:fixed;
+	top:0;
+	left:0;
+    z-index:-1;
 }
-
