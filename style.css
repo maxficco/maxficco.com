@@ -1,3 +1,10 @@
+html {
+    position: relative;
+    min-height: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
 * {
     margin:0;
     padding:0;
@@ -12,6 +19,7 @@ body {
     width:86vw;
     margin: 0 auto;
     height:calc(100vh - 4px);
+    min-height:calc(100vh - 4px);
 }
 h1 {
     margin:5px;
