@@ -47,7 +47,7 @@ main {
     float: left;
     display: inline;     
     text-align:center;
-    width:80%;
+    width:82%;
 }
 main p {
     color:#a89984;
@@ -76,8 +76,13 @@ main p {
 }
 
 canvas {
+    position:fixed;
+    top:0;
+    left:0;
     width:100%;
-    height:50%;
+    height:100%;
+    pointer-events: none;
+    border:none;
 }
 
 footer {
