@@ -224,8 +224,6 @@ function animate() {
     if (body) fish.draw();
     fish.draw_outline();
 
-    console.log(fish.mouseposx, fish.mouseposy);
-
     requestAnimationFrame(animate);
 }
 
@@ -254,7 +252,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const rect =  document.querySelector("header").getBoundingClientRect();
     fish.mouseposx = rect.x+rect.width;
     fish.mouseposy = rect.y;
-    animate();
 });
 
 // Start animation
+animate();
