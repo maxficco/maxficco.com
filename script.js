@@ -2,10 +2,6 @@ console.log("moo")
 const canvas = document.getElementById("background");
 const ctx = canvas.getContext("2d");
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 class circle {
     constructor(radius, link) {
         this.radius = radius;
@@ -77,8 +73,8 @@ class chain{
     constructor(radiusList) {
         this.radii = radiusList;
         this.head = new circle(radiusList[0], null);
-        this.mouseposx = window.innerWidth / 2;
-        this.mouseposy = window.innerHeight / 2;
+        this.mouseposx = window.innerWidth*0.9;
+        this.mouseposy = window.innerHeight*0.9;
         this.head.x = this.mouseposx + this.head.radius;
         this.head.y = this.mouseposy;
         this.circles = [];
@@ -107,15 +103,12 @@ class chain{
         const rotationSpeed = 0.25;
         this.head.angle += angleDiff * rotationSpeed;
 
-        console.log(Math.sin(this.t));
         let speed = 4;
         if (distToMouse > targetDist) {
             this.head.angle += Math.sin(this.t)/12;
             this.head.x += Math.cos(this.head.angle) * speed;
             this.head.y += Math.sin(this.head.angle) * speed;
         }
-//        this.head.x = this.mouseposx - Math.cos(this.head.angle) * targetDist;
- //       this.head.y = this.mouseposy - Math.sin(this.head.angle) * targetDist;
 
         for (let i = 1; i < this.circles.length; i++) {
             this.circles[i].update();
@@ -224,13 +217,14 @@ let fish = new chain(radii);
 let body = 0;
 
 // Animation loop
-async function animate() {
+function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     fish.update();
     if (body) fish.draw();
     fish.draw_outline();
 
+    console.log(fish.mouseposx, fish.mouseposy);
 
     requestAnimationFrame(animate);
 }
@@ -256,5 +250,11 @@ function resizeCanvas() {
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
+document.addEventListener("DOMContentLoaded", function() {
+    const rect =  document.querySelector("header").getBoundingClientRect();
+    fish.mouseposx = rect.x+rect.width;
+    fish.mouseposy = rect.y;
+    animate();
+});
+
 // Start animation
-animate();
