@@ -101,7 +101,8 @@ class chain{
         while (angleDiff < -Math.PI) angleDiff += 2 * Math.PI;
 
         // Gradually adjust angle
-        let longestDist = Math.sqrt(canvas.width**2 + canvas.height**2);
+        //let longestDist = Math.sqrt(canvas.width**2 + canvas.height**2);
+        const longestDist = 1740.95; // this is from the dimensions of my browser on my mac, less tight turning looks better even on smaller screens
         let rotationSpeed = (distToMouse/longestDist)**2;
         if (this.speed > 50) {
             this.head.angle += angleDiff * Math.min(1.0, rotationSpeed * 100 * dt);
@@ -258,9 +259,9 @@ window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
 document.addEventListener("DOMContentLoaded", function() {
-    const rect =  document.querySelector("header").getBoundingClientRect();
+    const rect =  document.getElementById("quote").getBoundingClientRect();
     fish.mouseposx = rect.x+rect.width;
-    fish.mouseposy = rect.y;
+    fish.mouseposy = rect.y+rect.height;
 });
 
 requestAnimationFrame(animate);
