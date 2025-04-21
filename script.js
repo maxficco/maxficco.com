@@ -20,7 +20,7 @@ class circle {
         let angleDiff = this.angle - this.link.angle;
         while (angleDiff > Math.PI) angleDiff -= 2*Math.PI
         while (angleDiff < -Math.PI) angleDiff += 2*Math.PI 
-        // Check if angle difference exceeds constraint
+
         let maxAngleDiff = Math.PI / 4; 
 
         if (Math.abs(angleDiff) > maxAngleDiff) {
@@ -83,13 +83,14 @@ class chain{
         for (let i = 1; i < radiusList.length; i++) {
             this.circles.push(new circle(radiusList[i], this.circles[i-1]));
         }
+        this.speed = 500;
     }
-    update() {
+    update(dt) {
         let dx = this.mouseposx - this.head.x;
         let dy = this.mouseposy - this.head.y;
 
         let targetAngle = Math.atan2(dy, dx);
-        let targetDist = 50;
+        //let targetDist = 100;
 
         let distToMouse = Math.sqrt(dx*dx + dy*dy);
 
@@ -100,21 +101,26 @@ class chain{
         while (angleDiff < -Math.PI) angleDiff += 2 * Math.PI;
 
         // Gradually adjust angle
-        const rotationSpeed = 0.25;
-        this.head.angle += angleDiff * rotationSpeed;
-
-        let speed = 4;
-        if (distToMouse > targetDist) {
-            this.head.angle += Math.sin(this.t)/12;
-            this.head.x += Math.cos(this.head.angle) * speed;
-            this.head.y += Math.sin(this.head.angle) * speed;
+        let longestDist = Math.sqrt(canvas.width**2 + canvas.height**2);
+        let rotationSpeed = (distToMouse/longestDist)**2;
+        if (this.speed > 50) {
+            this.head.angle += angleDiff * Math.min(1.0, rotationSpeed * 100 * dt);
         }
+
+        if (this.mouseisstopped) this.speed = Math.max(0, this.speed-50*dt);
+        else {
+            this.speed = 500;
+            this.mouseisstopped = true;
+        }
+
+        this.head.x += Math.cos(this.head.angle) * this.speed * dt;
+        this.head.y += Math.sin(this.head.angle) * this.speed * dt;
 
         for (let i = 1; i < this.circles.length; i++) {
             this.circles[i].update();
         }
 
-        this.t += 0.1;
+        this.t += dt;
     }
 
     draw() {
@@ -209,18 +215,23 @@ class chain{
     updateMouse(e) {
         this.mouseposx = e.clientX;
         this.mouseposy = e.clientY;
+        this.mouseisstopped = false;
     }
 
 }
+
 let radii = [30, 50, 60, 45, 30, 10, 30];
 let fish = new chain(radii);
 let body = 0;
 
 // Animation loop
-function animate() {
+let lastTime = performance.now();
+function animate(currentTime) {
+    const deltaTime = (currentTime - lastTime) / 1000; // in seconds
+    lastTime = currentTime;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    fish.update();
+    fish.update(deltaTime);
     if (body) fish.draw();
     fish.draw_outline();
 
@@ -238,13 +249,11 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// Resize handler
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
 
-// Initial setup
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
@@ -254,5 +263,4 @@ document.addEventListener("DOMContentLoaded", function() {
     fish.mouseposy = rect.y;
 });
 
-// Start animation
-animate();
+requestAnimationFrame(animate);
