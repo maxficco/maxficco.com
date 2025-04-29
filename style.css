@@ -1,26 +1,32 @@
 * {
     margin:0;
     padding:0;
+    box-sizing: border-box;
 }
 
 html {
     font-family:sans-serif;
-    border-right:2px solid rgba(200, 0, 0, 0.9);
 }
 
- p {
-/*     font-family: serif;*/
- }
+main p {
+    font-size: 16px;
+}
+
+main * {
+    margin: 8px;
+}
+
 
 body {
-    width: 100%;
-    max-width: 75vw;
-    margin: 0 auto;
+    width:85vw;
+    margin-left: 15vw;
+    padding-right: 15vw;
     min-height: 100vh;
+    position: relative;
     background-color: #000000;
     color: white;
-    margin: 0 auto;
     border-left: 2px solid rgba(200, 0, 0, 0.9);
+    border-right: 2px solid rgba(200, 0, 0, 0.9);
     z-index:0;
 }
 
@@ -43,6 +49,7 @@ h1 a {
 
 a {
     color:red;
+    margin:0;
 }
 
 nav a {
@@ -58,10 +65,16 @@ span {
 
 main {
     margin: 0 5px;
+    padding-bottom:64px; /* give space for footer */
 }
 
-#quote {
+blockquote {
     color: #ffffff40;
+}
+
+li {
+    padding-left: 1.3em;
+    text-indent: -1.3em;
 }
 
 #background {
@@ -79,12 +92,16 @@ footer {
     bottom:0;
     right:0;
     max-width: 100%;
-    overflow-x: hidden;
+    max-height: 64px;
+    max-width: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
     z-index: 1;
     background-color: #000000;
 }
 footer p {
     border: 2px solid rgba(200, 0, 0, 0.9);
+    border-right: none;
     font-size:12px;
     white-space: nowrap;
     overflow-x: auto;
@@ -93,7 +110,9 @@ footer p {
 
 @media screen and (max-width: 500px) {
   body {
-    width: 100%;
+    width: 100vw;
+    margin-left: 0;
+    padding-right: 0;
     max-width: none;
   }
 }
