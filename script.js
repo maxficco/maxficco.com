@@ -73,10 +73,10 @@ class chain{
     constructor(radiusList) {
         this.radii = radiusList;
         this.head = new circle(radiusList[0], null);
-        this.mouseposx = window.innerWidth*0.9;
-        this.mouseposy = window.innerHeight*0.9;
-        this.head.x = this.mouseposx + this.head.radius;
-        this.head.y = this.mouseposy;
+        this.mouseposx = 0;
+        this.mouseposy = 0;
+        this.head.x = window.innerWidth/2;
+        this.head.y = window.innerHeight/2;
         this.circles = [];
         this.t = 0;
         this.circles.push(this.head);
@@ -259,9 +259,8 @@ window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
 document.addEventListener("DOMContentLoaded", function() {
-    const rect =  document.getElementById("quote").getBoundingClientRect();
-    fish.mouseposx = rect.x+rect.width;
-    fish.mouseposy = rect.y+rect.height;
+    fish.mouseposx = Math.floor(Math.random() * (window.innerWidth + 1));
+    fish.mouseposy = Math.floor(Math.random() * (window.innerHeight + 1));
 });
 
 requestAnimationFrame(animate);
