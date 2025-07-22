@@ -1,18 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>SGV</title>
-    </head>
-    <body>
-        <h1>SGV: Deforming Structured 2D Gaussians for Efficient and Compact Video Representation</h1>
-        <p>Max Ficco, Matias Toro</p>
-        <p>Computer Science and Engineering Department, University of Notre Dame</p>
-        <br><br><br><br><br><br>
-        <h3>Acknowledgements</h3>
-        <p>As part of the CSE-CSA, funding for this work was provided by NSF CNS-2211428. We also thank our research mentor Zixuan Pan, faculty advisor Yiyu Shi, and program director Arturo Russell.
-        </p>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGV-Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 1. Global & Typography Reset */
+        body {
+            font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #363636;
+            background-color: #ffffff;
+        }
+
+        /* 2. Layout & Container */
+        .container {
+            max-width: 960px;
+            margin: 0 auto; /* Center the container */
+            padding: 3rem 1.5rem; /* Vertical and horizontal padding */
+            text-align: center;
+        }
+
+        /* 3. Section Styling */
+        .hero {
+             background-color: #f5f5f5; /* Light grey background for hero section */
+        }
+
+        .footer {
+            background-color: #fafafa;
+            color: #7a7a7a;
+            font-size: 0.9em;
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+        /* 4. Content Elements */
+        h1, h2 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.5em; /* Large title */
+        }
+
+        h2 {
+            font-size: 1.75em; /* Section titles */
+        }
+
+        a {
+            color: #3273dc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* 5. Specific Component Styles */
+        .authors {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .author-block {
+            margin: 0 0.5em; /* Spacing between author names */
+        }
+
+        .publication-links a {
+            display: inline-flex; /* Use flexbox for alignment */
+            align-items: center; /* Center items vertically */
+            background-color: #363636;
+            color: #fff;
+            padding: 0.5em 1em;
+            border-radius: 9999px; /* Pill shape */
+            margin: 0.5em 0.25em;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .publication-links a:hover {
+            background-color: #222;
+        }
+
+        .publication-links svg {
+            margin-right: 0.5em; /* Space between icon and text */
+        }
+        
+        .content-block {
+            text-align: justify;
+            max-width: 800px;
+            margin: 0 auto; /* Center the justified text block */
+        }
+
+    </style>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+    <section class="hero">
+        <div class="container">
+            <h1>SGV: Deforming Structured 2D Gaussians for Efficient and Compact Video Representation</h1>
+            
+            <div class="authors">
+                <span class="author-block">Max Ficco,</span>
+                <span class="author-block">Matias Toro</span>
+            </div>
+
+			<div class="publication-links">
+                <a href="https://github.com/maxficco/SGV">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 1C5.923 1 1 5.923 1 12c0 4.867 3.149 8.979 7.521 10.436.55.096.756-.233.756-.522 0-.262-.013-1.128-.013-2.049-2.764.509-3.479-.674-3.699-1.292-.124-.317-.66-1.293-1.127-1.554-.385-.207-.936-.715-.014-.729.866-.014 1.485.797 1.691 1.128.99 1.663 2.571 1.196 3.204.907.096-.715.385-1.196.701-1.471-2.448-.275-5.005-1.224-5.005-5.432 0-1.196.426-2.186 1.128-2.956-.111-.275-.496-1.402.11-2.915 0 0 .921-.288 3.024 1.128a10.193 10.193 0 0 1 2.75-.371c.936 0 1.871.123 2.75.371 2.104-1.43 3.025-1.128 3.025-1.128.605 1.513.221 2.64.111 2.915.701.77 1.127 1.747 1.127 2.956 0 4.222-2.571 5.157-5.019 5.432.399.344.743 1.004.743 2.035 0 1.471-.014 2.654-.014 3.025 0 .289.206.632.756.522C19.851 20.979 23 16.854 23 12c0-6.077-4.922-11-11-11Z"></path>
+                    </svg>Code
+                </a>
+            </div>    
+
+        </div>
+    </section>
+
+    <section class="image-display">
+        <div class="container">
+            <img src="image.png" alt="SGV method overview" style="width: 100%; max-width: 800px; height: auto; border-radius: 8px;">
+        </div>
+    </section>
+
+    <section class="main-content">
+        <div class="container">
+            <h2>Abstract</h2>
+            <div class="content-block">
+                <p>With the increasing use of video data across a wide range of domains including medical imaging, computer vision, and online streaming platforms, efficient and compact video representation is essential for cost-effective storage without sacrificing video fidelity. Recent methods in Deformable 2D Gaussian Splatting (D2GV) represent video using a canonical set of 2D Gaussians that are deformed over time to render individual frames. Compared to existing techniques in Implicit Neural Representations (INRs), D2GV achieves faster training and rendering times with strong video fidelity. However, storing and deforming Gaussian primitives independently ignores the spatial and temporal similarities among local Gaussians across frames. To exploit these similarities, we incorporate anchor-based neural Gaussians to utilize INR-based parameterization of Gaussian primitives for compact storage. We partition the video sequence into fixed-length subsequences to enable parallel training and linear scalability as the number of frames increases. For each subsequence, a canonical set of anchors is initialized across a structured grid, each governing a group of local Gaussian primitives. From stored anchor features, corresponding shape and color attributes of local Gaussians are predicted via two lightweight multi-layer perceptrons (MLPs). A third MLP is incorporated to predict deformations from anchored canonical frames to the individual frames across time. Our design improves compression ratios without significantly reducing fidelity while maintaining similar training and decoding times.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="method-section">
+        <div class="container">
+             <h2>Method</h2>
+             <div class="content-block">
+                <p>
+                    We partition video sequences into fixed-length segments for parallel training and linear scaling. Each segment uses \(N\) grid-positioned anchors with a set of attributes:
+                    $$
+                    \mathbf{A} = \{ \mathbf{x}_a \in \mathbb{R}^2, \mathbf{f}_a \in \mathbb{R}^D, \boldsymbol{\delta} \in \mathbb{R}^{K \times 2}, \mathbf{s}_o \in \mathbb{R}^2, \mathbf{s}_a \in \mathbb{R}^2 \}
+                    $$
+                </p>
+        
+                <p>
+                    The positions of \(K\) associated Gaussians are computed as:
+                    $$
+                    \{\boldsymbol{\mu}^{(k)}\}_{k=0}^{K-1} = \mathbf{x}_a + \{\boldsymbol{\delta}^{(k)}\}_{k=0}^{K-1} \odot \mathbf{s}_o
+                    $$
+                </p>
+        
+                <p>
+                    \(\text{MLP}_c\) predicts weighted colors for \(K\) associated Gaussians. \(\text{MLP}_{\Sigma}\) predicts scaling and rotation parameters \(\mathbf{s}_{\text{base}}, \theta\) to ensure covariance \(\Sigma\) is positive semi-definite.
+                    $$
+                    \Sigma = RS(RS)^\top;
+                    \quad R = \begin{bmatrix} \cos(\theta) & -\sin(\theta) \\ \sin(\theta) & \cos(\theta) \end{bmatrix},
+                    \quad S = \begin{bmatrix} s_1 & 0 \\ 0 & s_2 \end{bmatrix},
+                    \quad (s_1, s_2) = \mathbf{s}_{\text{base}} \odot \mathbf{s}_a
+                    $$
+                </p>
+        
+                <p>
+                    \(\gamma(\cdot)\) is the positional encoding function where \(p\) represents position \(\boldsymbol{\mu}\) or time \(t\), normalized to (0,1], and \(L\) is the number of encoding frequencies.
+                    $$
+                    \gamma(p) = (\sin(2^k \pi p), \cos(2^k \pi p))_{k=0}^{L-1}
+                    $$
+                </p>
+        
+                <p>
+                    Gaussian primitives from the canonical frame are deformed to render individual frames across time. \(\text{MLP}_{\Delta}\) predicts position and color deformations for frame \(t\) Gaussians:
+                    $$
+                    \boldsymbol{\mu}' = \boldsymbol{\mu} + d\boldsymbol{\mu}, \quad \boldsymbol{c}' = \boldsymbol{c} + d\boldsymbol{c}
+                    $$
+                    Following [2], the final pixel color \(\boldsymbol{C}\) is then computed using:
+                    $$
+                    \boldsymbol{C} = \sum_{i \in I} \boldsymbol{c}'_i G_i
+                    $$
+                    Where the spatial density of a Gaussian is defined as:
+                    $$
+                    G(\mathbf{x}) = \exp\left(-\frac{1}{2} (\mathbf{x} - \boldsymbol{\mu}')^\top \Sigma^{-1} (\mathbf{x} - \boldsymbol{\mu}')\right)
+                    $$
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="references-section">
+        <div class="container">
+             <h2>References</h2>
+             <div class="content-block">
+				<p>*SGI is an unreleased paper, rendering single images using anchored neural Gaussians[1] Liu, M., et al. "D2GV: Deformable 2D Gaussian Splatting for Video Representation in 400FPS," arXiv preprint arXiv:2503.05600, 2025.
+[2] L. Zhu, G. Lin, J. Chen, X. Zhang, Z. Jin, Z. Wang, and L. Yu. Large Images are Gaussians: High-quality large image representation with levels of 2D Gaussian splatting. In Proceedings of AAAI Conference on Artificial Intelligence, pp. 10977–10985, 2025.
+[3] A. Mercat, M. Viitanen, J. Vanne, "UVG dataset: 50/120fps 4K sequences for video codec analysis and development," in Proceedings of the 11th ACM multimedia systems conference, 2020, pp. 297–302. 
+	†videos used: Bosphorus, Beauty, SetGo, Bee, Yacht, Jockey, Shake<\p>
+             </div>
+        </div>
+    </section>
+
+    <section class="acknowledgements-section">
+        <div class="container">
+             <h2>Acknowledgements</h2>
+             <div class="content-block">
+				<p>As part of the CSE-CSA, funding for this work was provided by NSF CNS-2211428. We also thank our research mentor Zixuan Pan, faculty advisor Yiyu Shi and program director Arturo Russell.<\p>
+             </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>This website template was adapted from the Nerfies project page, licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons license</a>.</p>
+    </footer>
+
+</body>
 </html>
