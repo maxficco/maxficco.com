@@ -243,10 +243,7 @@ document.addEventListener('mousemove', (e) => fish.updateMouse(e));
 document.addEventListener('keydown', function(event) {
     const key = event.key; // The key that was pressed
     if (key === 'a') {
-        body = 1;
-    }
-    if (key === 'z') {
-        body = 0;
+        body = 1 - body;
     }
 });
 

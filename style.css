@@ -1,122 +1,98 @@
-* {
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; }
+
+:root {
+    --bg: #000;
+    --fg: #fff;
+    --accent: rgba(255, 0, 0, 0.75);
+    --strip: rgba(255, 0, 0, 0.25);
+    --muted: #ffffff66;
+    --link: red;
+    --font-sans: Helvetica, sans-serif;
+    --font-serif: Georgia, serif;
 }
 
-html {
-    font-family: 'Helvetica Neue', sans-serif;
+body {
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--fg);
 }
 
-main p {
+.container {
+    border-left: 2rem solid var(--strip);
+    max-width: 100ch;
+    width: 92vw;
+    margin: 0 auto;
+    padding-inline: 1rem;
+    min-height: 100vh;       /* fallback */
+    min-height: 100dvh;      /* better on mobile address-bar browsers */
+    display: flex;
+    flex-direction: column;
+}
+
+main { flex: 1; }          /* takes remaining space and pushes footer down */
+
+body { 
+    font-family: var(--font-sans);
+    line-height: 1.6;
     font-size: 16px;
 }
 
-main * {
-    margin: 8px;
-}
+h1, h2, h3 { line-height: 1.25; margin: 1rem 0 0.5rem; }
+p, ul, ol, blockquote { margin: 0.75rem 0; }
+blockquote { color: var(--muted); padding-left: 1rem; border-left: 2px solid var(--accent); }
 
+a { color: var(--link); text-decoration: underline dotted 2px}
+a:hover { text-decoration: underline 2px; }
+a:focus-visible { outline: 2px solid var(--fg);}
+a:hover::before { content: "["; color: var(--muted); pointer-events: none;}
+a:hover::after { content: "](" attr(href) ")"; color: var(--muted); pointer-events: none;}
 
-body {
-    width:85vw;
-    margin-left: 15vw;
-    padding-right: 15vw;
-    min-height: 100vh;
-    position: relative;
-    background-color: #000000;
-    color: white;
-    border-left: 2px solid rgba(200, 0, 0, 0.9);
-    border-right: 2px solid rgba(200, 0, 0, 0.9);
-    z-index:0;
-}
+.md-link, .md-link:hover { text-decoration: none; font-weight: bold; }
+.md-link::before { content: "["; color: var(--muted); font-weight: normal; }
+.md-link::after { content: "](" attr(href) ")"; color: var(--muted); font-weight: normal; }
+.md-link:hover::before, .md-link:hover::after { color: var(--link); }
 
-nav ul {
-    list-style-type: none;
-    white-space: nowrap;
-}
-h3 {
-    font-family: 'Georgia', serif;
-    font-size:20px;
-}
-h1 {
-    font-size:20px;
-}
-h1 a {
-    color: #ffffff40;
-    border: 2px solid rgba(200, 0, 0, 0.9);
-    border-left: none;
-    text-decoration:none;
-    font-weight:bold;
+header h3 {
+    border: 2px solid var(--accent);
     display: inline-block;
-    vertical-align: top;
+    padding: 0.125rem;
+    font-weight: bold;
 }
 
-a {
-    color:red;
-    margin:0;
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+    gap: 0.5rem 1rem; /* row gap, column gap */
 }
 
-nav a {
-    color: #ffffff40;
-}
-a:hover {
-    color:red;
-}
-span {
-    font-weight:bold;
-    color:white;
-}
-
-main {
-    margin: 0 5px;
-    padding-bottom:64px; /* give space for footer */
-}
-
-blockquote {
-    color: #ffffff40;
-}
-
-li {
-    padding-left: 1.3em;
-    text-indent: -1.3em;
-}
+header a { color: white; }
 
 #background {
-    position:fixed;
-    top:0;
-    left:0;
-    z-index:-1;
-    width:100%;
-    height:100%;
-    border:none;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    border: none;
+    pointer-events: none;    /* never eat clicks */
 }
 
 footer {
-    position: absolute;
-    bottom:0;
-    right:0;
-    max-width: 100%;
-    max-height: 64px;
-    max-width: 100%;
-    overflow-y: auto;
-    overflow-x: auto;
-    z-index: 1;
-    background-color: #000000;
-}
-footer p {
-    border: 2px solid rgba(200, 0, 0, 0.9);
-    border-right: none;
-    font-size:12px;
-    white-space: nowrap;
-    overflow-x: auto;
-    max-width: 100%; 
 }
 
-@media screen and (max-width: 500px) {
-  body {
-    width: 100vw;
-    margin-left: 0;
-    padding-right: 0;
-    max-width: none;
-  }
+footer p {
+    border-top: 2px solid var(--accent);
+    width:100%;
+    margin: 0;
+    padding-left: 0.25rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+hr {
+    border-color: var(--accent);
 }
