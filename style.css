@@ -96,3 +96,7 @@ footer p {
 hr {
     border-color: var(--accent);
 }
+
+img {
+    margin:12px;width:90%;max-width:500px;
+}
