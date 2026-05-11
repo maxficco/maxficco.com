@@ -1,0 +1,6064 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../../style.css">
+        <title>DataStructures</title>
+        <link rel="icon" type="image/x-icon" href="../../images/happycat.svg">
+        <script defer src="../../script.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <section>
+                    <a href="https://maxficco.com">Max Ficco</a>
+                    <a href="../../about.html">about</a>
+                    <a href="../../now.html">now</a>
+                    <a href="../../weblog.html">weblog</a>
+                    <a href="../../notes.html">notes</a>
+                    <a href="../../photos.html">photos</a>
+                    <a href="../../projects.html">projects</a>
+                    <a href="../../contact.html">contact</a>
+                    <button id="theme-toggle" aria-label="Toggle theme">
+                        <svg class="moon" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/>
+                        </svg>
+                        <svg class="sun" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+                        </svg>
+                    </button>
+                </section>
+            </header>
+            <main>
+<blockquote>
+<p>Data Structures (CSE 20312)<br />
+Prof. Jay Brockman, Fall 2025</p>
+</blockquote>
+<p><a href="https://tira.mooc.fi/spring-2025/">mooc.fi</a></p>
+<h1>2025-08-27</h1>
+<blockquote>
+<p>talked about unit tests and makefiles<br />
+in makefile:</p>
+</blockquote>
+<ul>
+<li>order does not matter! (uses algorithm that constructs dependency graph - topological sort)</li>
+<li>-g includes source code in compiled object file to allow for debugging</li>
+<li>-Wall is Warn all</li>
+</ul>
+<h3>The C Language!</h3>
+<ul>
+<li>C (followed B) by Ken Thompson, Dennis Ritchie 1973</li>
+</ul>
+<p>Memory Management</p>
+<ul>
+<li>utilization</li>
+<li>security</li>
+<li>ease of programing</li>
+</ul>
+<ul>
+<li>C exposes (and makes you deal with) details of memory</li>
+<li>Python (which we will use later) does not</li>
+</ul>
+<p><code>sizeof(...)</code> tells you how many bytes a datatype stores:</p>
+<pre><code>bool, char -- 1
+short -- 2
+int, float -- 4
+double -- 8
+int* , char* -- 8
+</code></pre>
+<h1>2025-08-29</h1>
+<ul>
+<li>64 bit addresses sent from processor to memory</li>
+<li>8 bit channel of data to go back and forth between processor and memory<br />
+(not entirely sure what is meant by this yet)</li>
+</ul>
+<h3>binary and hexadecimal numbers:</h3>
+<p>0 0000<br />
+1 0001<br />
+2 0010<br />
+3 0011<br />
+4 0100<br />
+5 0101<br />
+6 0110<br />
+7 0111<br />
+8 1000<br />
+9 1001<br />
+A 1010<br />
+B 1011<br />
+C 1100<br />
+D 1101<br />
+E 1110<br />
+F 1111</p>
+<p><strong>At each memory address you can only store one byte</strong></p>
+<ul>
+<li>in most microprocessers, the least significant bit shows up in the lowest address in memory (little endian architecture)
+<ul>
+<li>(over the air serially often sent as big endian)</li>
+</ul>
+</li>
+</ul>
+<p>Ex:<br />
+<code>char c = 'A'; int x = 0xaabbccdd</code> (0x denotes hexadecimal)</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>address</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c</td>
+<td>~</td>
+<td>0x41</td>
+</tr>
+<tr>
+<td></td>
+<td>(higher address)</td>
+<td>0xaa</td>
+</tr>
+<tr>
+<td></td>
+<td>~</td>
+<td>0xbb</td>
+</tr>
+<tr>
+<td></td>
+<td>~</td>
+<td>0xcc</td>
+</tr>
+<tr>
+<td>x</td>
+<td>(lower address)</td>
+<td>0xdd</td>
+</tr>
+</tbody>
+</table>
+<h3>pointer variables</h3>
+<p><code>int x = 1;</code><br />
+<code>int *p;</code>   initializes start of 8 consecutive bytes in memory<br />
+<code>p = &amp;x</code>    sets p to x's address found in lookup table<br />
+<code>*p = 5</code>    changes the value at the address stored in p to 5<br />
+^ dereference <code>*</code> here is an operator, different than the one used to initialize pointer p</p>
+<h3>example in zybooks</h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int x = 5;                  // x, y are ints
+    int y = 1;
+    int *p;                     // p, q are addresses of ints
+    int *q;
+
+    p = &amp;x;                     // p gets address of x
+    y = *p;                     // y gets value at address in p
+    printf(&quot;y = %d\n&quot;, y);
+
+    q = p;                      // q gets same address as p
+
+    printf(&quot;*p = %d    *q = %d\n&quot;, *p, *q); 
+}
+</code></pre>
+<p>^ used debugger to watch values change step by step</p>
+<p><strong>Arrays are contiguous blocks of memory</strong><br />
+int a; a &lt;---value of a<br />
+int A[5]; A &lt;---points to the starting value (A[0]) of the array</p>
+<pre><code class="language-c">char char_v1;
+int  int_v1;
+char char_v2;
+int  int_v2;
+char char_array[4];
+int  int_array[4];
+</code></pre>
+<pre><code>Address of char_v1:        0x7ffcd1389526
+Address of int_v1:         0x7ffcd1389528
+Address of char_v2:        0x7ffcd1389527
+Address of int_v2:         0x7ffcd138952c
+Address of char_array[0]:  0x7ffcd1389544
+Address of char_array[1]:  0x7ffcd1389545
+Address of int_array[0]:   0x7ffcd1389530
+Address of int_array[1]:   0x7ffcd1389534
+</code></pre>
+<p>^ variables of same data type follow each other sequentially in memory<br />
+(i.e. by data type - not by order of declaration)</p>
+<h1>2025-09-01</h1>
+<h3>pointer arithmetic</h3>
+<p>recap: arrays are contiguous blocks of memory</p>
+<ul>
+<li>array of chars one after the other</li>
+<li>array of ints need space for 4 bytes between each (each address holds 1 byte)</li>
+</ul>
+<p>what happens when you add 1 to a pointer?</p>
+<ul>
+<li>increments by the sizeof the variable it points to (then points to the next<br />
+<code>*(ptr + 3)</code> &lt;=&gt; <code>ptr[3]</code></li>
+</ul>
+<h3>pointers and strings</h3>
+<ul>
+<li>a string is just a null-terminated array of chars</li>
+<li>(<code>0</code> is the same as <code>'\0'</code>)</li>
+</ul>
+<pre><code class="language-c">char s[] = &quot;abcde&quot;;
+// _________________________________________________
+// |  'a'  |  'b'  |  'c'  |  'd'  |  'e'  |   0   |
+// | &amp;s[0] | &amp;s[1] | &amp;s[2] | &amp;s[3] | &amp;s[4] | &amp;s[5] |
+// -------------------------------------------------
+</code></pre>
+<p>cool trick we can do:</p>
+<pre><code class="language-c">// Keep going while *(s + i) != 0 (false). (we could have also used s[i])
+for (int i = 0;  *(s + i);  i++) {
+    printf(&quot;%c&quot;, *(s + i));
+}
+</code></pre>
+<h3>subtracting pointers</h3>
+<p>let <code>char *p</code> point to the <code>'\0'</code> in string s.<br />
+what is <code>p-s</code>?</p>
+<ul>
+<li>an int: the length of the string!</li>
+</ul>
+<h3>memory management</h3>
+<ul>
+<li>most important part of system design!</li>
+</ul>
+<p>Variables: have names (created by compiler)<br />
+Dynamic memory: doesn't have name, but has pointer to reach it (created at runtime)</p>
+<p>Regions of Memory:</p>
+<pre><code>ffffffffffffffff
+_________________
+Stack (grows downward)
+- contains function local variables
+______ vv _______
+
+
+______ ^^ _______
+Heap (grows upward)
+- from malloc, calloc, free
+_________________               ^^ created at runtime (above)^^   vv (below) created at compile time vv
+DATA FIXED SIZE
+- contains global variables, static variables, constant strings
+_________________
+(Text) Code
+- contains machine code to run program
+_________________
+0000000000000000
+</code></pre>
+<h3>Heap: dynamic memory allocation in C</h3>
+<p><code>void *malloc(n_bytes)</code></p>
+<ul>
+<li>allocates n-bytes unitialized in memory</li>
+</ul>
+<p><code>void *calloc(n_objects, bytes_per_object)</code></p>
+<ul>
+<li>allocates n-bytes of memory initialized to 0</li>
+</ul>
+<p><code>free(void *ptr)</code></p>
+<ul>
+<li>
+<p>how does free know how much memory to free?</p>
+</li>
+<li>
+<p>there must exist some table at runtime that keeps track of addresses allocated and how much!</p>
+</li>
+<li>
+<p>actually a fairly complicated task to efficiently pack the heap</p>
+</li>
+<li>
+<p>when you try to perform an operation on a segment/region in memory where you are not allowed to:</p>
+<ul>
+<li>segmentation fault!</li>
+</ul>
+</li>
+<li>
+<p>growing the stack downward was a classic exploit in early computer systems for hackers to access/modify data and user code</p>
+</li>
+</ul>
+<h3>What happens when you call a function?</h3>
+<pre><code class="language-c">void f3() { 
+	// does something
+}
+void f1() { 
+	// does something
+}
+void f2() {
+    f3();
+}
+
+void main() {
+    f1();
+    f2();
+}
+</code></pre>
+<ul>
+<li>Starts at top of stack</li>
+<li>Allocates stack frame for <code>main</code>:</li>
+</ul>
+<pre><code>________  (TOP OF STACK)
+| main |
+-------- &lt;-- stack pointer (points to the address below the top of the stack that has enough space for `main`'s variables)
+</code></pre>
+<ul>
+<li>Allocates stack frame for <code>f1</code>:</li>
+</ul>
+<pre><code>________  (TOP OF STACK)
+| main |
+--------
+|  f1  |
+-------- &lt;-- stack pointer 
+</code></pre>
+<ul>
+<li>f1 returns, now f2 stack frame is allocated in exact same location as f1 was</li>
+</ul>
+<pre><code>________  (TOP OF STACK)
+| main |
+--------
+|  f2  |
+-------- &lt;-- stack pointer 
+</code></pre>
+<ul>
+<li>f2 calls f3</li>
+</ul>
+<pre><code>________  (TOP OF STACK)
+| main |
+--------
+|  f2  |
+--------
+|  f3  |
+-------- &lt;-- stack pointer 
+</code></pre>
+<ul>
+<li>returns all the way back</li>
+</ul>
+<pre><code>________  (TOP OF STACK)
+| main |
+-------- &lt;-- stack pointer 
+</code></pre>
+<ul>
+<li>every time a function calls, it allocates a stack frame</li>
+<li>every time a function returns, it deallocates the stack frame</li>
+<li>does this by changing what's called the stack pointer</li>
+<li>(the code that allocates/deallocates the stack frame doesn't have to be written in C)
+<ul>
+<li>in assembly, uses a register that is reserved to be your stack pointer</li>
+<li>you move the stack pointer, and then reference values relative to the stack pointer</li>
+</ul>
+</li>
+</ul>
+<p>&quot;Isn't this exceedingly clever?&quot;<br />
+Key part of computer system design: you don't want to waste memory!<br />
+The nature of functions calling functions automatically takes care of this for you with a stack</p>
+<h1>2025-09-03</h1>
+<h3>call stack example</h3>
+<pre><code class="language-c">int add(int m, int n) {
+    m = m + n;
+    return m;
+}
+void square(int *a) {
+    *a = *a * *a;
+}
+int main() {
+    int x = 1;
+    int y = 1;
+
+    int z = add(x, y);
+    square(&amp;z);
+
+    printf(&quot;x=%d y=%d z=%d\n&quot;, x, y, z);
+
+    return 0;
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>address</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>y</td>
+<td>0x7...7e4 (highest in stack)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>x</td>
+<td>0x7...7e0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>z</td>
+<td>0x7...7dc</td>
+<td>2, then 4</td>
+</tr>
+<tr>
+<td>m</td>
+<td>0x7...7bc</td>
+<td>1</td>
+</tr>
+<tr>
+<td>n</td>
+<td>0x7...7b8</td>
+<td>1</td>
+</tr>
+<tr>
+<td>a</td>
+<td>0x7...7b8 (replaces n)</td>
+<td>0x7...7dc</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>when the stack frame of <code>add</code> expires, the stack frame of <code>square</code> can take its place</li>
+<li>note how <code>a</code>, which is a pointer of 8 bytes, replaces the address of n. This is because the <code>square</code> stack frame reallocated all eight bytes of the previous ints <code>m</code> and <code>n</code> (4+4 bytes) in order to store <code>a</code>.  Because the byte order is little endian, <code>a</code> starts at the lower address, where <code>n</code> previously started.</li>
+</ul>
+<h3>Data segment</h3>
+<p>--&gt; has global variables, statics, and string constants</p>
+<p><code>char a[] = &quot;cat&quot;;</code> sizeof(a): 4<br />
+on main's stack frame:</p>
+<pre><code>_________________________________
+|  'c'  |  'a'  |  't'  |   0   |
+---------------------------------
+</code></pre>
+<hr />
+<p><code>char *p = &quot;dog&quot;;</code> sizeof(p): 8<br />
+<strong>&quot;dog&quot; is a string constant!</strong><br />
+on main's stack frame:</p>
+<pre><code>_______________________________________________
+|  pointer p to data segment(8 bytes)         |
+-----------------------------------------------
+</code></pre>
+<p>in data segment:</p>
+<pre><code>_________________________________
+|  'd'  |  'o'  |  'g'  |   0   |
+---------------------------------
+</code></pre>
+<hr />
+<p>We cannot do: <code>p[0] = 'X'</code>! It is a string constant that lives in the data segment.<br />
+<strong>note that global variables and static variables live in the data segment and <em>can</em> be written to</strong></p>
+<p>We can however reassign p to a different address: <code>p = &amp;a</code></p>
+<p>But we cannot make an array point to a new address: <code>a = p</code> is illegal.</p>
+<ul>
+<li>Arrays are not pointer variables - they are fixed blocks of memory with a name (think compile-time alias to an address)</li>
+<li>In most expressions, the array name decays to a pointer to its first element (<code>&amp;a[0]</code>), but this is a value the compiler produces, not something stored that you can reassign.</li>
+</ul>
+<h1>2025-09-05</h1>
+<h3>where do variables go in memory?</h3>
+<pre><code class="language-c">double GLOBAL = 3.14;
+int main() {
+    int int_scalar = 25;
+    int int_array[] = {100, 101, 102, 103};
+    char *str_const = &quot;hello&quot;;
+    int *malloc_array = malloc(10*sizeof(int))
+    static int static_int = 2;
+</code></pre>
+<ul>
+<li>Stack: <code>&amp;int_scalar</code>, <code>int_array</code>, <code>&amp;str_const</code>, <code>&amp;malloc_array</code></li>
+<li>Heap: <code>malloc_array</code></li>
+<li>Data: <code>str_const</code>, <code>&amp;static_int</code>, <code>&amp;GLOBAL</code></li>
+<li>Code: <code>main</code></li>
+</ul>
+<pre><code>---------------------------stack----------------------------
+    int_array: 0x7ffc090b24d0,    *int_array: 100
+&amp;malloc_array: 0x7ffc090b24c8,  malloc_array: 0x652de1f3d2a0
+   &amp;str_const: 0x7ffc090b24c0,     str_const: 0x652dbe49b008
+  &amp;int_scalar: 0x7ffc090b24bc,    int_scalar: 25
+----------------------------heap----------------------------
+ malloc_array: 0x652de1f3d2a0, *malloc_array: 0
+----------------------------data----------------------------
+  &amp;static_int: 0x652dbe49d018,    static_int: 2
+      &amp;GLOBAL: 0x652dbe49d010,        GLOBAL: 3.140000
+    str_const: 0x652dbe49b008,    *str_const: h
+----------------------------code----------------------------
+         main: 0x652dbe49a1a9,    *(unsigned char*)main: 0xf3   &lt;- first opcode! (first byte of first instruction of main)
+</code></pre>
+<ul>
+<li>mailbox -&gt; contents analogy breaks down a bit for arrays - <code>arr</code> is not a box containing a pointer but more like a label for the whole row of boxes glued together.</li>
+<li>It's just a design choice in C that when you use <code>arr</code> in most expressions, the compiler treats it as the address of the first box (array decays to a pointer). You then use <code>*</code> or <code>[]</code> to access the individual values inside those &quot;glued boxes&quot;.</li>
+</ul>
+<h3>I/O: printing strings:</h3>
+<pre><code class="language-c">char *string = &quot;hello&quot;
+
+printf(&quot;%s\n&quot;, string);
+
+puts(string); // only takes in strings; prints with a new line
+</code></pre>
+<h3>reading input line by line</h3>
+<p>can use scanf, but we'll usually use fgets</p>
+<pre><code class="language-c">char buffer[BUFSIZ]; // BUFSIZ is a constant defined in &lt;stdio.h&gt; (a couple thousand characters, more than enough)
+while (fgets(buffer, BUFSIZ, stdin)) {
+    // process the buffer (maybe strdup into an array of strings)
+}
+</code></pre>
+<p>small downside: fgets also captures newline <code>\n</code>.  We can &quot;chomp&quot;:</p>
+<ul>
+<li>Iterate through the buffer until you get to NULL character. If you encounter <code>\n</code>, replace with <code>\0</code> and break.
+<ul>
+<li>e.g. <code>['c', 'a', 't', '\n', '\0']</code> --&gt; <code>['c', 'a', 't', '\0', '\0']</code>, which functionally is just <code>['c' 'a' 't' '\0']</code></li>
+</ul>
+</li>
+</ul>
+<h3>Arrays of strings</h3>
+<ul>
+<li><code>char** strarray</code>: (i.e. <code>(char*) *strarray</code>)
+<ul>
+<li>use <code>calloc</code> to allocate an array of null pointers</li>
+<li>use <code>strdup</code> to allocate individual strings (e.g. from buffer) to each of those pointers</li>
+</ul>
+</li>
+</ul>
+<pre><code>_____
+| * |  strarray (on stack)
+-----
+  | (points to first pointer in heap) 
+  |
+__V__
+| * | - - &gt;|'c'|'a'|'t'|'\0'|  (each string also exists somewhere in heap, not necessarily in order among each other)
+-----
+| * | - - &gt;|'d'|'o'|'g'|'\0'|
+-----
+| * | - - &gt;|'m'|'o'|'u'|'s'|'e'|'\0'|
+-----
+</code></pre>
+<p>To free this whole array of strings is sorta complicated:</p>
+<ul>
+<li>must first free strings individually, then free the pointers that pointed to those strings (everything exists on the heap except for the strarray pointer)</li>
+</ul>
+<h1>2025-09-08</h1>
+<h3>reading user data into an array of strings (continuing from last class)</h3>
+<pre><code class="language-c">char  **read_user_data(FILE *stream, int nstrings) {
+    char buffer[80]; // Up to 80 characters per string
+    char **sarray = calloc(nstrings, sizeof(char*)); // use calloc so that we have 0s at end to use as sentinel
+    int i = 0;
+    while (fgets(buffer, 80, stream)) {
+        chomp(buffer);
+        *(sarray+i) = strdup(buffer);
+        i++;
+    }
+    return sarray;
+}
+</code></pre>
+<h3>freeing a list of strings <code>char** strarray</code></h3>
+<p>using <code>free</code>:</p>
+<ol>
+<li>delete each string</li>
+<li>delete each pointer</li>
+</ol>
+<pre><code class="language-c">void free_string_array(char **sarray) {
+    for (int i = 0; sarray[i]; i++) {
+        free(sarray[i]); // free each individual string
+    }
+    free(sarray); // free the array of string pointers
+}
+</code></pre>
+<h3>Abstract Data Types (ADTs)</h3>
+<ul>
+<li>a &quot;big idea&quot;, defined by operations it supports</li>
+<li>internal details hidden from user</li>
+</ul>
+<p>Today: Dynamic Array<br />
+Wednesday: Other ADTs on top of Dynamic Array (Stack, Queue, Set)</p>
+<ul>
+<li>ADTs are related to object oriented programming (but you don't <em>need</em> an object oriented programming language to implement ADTs)</li>
+</ul>
+<h3>review of structs:</h3>
+<p>Example: Point with x and y</p>
+<pre><code class="language-c">struct Point {
+    int x;
+    int y;
+};
+</code></pre>
+<p>nicer to do:</p>
+<pre><code class="language-c">typdef struct {
+    int x;
+    int y;
+} Point; 
+</code></pre>
+<p><code>Point p; p.x = 1; p.y = 2;</code></p>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Address</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(y)</td>
+<td>Ox...F</td>
+<td>0x00</td>
+</tr>
+<tr>
+<td>(y)</td>
+<td>Ox...E</td>
+<td>0x00</td>
+</tr>
+<tr>
+<td>(y)</td>
+<td>Ox...D</td>
+<td>0x00</td>
+</tr>
+<tr>
+<td>start of y</td>
+<td>Ox...C</td>
+<td>0x10 (2)</td>
+</tr>
+<tr>
+<td>(x)</td>
+<td>Ox...B</td>
+<td>0x00</td>
+</tr>
+<tr>
+<td>(x)</td>
+<td>0x...A</td>
+<td>0x00</td>
+</tr>
+<tr>
+<td>(x)</td>
+<td>0x...9</td>
+<td>0x00</td>
+</tr>
+<tr>
+<td>p -&gt; start of x</td>
+<td>0x...8</td>
+<td>0x01 (1)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>compiler typically pads struct size to power of 2</li>
+</ul>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+typedef struct {
+    char *name;
+    int  age;
+} Person;
+
+int main() {
+    // Declare a Person as a local variable
+    Person p;
+    p.name = &quot;James&quot;;
+    p.age = 20;
+
+    // Allocate a Person on the heap
+    Person *p_ptr = malloc(sizeof(Person));
+    p_ptr-&gt;name = strdup(&quot;Madison&quot;);
+    p_ptr-&gt;age = 21;
+
+    printf(&quot;sizeof(p): %lu\n&quot;, sizeof(p)); // 16 (would have expected it to be 12 for char* and int)
+    printf(&quot;sizeof(*p_ptr): %lu\n&quot;, sizeof(*p_ptr)); // 16
+
+    free(p_ptr-&gt;name);
+    free(p_ptr);
+}
+</code></pre>
+<h3>Dynamic Array: Overview</h3>
+<ul>
+<li>consists of an internal array that can grow dynamically</li>
+<li>need to keep track of:
+<ul>
+<li>data array</li>
+<li>capacity</li>
+<li>size</li>
+</ul>
+</li>
+</ul>
+<pre><code>____________
+| data     | ------&gt; |__1__|__4__|__3__|_____|_____|
+------------
+| capacity | = 5 (how much total space in internal data array) 
+------------
+| size     | = 3 (number of elements stored within capacity)
+------------
+</code></pre>
+<h3>methods:</h3>
+<p><code>array_create()</code></p>
+<ul>
+<li>create new empty array<br />
+<code>array_delete(Array *)</code></li>
+<li>free an array and its contents<br />
+<code>array_append(Array *, int value)</code></li>
+<li>add an element to the end of the array (if full, reallocate to double capacity and copy over values if needed-e.g.)<br />
+<code>array_at(Array *array, int index)</code></li>
+<li>return the value at an index<br />
+<code>array_index(Array *array, int value)</code></li>
+<li>return the first index with a given value<br />
+<code>array_insert(Array *array, int index, int value)</code></li>
+<li>insert a new value at an index (and shifts elements after it to the right)</li>
+</ul>
+<h3>Growing an Array: realloc</h3>
+<p><code>void* realloc(void *p, size_t size)</code> (<code>size_t</code> typically unsigned long int)</p>
+<ul>
+<li>takes in original array and new size (bytes)</li>
+<li>returns new array (with elements copied over)</li>
+</ul>
+<h3>Shifting elements to the right</h3>
+<pre><code>                              |--[size]
+                              v
+|__31__|__32__|__33__|__35__|____|____|____|____|
+                     ^__want to insert(34, at index 3)
+</code></pre>
+<p>from: size<br />
+to: index<br />
+we set: data[i] = data[i-1]</p>
+<h3>Computational Complexity</h3>
+<p>space/time efficiency<br />
+Big O Notation<br />
+O(1): constant<br />
+O(N): proportional to N<br />
+O(N^2): proportional to N^2<br />
+...(covered more later)</p>
+<p>Average (A) and Worst Case (W)</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Time (A)</th>
+<th>Time (W)</th>
+<th>Space (A)</th>
+<th>Space (W)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Append</td>
+<td>O(1)</td>
+<td>O(N) (realloc+copy)</td>
+<td>O(1)</td>
+<td>O(N)</td>
+</tr>
+<tr>
+<td>At</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Index</td>
+<td>O(N)</td>
+<td>O(N)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Insert</td>
+<td>O(N)</td>
+<td>O(N)</td>
+<td>O(1)</td>
+<td>O(N) (realloc)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Will get into the C code for Dynamic Arrays next class!</li>
+</ul>
+<h1>2025-09-10</h1>
+<ul>
+<li>Abstraction: hiding detail and exposing the interface</li>
+</ul>
+<h3>Dynamic Array C code</h3>
+<p>array.h</p>
+<pre><code class="language-c">#pragma once // (so that everything is included only once)
+
+#include &lt;stdbool.h&gt;
+#include &lt;stdlib.h&gt;
+
+/* Constants */
+#define ARRAY_DEFAULT_CAPACITY 1 &lt;&lt; 2 // 4 elements
+
+/* Structure */
+typedef struct {
+    int	  *data;	// Internal array
+    int   capacity;	// Total number of elements
+    int   size;     // Number of valid elements
+} Array;
+
+/* Functions */
+Array*  array_create();
+void    array_delete(Array *array);
+void    array_append(Array *array, int value);
+int     array_at(Array *array, int index);
+int	    array_index(Array *array, int value);
+void    array_insert(Array *array, int index, int value);
+</code></pre>
+<p>array.c</p>
+<pre><code class="language-c">#include &quot;array.h&quot;
+#include &lt;assert.h&gt;
+#include &lt;string.h&gt;
+
+Array *array_create() {
+    // Allocate Array structure
+    Array *array = malloc(sizeof(Array));
+
+    // Initialize capacity and size
+    array-&gt;capacity = ARRAY_DEFAULT_CAPACITY;
+    array-&gt;size = 0;
+
+    // Allocate the data array
+    array-&gt;data = malloc(array-&gt;capacity * sizeof(int));
+
+    // return pointer to Array
+    return array;
+}
+
+void array_delete(Array *array) {
+    // Free the data array
+    free(array-&gt;data);
+    
+    // Free the Array structure
+    free(array);
+}
+
+void array_append(Array *array, int value) {
+    // If the size is at capacity, double the capacity
+    if (array-&gt;size == array-&gt;capacity) {
+        array-&gt;capacity *= 2;
+        array-&gt;data = realloc(array-&gt;data, array-&gt;capacity * sizeof(int));
+    }
+    // Store value at end of array and increment size
+    array-&gt;data[array-&gt;size] = value;
+    array-&gt;size++;
+}
+
+int array_at(Array *array, int index) {
+    // Return the value at the index
+    return array-&gt;data[index];
+}
+
+int array_index(Array *array, int value) {
+    // Scan internal array for first element 
+    // that matches value and return its index         
+    for (int index = 0; index &lt; array-&gt;size; index++)
+        if (array-&gt;data[index] == value) {
+            return index;
+        }
+    return -1; // Return -1 if no match found
+}
+
+void array_insert(Array *array, int index, int value) {
+    // If the size is at capacity, double the capacity
+    if (array-&gt;size == array-&gt;capacity) {
+        array-&gt;capacity *= 2;  // Double the capacity
+        array-&gt;data = realloc(array-&gt;data, array-&gt;capacity * sizeof(int));
+    }
+
+    // Shift the values from index to the end of the array one element ahead
+    for (int i=array-&gt;size; i&gt;index; i--) {
+        array-&gt;data[i] = array-&gt;data[i-1];
+    }
+
+    // Store new value and increment size
+    array-&gt;data[index] = value;
+    array-&gt;size++;
+}
+</code></pre>
+<h3>Stack: Overview</h3>
+<p>Push: add element to top<br />
+Pop: remove element from top<br />
+Top: peek at top<br />
+Empty: true if stack is empty</p>
+<pre><code>|   | 
+|   |
+| 3 | &lt;--Top of Stack
+| 2 |
+| 1 | 
+-----
+</code></pre>
+<h3>Parentheses, Brackets, Braces Matching:</h3>
+<p>valid PBB Matching:</p>
+<pre><code>(){}[]
+{[()]}
+{}[]
+</code></pre>
+<p>invalid:</p>
+<pre><code>[)]
+[{()]}
+</code></pre>
+<p><strong>We can use the stack to write an algorithm to detect valid PBBs!</strong>:<br />
+traverse string in order left to right:</p>
+<ul>
+<li>push opening PBBs to stack</li>
+<li>if encounter a closing PBB, pop from stack and check if the popped opener matches the closer</li>
+</ul>
+<pre><code class="language-pseudocode">for each input char c:
+	if c is an opener:
+		push c on stack
+	else:
+		if stack empty: return false
+		if c is closer that matches top:
+			pop stack
+		else:
+			return false
+if stack is empty:
+	return true
+else:
+	return false
+</code></pre>
+<h1>2025-09-12</h1>
+<ul>
+<li>using principles of object oriented programming to create</li>
+<li>abstraction (push and pop methods) and inheritance (stack &quot;inherits&quot; from dynamic array)</li>
+</ul>
+<h3>Implementing Stack, based on our previous implementation of Dynamic Array</h3>
+<p>stack.h</p>
+<pre><code class="language-c">#pragma once
+#include &quot;array.h&quot;
+
+/* Structures */
+typedef Array Stack;
+
+/* Functions */
+Stack*  stack_create();
+void    stack_delete(Stack *stack);
+void    stack_push(Stack *s, int value);
+int     stack_pop(Stack *s);
+int     stack_top(Stack *s);
+bool    stack_empty(Stack *s);
+</code></pre>
+<p>stack.c</p>
+<pre><code class="language-c">#include &quot;stack.h&quot;
+#include &lt;assert.h&gt;
+
+Stack* stack_create() {
+    return array_create();
+}
+
+void stack_delete(Stack *stack) {
+    array_delete(stack);
+}
+
+void stack_push(Stack *stack, int value) {
+    array_append(stack, value);
+}
+
+int stack_top(Stack *stack) {
+    assert(stack-&gt;size &gt; 0);
+    return array_at(stack, stack-&gt;size - 1);
+}
+
+int stack_pop(Stack *stack) {
+    int top = stack_top(stack); // will assert false if stack is empty
+    stack-&gt;size--;
+    return top;
+}
+
+bool stack_empty(Stack *stack) {
+    return stack-&gt;size == 0;
+}
+</code></pre>
+<h3>Implementing Parentheses, Brackets, Braces Matching Algorithm:</h3>
+<pre><code class="language-c">#include &lt;stdbool.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+#include &quot;stack.h&quot;
+
+void chomp(char *str) {
+    size_t size = strlen(str);
+    if (*(str + size - 1) == '\n') *(str + size - 1) = 0;
+}
+
+bool is_pbb_matched(char *s) {
+    Stack *stack = stack_create();
+
+    for (char *c = s; *c; c++) {
+        // if char is an opener, push 
+        if (*c == '{' || *c == '[' || *c == '(') {
+            stack_push(stack, *c); // push ascii value of opener
+        // else if char is a closer that match opener on stack, pop
+        } else if (!stack_empty(stack) &amp;&amp; 
+                    ((*c == '}' &amp;&amp; stack_top(stack) == '{') ||
+                    (*c == ']' &amp;&amp; stack_top(stack) == '[') ||
+                    (*c == ')' &amp;&amp; stack_top(stack) == '('))) {
+            stack_pop(stack);
+        // else no match
+        } else {
+            stack_delete(stack);
+            return false;
+        }
+    }
+    if (stack_empty(stack)) {
+        stack_delete(stack);
+        return true;
+    } else {
+        stack_delete(stack);
+        return false;
+    }
+}
+
+int main(int argc, char *argv[]) {
+    char buffer[BUFSIZ];
+    while (fgets(buffer, BUFSIZ, stdin)) {
+        chomp(buffer);
+        puts(is_pbb_matched(buffer) ? &quot;pbb-matched&quot; : &quot;not pbb-matched&quot;);
+    }
+    return 0;
+}
+</code></pre>
+<h3>Stack vs. Queue</h3>
+<p>stack: Last In, First Out (LIFO)</p>
+<pre><code>___________________v---push and pop only on one end
+|
+--------------------
+</code></pre>
+<p>queue: First In, First Out (FIFO)</p>
+<pre><code>pop---v___________________v---push
+         (like a pipe!)
+       -------------------
+</code></pre>
+<p>methods for queue:</p>
+<ul>
+<li>push</li>
+<li>pop</li>
+<li>front</li>
+<li>empty</li>
+</ul>
+<p>Complexity of Queue (implemented with a Dynamic Array):</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Time (Avg)</th>
+<th>Space (Avg)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Push</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Pop</td>
+<td>O(N) - have to shift everything</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Front</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Empty</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+<p>deque (double ended queue):</p>
+<pre><code>push, pop--v_________________________________v---push, pop
+             (pipe that can flow either way) 
+            ---------------------------------
+</code></pre>
+<p>methods for queue:</p>
+<ul>
+<li>push left, push right</li>
+<li>pop left, pop right</li>
+<li>front</li>
+<li>empty</li>
+</ul>
+<h3>Set</h3>
+<ul>
+<li>a &quot;big bag of stuff&quot; (unique, unordered stuff!)<br />
+methods:</li>
+<li>add(value)</li>
+<li>contains(value)</li>
+<li>remove(value</li>
+</ul>
+<p>Complexity of Set (implemented with a Dynamic Array):</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Time (Avg)</th>
+<th>Space (Avg)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Add</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Contains</td>
+<td>O(N)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Remove</td>
+<td>O(N)</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+<h3>Algorithm analysis</h3>
+<p>constant time operations: operations that take the same amount of time regardless of data value</p>
+<ul>
+<li>arithmetic operations</li>
+<li>variable assignments</li>
+<li>loops with fixed number of iterations</li>
+<li>indexing into an array</li>
+<li>comparisons</li>
+</ul>
+<p>Big O Notation:</p>
+<ul>
+<li>IGNORE CONSTANTS</li>
+<li>if sum of terms, take the highest order term</li>
+<li>if product of terms, take the product of orders</li>
+</ul>
+<h3>Classic Big O Complexities:</h3>
+<p>O(1)</p>
+<ul>
+<li>array lookup and compare: <code>if a[i] == key</code></li>
+</ul>
+<p>O(N)</p>
+<ul>
+<li>for loops: <code>for (i=0; i &lt; size; i++) { do something O(1) }</code></li>
+</ul>
+<p>O(N^2), and other polynomials</p>
+<ul>
+<li>typically nested for loops <code>for (i=0; i &lt; size; i++) { do something O(N) }</code></li>
+</ul>
+<p>O(log N)</p>
+<ul>
+<li>Divide and Conquer (e.g. binary search)</li>
+</ul>
+<pre><code>|__0__|__3__|__7__|__9__|__25__|__47__|__83__|
+					 ^--look at mid: &gt; or &lt; than key? (discard other half &amp; repeat until mid==key)
+</code></pre>
+<ul>
+<li>The most number of times we would need to cut in half is log_2(n)</li>
+<li>an array of 2^(20) elements would only take at most 20 steps to cut down to key</li>
+</ul>
+<p>O(N log N)</p>
+<ul>
+<li>Divide into O(log N) subproblems, where each subproblem is O(N) to solve</li>
+<li>sorting algorithms can get to this speed</li>
+</ul>
+<p>O(C^N), O(N!) - exponential, non-polynomial</p>
+<ul>
+<li>guessing a password by trying all combinations</li>
+</ul>
+<h1>2025-09-15</h1>
+<h3>Comparing linear and binary search times</h3>
+<p>binary search is much faster!!<br />
+10,000 trials on sorted array of 2^(20) elements:</p>
+<ul>
+<li>9.40 sec vs. 0.00115 sec</li>
+</ul>
+<h3>Some examples: what is their complexity?</h3>
+<p>example 1: dot products<br />
+O(N) because each element is multiplied and added pairwise</p>
+<p>example 2: matrix multiplication<br />
+O(N^3)</p>
+<pre><code>for each row
+	for each column
+		take dot product - O(N)
+</code></pre>
+<p>example 3:<br />
+Euclidian GCD - greatest common divisor of a and b<br />
+(where N is bit length of a and b)</p>
+<ol>
+<li>Ensure that a is greater than b. If b is greater than a, swap the values of a and b.</li>
+<li>Computer the remainder of r of a divided by b</li>
+<li>If r is equal to 0, then the GCD of a and b is b.  Otherwise, set a to b and b to r, and go back to step 2</li>
+</ol>
+<ul>
+<li>in terms of bit length, O(N) ~losing a bit of significance each time</li>
+<li>in terms of the magnitude of the numbers, O(log N) ~remainder is at most the difference between a and b</li>
+</ul>
+<h3>Recursion</h3>
+<ul>
+<li>an algorithm that breaks a problem into subproblems and applies the algorithm itself</li>
+<li>needs a base case when can't subdivide further</li>
+</ul>
+<p>Why recursion?</p>
+<ul>
+<li>useful for structures that are also recursive (like trees)</li>
+<li>lots of things can be seen as recursive! (e.g. arrays could be seen as unit element followed by array of length n-1)</li>
+<li>However, usually does not save time and space (particularly not space)</li>
+</ul>
+<p>Basic recursive function:</p>
+<pre><code>recursive(data):
+	if (base case):
+		perform base action
+		return
+	else
+		recursive(reduced data)
+</code></pre>
+<p>Variants:</p>
+<ul>
+<li>sometimes return data value</li>
+<li>more than one base case</li>
+<li>more than one recursive call (e.g. recurse left, recurse right)</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>factorial</li>
+<li>cumulative sum</li>
+<li>print list reversed</li>
+<li>linear search</li>
+<li>binary search</li>
+<li>has duplicates</li>
+<li>reverse list</li>
+<li>fibonacci</li>
+</ul>
+<pre><code class="language-c">int cumulative_sum(int n) {
+    if (n == 0) {
+        return 0;
+    }
+    return n + cumulative_sum(n-1);
+}
+
+int factorial(int n) {
+    if (n == 0) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+
+void print_string(char *s) { // &quot;every string is a character followed by another string&quot;
+    if (*s == '\0') {
+        putchar('\n');
+        return;
+    }
+    putchar(*s);
+    print_string(s+1);
+}
+</code></pre>
+<h1>2025-09-17</h1>
+<p>continuing recursion:</p>
+<pre><code class="language-c">void reverse_array(int *list, int start_index, int end_index) {
+    if (start_index &gt;= end_index) { // 0 or 1 elements left in middle
+        return;
+    }
+    // swap elements
+    int temp = list[start_index];
+    list[start_index] = list[end_index];
+    list[end_index] = temp;
+
+    reverse_array(list, start_index + 1, end_index - 1);
+}
+
+int linear_search(int *numbers, int high, int key) {
+    if (high &lt; 0) {
+        return -1;
+    }
+	if (numbers[high] == key) {
+        return high;
+    }
+
+    return linear_search(numbers, high - 1, key);
+}
+
+int binary_search(int *numbers, int low, int high, int key) {
+	if (low &gt; high)
+		return -1;
+
+	int mid = (low + high) / 2;
+
+	if (key &gt; numbers[mid])
+		return binary_search(numbers, mid+1, high, key);
+
+	if (key &lt; numbers[mid])
+		return binary_search(numbers, low, mid-1, key);
+
+   return mid;
+}
+
+bool has_duplicate(int *array, int high) {
+    if (high == 0)
+        return false;
+
+    if (linear_search(array, high-1, array[high]) &gt;= 0)
+        return true;
+
+    return has_duplicate(array, high-1);
+}
+
+int fibonacci_number(int n) {
+	if (n == 0)
+		return 0;
+	if (n == 1)
+		return 1;
+	return fibonacci_number(n - 1) + fibonacci_number(n - 2);
+}
+
+</code></pre>
+<h3>Recurrence Relations</h3>
+<ul>
+<li>look in book</li>
+<li>good review for discrete math, not going to cover extensively in this class</li>
+</ul>
+<p>Recurrence relation for factorial:</p>
+<pre><code>(k)
+ |
+(k)
+ |
+(k)
+ |
+... (repeated n times)
+
+T(N) = k + T(N-1) =&gt; O(N)
+</code></pre>
+<p>Recurrence relation for has_duplicate:</p>
+<pre><code>(N)
+ |
+(N-1)
+ |
+(N-2)
+ |
+... (repeated n times)
+
+T(N) = N + T(N-1)
+	 = N + N-1 + ... + 1 = (N+1)*(N/2) =&gt; O(N^2)
+</code></pre>
+<h3>Sorting</h3>
+<p><a href="https://anim.ide.sk/sortingcards.php">Sorting Cards Exercise</a></p>
+<h1>2025-09-19</h1>
+<h3>Bubble Sort</h3>
+<pre><code class="language-c">void BubbleSort(int *numbers, int numbersSize) {
+   for (int i = 0; i &lt; numbersSize - 1; i++) {
+      for (int j = 0; j &lt; numbersSize - i - 1; j++) {
+         if (numbers[j] &gt; numbers[j+1]) {
+            int temp = numbers[j];
+            numbers[j] = numbers[j + 1];
+            numbers[j + 1] = temp;
+         }
+      }
+   }
+}
+// or...
+void BubbleSort(int *numbers, int numbersSize) {
+   int i = numbersSize - 1;
+   while (i &gt; 0) {
+      for (int j = 0; j &lt; i; j++) {
+         if (numbers[j] &gt; numbers[j + 1]) {
+            int temp = numbers[j];
+            numbers[j] = numbers[j + 1];
+            numbers[j + 1] = temp;
+         }
+      }
+      i--;
+   }
+}
+</code></pre>
+<h3>Insertion Sort</h3>
+<pre><code class="language-c">void InsertionSort(int *numbers, int numbersSize) {
+    for (int i = 1; i &lt; numbersSize; ++i) {
+        int j = i;
+            // Insert numbers[i] into sorted part
+            // stopping once numbers[i] in correct position
+            while (j &gt; 0 &amp;&amp; numbers[j] &lt; numbers[j - 1]) {
+            // Swap numbers[j] and numbers[j - 1]
+            int temp = numbers[j]; 
+            numbers[j] = numbers[j - 1];
+            numbers[j - 1] = temp;
+            --j;
+        }
+    }
+}
+</code></pre>
+<h3>Space Complexity</h3>
+<ul>
+<li>Space complexity is how much <em>ancillary</em> space you need to allocate for the algorithm
+<ul>
+<li>bubble sort and insertion sort both have O(1) space complexity</li>
+</ul>
+</li>
+</ul>
+<h3>Adaptiveness and Stability</h3>
+<p><strong>Adaptiveness: Takes advantage of partial sort</strong></p>
+<ul>
+<li>
+<p>selection sort is not adaptive</p>
+</li>
+<li>
+<p>insertion sort is adaptive (if array is already sorted, it would only need one pass)</p>
+</li>
+<li>
+<p>bubble sort is not adaptive (always O(n^2))</p>
+</li>
+<li>
+<p>we can modify bubble sort to make it adaptive</p>
+<ul>
+<li>keeps track of the last swap (if unable to make further swaps, we know everything after it must be sorted):</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-c">void BubbleSortImproved(int *numbers, int numbersSize) {
+   int last;  // last swap index
+   for (int i = 0; i &lt; numbersSize - 1; /* i updated below using last */) {
+      last = -1;
+      for (int j = 0; j &lt; numbersSize - i - 1; j++) {
+         if (numbers[j] &gt; numbers[j + 1]) {
+            int temp = numbers[j];
+            numbers[j] = numbers[j + 1];
+            numbers[j + 1] = temp;
+            last = j;
+         }
+      }
+      if (last == -1) break;                 // already sorted
+      i = numbersSize - last - 1;            // shrink checked range
+   }
+}
+// or...
+void BubbleSortImproved(int *numbers, int numbersSize) {
+   int i = numbersSize - 1;
+   while (i &gt;= 1) {
+      int last = -1;
+      for (int j = 0;  j &lt; i;  j++) {
+         if (numbers[j] &gt; numbers[j+1]) {
+            int temp = numbers[j];
+            numbers[j] = numbers[j + 1];
+            numbers[j + 1] = temp;
+            last = j;
+         }
+      }
+      i = last;
+   }
+}
+</code></pre>
+<p>We can also improve insertion sort (saves on write instructions):</p>
+<pre><code class="language-c">void InsertionSortImproved(int *numbers, int numbersSize) {
+    for (int i = 1;  i &lt; numbersSize;  i++) {
+        int j = i - 1;
+        int tmp = numbers[i];
+        while ((j &gt;= 0) &amp;&amp; (numbers[j] &gt; tmp)) {
+            numbers[j+1] = numbers[j];
+            j = j - 1;
+        }
+        numbers[j+1] = tmp;
+    }
+}
+</code></pre>
+<p><strong>Stability: If two elements have the same the value, order will not be changed</strong></p>
+<ul>
+<li>there may be additional information that would be messed up by switching order</li>
+<li>selection sort is not stable</li>
+<li>ex: <code>[2a, 2b, 1, 3, 4, 5]</code> would go to <code>[1, 2b, 2a, 3, 4, 5]</code></li>
+</ul>
+<hr />
+<p>O(N^2) sorting algorithms build up sorted region through multiple passes</p>
+<ul>
+<li>Which is fastest (out of algorithms we have seen so far)?</li>
+<li>Let's test!
+<ul>
+<li>Insertion sort (adaptive and stable; with enhancement is fastest)</li>
+</ul>
+</li>
+</ul>
+<p><img src="o-n-squared-sorting-times.png" alt="o-n-squared-sorting-times" /></p>
+<hr />
+<p>O(N log N) sorting algorithms build up a sorted order by dividing the problem and combining results.</p>
+<h3>Merge sort</h3>
+<blockquote>
+<p>did example in class physically sorting 16 people by first name using merge sort (cool!)</p>
+<ul>
+<li>start as individual</li>
+<li>merge into pairs</li>
+<li>merge pairs into new order (only comparing first of each pair)</li>
+<li>pair groups of 4 ... and so on ...(only comparing first of each order)</li>
+</ul>
+</blockquote>
+<p>best, average, and worst time complexity: O(N log N)<br />
+space complexity: O(N) - need ancillary array of size N</p>
+<h3>Quicksort</h3>
+<p>average time complexity: O(N log N) - usually, depending on data/choices<br />
+average space complexity: O(log N) - auxiliary due to recursion stack</p>
+<ul>
+<li>partition array via swaps into regions above or below a pivot value</li>
+<li>pivot value can be chosen arbitrarily (first, last, middle, random, or median-of-three).</li>
+<li>small note: values in array equal to the pivot value can be in either partition (implementation-dependent)</li>
+<li>another note: we are not sorting around the pivot index - we are sorting around its value
+<ul>
+<li>if we didn't use strict comparisons (&gt; and &lt;), the element from which we assigned the pivot can move</li>
+</ul>
+</li>
+</ul>
+<pre><code>pivot_value = 4 (pick middle element)
+
+|__3__|__6__|__1__|__4__|__7__|__2__|__5__|
+   ^--low_index                        ^--high_index
+
+while low_index &lt;= high index:
+	increment low_index until array[low_index] &gt; pivot_value
+	decrement high_index until array[high_index] &lt; pivot_value
+	swap array[low_index] with array[high_index]
+
+then, given ending position of low_index,
+	recursively apply sort on low partition (orig_low_index to ending_low_index) 
+	recursively apply sort on high partition (ending_low_index+1 to orig_high_index) 
+</code></pre>
+<p>Worst case: if pivots are always bad, it basically turns into selection sort</p>
+<ul>
+<li>time complexity: O(N^2)</li>
+<li>space complexity: O(N)</li>
+<li>example: pick pivot as lowest element, and array is already sorted</li>
+<li><a href="https://visualgo.net/en/sorting">website to visualize</a></li>
+<li>if we pass a sorted array to quicksort (picking pivot at index 0), you can visualize how it must recurse at every element (N times)</li>
+</ul>
+<h1>2025-09-22</h1>
+<p><a href="https://opendsa-server.cs.vt.edu/ODSA/Books/Everything/html/Mergesort.html">Merge Sort Visualization</a><br />
+<a href="https://anim.ide.sk/sorting_algorithms_2.php">Quicksort &amp; Merge Sort</a></p>
+<p>Recap:</p>
+<ul>
+<li>bad pivot values =&gt; bad partitions =&gt; O(N^2) instead of O(N log N)</li>
+<li>merge sort is stable, quicksort is not</li>
+</ul>
+<h3>Merge Sort C code</h3>
+<pre><code class="language-c">#include &lt;stdlib.h&gt;
+
+void Merge(int *numbers, int i, int j, int k) {
+   int mergedSize = k - i + 1;               // Size of merged partition
+   int mergePos = 0;                         // Position to insert merged number
+   int leftPos = 0;                          // Position of elements in left partition
+   int rightPos = 0;                         // Position of elements in right partition
+   // Dynamically allocates temporary array for merged numbers
+   int *mergedNumbers = malloc(mergedSize * sizeof(int));   
+   leftPos = i;                          // Initialize left partition position
+   rightPos = j + 1;                     // Initialize right partition position
+   
+   // Add smallest element from left or right partition to merged numbers
+   while (leftPos &lt;= j &amp;&amp; rightPos &lt;= k) {
+      if (numbers[leftPos] &lt;= numbers[rightPos]) {
+         mergedNumbers[mergePos] = numbers[leftPos];
+         ++leftPos;
+      }
+      else {
+         mergedNumbers[mergePos] = numbers[rightPos];
+         ++rightPos;
+         
+      }
+      ++mergePos;
+   }
+   
+   // If left partition is not empty, add remaining elements to merged numbers
+   while (leftPos &lt;= j) {
+      mergedNumbers[mergePos] = numbers[leftPos];
+      ++leftPos;
+      ++mergePos;
+   }
+   
+   // If right partition is not empty, add remaining elements to merged numbers
+   while (rightPos &lt;= k) {
+      mergedNumbers[mergePos] = numbers[rightPos];
+      ++rightPos;
+      ++mergePos;
+   }
+   
+   // Copy merge number back to numbers
+   for (mergePos = 0; mergePos &lt; mergedSize; ++mergePos) {
+      numbers[i + mergePos] = mergedNumbers[mergePos];
+   }
+   free(mergedNumbers);
+}
+
+void MergeSort(int *numbers, int i, int k) {
+   int j = 0;
+   
+   if (i &lt; k) {
+      j = (i + k) / 2;  // Find the midpoint in the partition
+      
+      // Recursively sort left and right partitions
+      MergeSort(numbers, i, j);
+      MergeSort(numbers, j + 1, k);
+      
+      // Merge left and right partition in sorted order
+      Merge(numbers, i, j, k);
+   }
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th><strong>MERGE SORT</strong></th>
+<th>Time Complexity</th>
+<th>Space Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Best Case</td>
+<td>O(N log N)</td>
+<td>O(N)</td>
+</tr>
+<tr>
+<td>Average Case</td>
+<td>O(N log N)</td>
+<td>O(N)</td>
+</tr>
+<tr>
+<td>Worst Case</td>
+<td>O(N log N)</td>
+<td>O(N)</td>
+</tr>
+<tr>
+<td>--</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Adaptive?</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>Stable?</td>
+<td>Yes</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>side note: python uses Timsort, which essentially uses merge sort down to subarrays of 32 elements, and then uses insertion sort (which is adaptive)</p>
+<h3>Quicksort</h3>
+<pre><code class="language-c">#include &lt;stdbool.h&gt;
+
+int Partition(int *numbers, int lowIndex, int highIndex) {
+    // Pick middle element as pivot
+    int midpoint = lowIndex + (highIndex - lowIndex) / 2;// avoids overflow, otherwise same as (highIndex + lowIndex) / 2;
+    int pivot = numbers[midpoint];
+
+    bool done = false;
+    while (!done) {
+        while (numbers[lowIndex] &lt; pivot) {
+            lowIndex += 1;
+        }
+        while (pivot &lt; numbers[highIndex]) {
+            highIndex -= 1;
+        }
+        // If zero or one elements remain, then all numbers are partitioned. Return highIndex.
+        if (lowIndex &gt;= highIndex) {
+            done = true;
+        } else {
+            // Swap numbers[lowIndex] and numbers[highIndex]
+            int temp = numbers[lowIndex];
+            numbers[lowIndex] = numbers[highIndex];
+            numbers[highIndex] = temp;
+            // Update lowIndex and highIndex
+            lowIndex += 1;
+            highIndex -= 1;
+        }
+    }
+    // this will be the top of the low end for the next call
+    return highIndex;
+}
+
+void Quicksort(int *numbers, int lowIndex, int highIndex) {
+    // Base case: If the partition size is 1 or zero
+    // elements, then the partition is already sorted
+    if (lowIndex &gt;= highIndex) {
+        return;
+    }
+    // Partition the data within the array. Value lowEndIndex
+    // returned from partitioning is the index of the low
+    // partition's last element.
+    int lowEndIndex = Partition(numbers, lowIndex, highIndex);
+	
+    Quicksort(numbers, lowIndex, lowEndIndex);// recursively sort low partition
+    Quicksort(numbers, lowEndIndex + 1, highIndex);// recursively sort high partition
+}
+</code></pre>
+<pre><code class="language-c">// from https://anim.ide.sk/sorting_algorithms_2.php
+// Basically the same thing, may do one extra swap with itself
+void Quicksort(int *a, int beg, int end) {
+	int i = beg;
+    int j = end;
+    int pivot = a[(i + j) / 2];
+	while (i &lt;= j) {  // i, j need to cross for next call
+		while (a[i] &lt; pivot) 
+            i++;
+        while (a[j] &gt; pivot) 
+            j--;
+        if (i &lt;= j) {
+            // one last swap with yourself--no harm
+            int temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+            i++;
+            j--;
+        }
+    }
+    if (beg &lt; j) 
+        Quicksort(a, beg, j);
+    if (i &lt; end) 
+        Quicksort(a, i, end);
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th><strong>QUICKSORT</strong></th>
+<th>Time Complexity</th>
+<th>Space Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Best Case</td>
+<td>O(N log N)</td>
+<td>O(log N)</td>
+</tr>
+<tr>
+<td>Average Case</td>
+<td>O(N log N)</td>
+<td>O(log N)</td>
+</tr>
+<tr>
+<td>Worst Case</td>
+<td>O(N^2)</td>
+<td>O(N)</td>
+</tr>
+<tr>
+<td>--</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Adaptive?</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>Stable?</td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>Comparison:</h3>
+<p><img src="mergesort_quicksort.png" alt="mergesort_quicksort" /><br />
+<strong>NOTE</strong>: we did not cover radix sort in class, but may it be useful to review for interviews!</p>
+<h3>2 main data structure implementations:</h3>
+<ol>
+<li>(dynamic) array based</li>
+<li>linked</li>
+</ol>
+<p>Linked Data structures:</p>
+<ul>
+<li>linked lists</li>
+<li>trees</li>
+<li>graphs</li>
+</ul>
+<p>For Recursive Data Structures:</p>
+<ul>
+<li>a child of a tree is a tree</li>
+<li>the rest of a list is a list</li>
+</ul>
+<h3>Linked Lists</h3>
+<p>made up of list nodes:</p>
+<pre><code>		_________      _________
+Value:	| Blue  |      |  Red  |
+		---------      ---------
+Next:	|   *---|--&gt;   |   *---|--&gt; null
+		---------      ---------
+*Head-------^
+
+</code></pre>
+<p>first element in list we call the head</p>
+<ul>
+<li>head pointer lives in the stack</li>
+</ul>
+<p>in class balloon demo: when inserting/removing elements, don't let go of any balloons! (memory leaks/dangling pointers)</p>
+<h3>insert node at head of list</h3>
+<pre><code class="language-c">Node *list_add_head(Node *head, int value) {
+    Node *n = malloc(sizeof(Node));
+    n-&gt;value = value;
+    n-&gt;next = head;
+    return n;
+}
+</code></pre>
+<h3>delete node from head of list</h3>
+<pre><code class="language-c">Node *list_remove_head(Node *head) {
+    Node *n = head;
+    head = n-&gt;next;
+    free(n);
+    return head;
+}
+</code></pre>
+<h1>2025-09-24</h1>
+<p>...continuing Linked Lists:<br />
+recap: when allocating variables on the heap, unless you maintain contact with them (using pointer), the balloon will float away (memory leak)!</p>
+<h3>Pointer Chasing (printing a linked list)</h3>
+<p><code>head --&gt; [ ] --&gt; [ ] --&gt; [ ] --&gt; 0</code><br />
+set n = head, move down the list!</p>
+<pre><code class="language-c">void list_print_iterative(Node *head) {
+    for (Node *n = head; n != NULL; n = n-&gt;next) { // don't do n++! nodes are not sequential like arrays
+        printf(&quot;%d &quot;, n-&gt;value);
+    }
+    printf(&quot;\n&quot;);
+}
+</code></pre>
+<h3>Adding node after current node</h3>
+<pre><code>         curr
+	      ↓
+head --&gt; [1] -x-&gt; [3] --&gt; [4] --&gt; 0
+	      ↓        ↑
+ (malloc) n  --&gt;  [2]
+</code></pre>
+<pre><code class="language-c">void list_add_after(Node *curr, int value) {
+    Node *n = malloc(sizeof(Node));
+    n-&gt;value = value;
+    n-&gt;next = curr-&gt;next;
+    curr-&gt;next = n;
+}
+</code></pre>
+<h3>Removing node after current node</h3>
+<pre><code>         curr            successor
+	      ↓     (free!)    ↓ 
+head --&gt; [1] -x-&gt; [3] --&gt; [4] --&gt; 0
+	      ↓                ↑
+          --&gt;--&gt;--&gt;--&gt;--&gt;--^
+</code></pre>
+<pre><code class="language-c">void list_remove_after(Node *curr) {
+    Node *successor = curr-&gt;next-&gt;next;
+    free(curr-&gt;next);
+    curr-&gt;next = successor;
+}
+</code></pre>
+<h3>Print list recursively</h3>
+<pre><code class="language-c">void list_print_recursive(Node *head) {
+    if (head == NULL) {
+        printf(&quot;\n&quot;);
+        return;
+    }
+    printf(&quot;%d &quot;, head-&gt;value);
+    list_print_recursive(head-&gt;next);
+}
+
+void list_print_reversed_recursive(Node *head, Node *curr) {
+    if (curr == NULL) {
+        return;
+    }
+    list_print_reversed_recursive(head, curr-&gt;next); // recurse _before_ we print
+    printf(&quot;%d &quot;, curr-&gt;value);
+    if (curr == head) printf(&quot;\n&quot;); // same head is passed to every recursive call
+}
+// called as: list_print_reversed_recursive(head, head);
+</code></pre>
+<h3>Deleting a Linked LIst</h3>
+<pre><code class="language-c">void list_delete_iterative(Node *head) {
+    while (head != NULL) {
+        Node *n = head;
+        head = head-&gt;next;
+        free(n);
+    }
+}
+void list_delete_recursive(Node *head) {
+    if (head == NULL) {
+        return;
+    }
+    list_delete_recursive(head-&gt;next); // recurse first!
+    free(head);
+}
+</code></pre>
+<h3>Stack implemented using Linked List</h3>
+<p>recall:</p>
+<ul>
+<li>when using Dynamic Arrays for stacks, we pushed/popped at the end of the array.</li>
+<li>otherwise we would have had to shift elements - O(N)</li>
+</ul>
+<p>for linked lists:</p>
+<ul>
+<li>we push/pop at the head - O(1)</li>
+<li>otherwise pushing/popping at the tail requires O(N) traversal</li>
+</ul>
+<h3>Queue using a Linked List</h3>
+<ul>
+<li>because we push at one end and pop at the other end, one operation will have to be O(N)</li>
+<li>but what if we add a tail?</li>
+</ul>
+<pre><code>								  tail (push only)
+								  ↓
+head --&gt; [ ] --&gt; [ ] --&gt; [ ] --&gt; [ ] --&gt; 0
+</code></pre>
+<ul>
+<li>then, we can push to the tail and pop from the head</li>
+<li><strong>NOTE</strong>: we cannot pop from the tail, because we cannot cannot look backwards!!!</li>
+<li>this brings us to doubly linked lists...</li>
+</ul>
+<h1>2025-09-26</h1>
+<h3>Queue using Linked list</h3>
+<p>recap:</p>
+<ul>
+<li>insert at tail &amp; remove at head (easy)</li>
+<li>insert at head &amp; remove at tail (hard - we can't see backwards!)</li>
+<li>we need prev pointers if we want both operations at tail</li>
+<li>therefore...</li>
+</ul>
+<h3>Deque (double ended queue) using Doubly-Linked List</h3>
+<ul>
+<li>each note contains next and prev:</li>
+</ul>
+<pre><code>				 (head)                         (tail)
+				_________      _________      _________
+Value:			| Blue  |      |  Red  |      | Green |
+				---------      ---------      ---------
+Next:			|   *---|--&gt;   |   *---|--&gt;   |   *---|--&gt; null
+				---------      ---------      ---------
+Prev:   null &lt;--|---*   |   &lt;--|---*   |   &lt;--|---*   |
+				---------      ---------      ---------
+</code></pre>
+<ul>
+<li>aside: one of the few places that python uses doubly-linked lists is for its implementation of deque
+<ul>
+<li>queues aren't generally used for large amounts of data (too much auxiliary space)</li>
+</ul>
+</li>
+<li>limitation/awkwardness of linked lists: need to check boundary conditions (is_empty, adding/removing head or tail)
+<ul>
+<li>solution: Doubly-linked list with dummy elements</li>
+<li>now: <code>head-&gt;next</code> refers to first element in list, <code>tail-&gt;prev</code> refers to the last</li>
+</ul>
+</li>
+</ul>
+<pre><code>  head                                   tail
+   ↓                                      ↓ 
+[dummy] &lt;-&gt; [10] &lt;-&gt; [20] &lt;-&gt; [30] &lt;-&gt; [dummy]
+</code></pre>
+<h3>Doubly Linked List Implementation</h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+// Definition of a Node
+typedef struct Node {
+    int data;
+    struct Node* prev;
+    struct Node* next;
+} Node;
+
+// Definition of a Doubly Linked List
+typedef struct DoublyLinkedList {
+    Node* head;  // Dummy head
+    Node* tail;  // Dummy tail
+} DoublyLinkedList;
+
+// Create a new node
+Node* create_node(int data) {
+    Node* new_node = (Node*)malloc(sizeof(Node));
+    new_node-&gt;data = data;
+    new_node-&gt;prev = new_node-&gt;next = NULL;
+    return new_node;
+}
+
+// Initialize the doubly linked list with Dummy nodes
+DoublyLinkedList* create_list() {
+    DoublyLinkedList* list = (DoublyLinkedList*)malloc(sizeof(DoublyLinkedList));
+    list-&gt;head = create_node(0);  // Dummy head
+    list-&gt;tail = create_node(0);  // Dummy tail
+    list-&gt;head-&gt;next = list-&gt;tail;
+    list-&gt;tail-&gt;prev = list-&gt;head;
+    return list;
+}
+
+// Check if the list is empty
+int is_empty(DoublyLinkedList* list) {
+    return list-&gt;head-&gt;next == list-&gt;tail;
+}
+
+// Helper function: Insert node after current node
+void insert_after(Node *current, int data) {
+    Node* new_node = create_node(data);
+    Node* next_node = current-&gt;next;
+
+    current-&gt;next = new_node;
+    new_node-&gt;prev = current;
+    new_node-&gt;next = next_node;
+    next_node-&gt;prev = new_node;
+}
+
+// Helper function: Remove current node and return data
+int pop(Node* current) {
+    int data = current-&gt;data;
+    current-&gt;prev-&gt;next = current-&gt;next;
+    current-&gt;next-&gt;prev = current-&gt;prev;
+    free(current);
+    return data;
+}
+
+// Prepend an element to the head  of the list
+void prepend(DoublyLinkedList* list, int data) {
+    insert_after(list-&gt;head, data);
+}
+
+// Append an element to the tail of the list
+void append(DoublyLinkedList* list, int data) {
+    insert_after(list-&gt;tail-&gt;prev, data);
+}
+
+// Remove the (non-dummy) head of the list and return value
+int pop_head(DoublyLinkedList* list) {
+    return pop(list-&gt;head-&gt;next);
+}
+
+// Remove the (non-dummy) head of the list and return value
+int pop_tail(DoublyLinkedList* list) {
+    return pop(list-&gt;tail-&gt;prev);
+}
+
+// Insert an element at a specific position (0-based index)
+void insert_at(DoublyLinkedList* list, int data, int position) {
+    Node* current = list-&gt;head;
+    int i = 0;
+
+    // Traverse the list to find the position
+    while (current-&gt;next != list-&gt;tail &amp;&amp; i &lt; position) {
+        current = current-&gt;next;
+        i++;
+    }
+
+    insert_after(current, data);
+}
+
+// Delete an element at a specific position (0-based index)
+void delete_at(DoublyLinkedList* list, int position) {
+    Node* current = list-&gt;head-&gt;next;  // Start from the first valid node
+    int i = 0;
+
+    // Traverse to the node at the specified position
+    while (current != list-&gt;tail &amp;&amp; i &lt; position) {
+        current = current-&gt;next;
+        i++;
+    }
+
+    // If we are at a valid node (not the Dummy tail)
+    if (current != list-&gt;tail) {
+        pop(current);
+    }
+}
+
+// Delete an element by value
+int delete_by_value(DoublyLinkedList* list, int data) {
+    Node* current = list-&gt;head-&gt;next;  // Start from the first valid node
+    while (current != list-&gt;tail) {
+        if (current-&gt;data == data) {
+            pop(current);
+            return 1;  // Data found and deleted
+        }
+        current = current-&gt;next;
+    }
+    return 0;  // Data not found
+}
+
+// Display the list forward
+void display_forward(DoublyLinkedList* list) {
+    printf(&quot;Head &lt;-&gt; &quot;);
+    Node* current = list-&gt;head-&gt;next;  // Start from the first valid node
+    while (current != list-&gt;tail) {
+        printf(&quot;%d &lt;-&gt; &quot;, current-&gt;data);
+        current = current-&gt;next;
+    }
+    printf(&quot;Tail\n&quot;);
+}
+
+// Display the list backward
+void display_backward(DoublyLinkedList* list) {
+    printf(&quot;Tail &lt;-&gt; &quot;);
+    Node* current = list-&gt;tail-&gt;prev;  // Start from the last valid node
+    while (current != list-&gt;head) {
+        printf(&quot;%d &lt;-&gt; &quot;, current-&gt;data);
+        current = current-&gt;prev;
+    }
+    printf(&quot;Head\n&quot;);
+}
+
+// Free the memory allocated for the list
+void free_list(DoublyLinkedList* list) {
+    Node* current = list-&gt;head;
+    while (current != NULL) {
+        Node* next = current-&gt;next;
+        free(current);
+        current = next;
+    }
+    free(list);
+}
+</code></pre>
+<p>Note: we can actually implement doubly linked list with a single dummy node (this is how python implements deque)</p>
+<ul>
+<li>becomes like a circle, where <code>dummy-&gt;next</code> is the head, and, <code>dummy-&gt;prev</code> is the tail</li>
+</ul>
+<h1>2025-09-29</h1>
+<p>recap: doubly linked lists - dummy nodes aren't necessary but are helpful for avoiding extra checks</p>
+<h3>Employee Record Database</h3>
+<p>Employee Record object (struct)</p>
+<ul>
+<li>Number id (int)</li>
+<li>Name (string)</li>
+</ul>
+<p>Operations:</p>
+<ul>
+<li>insert</li>
+<li>lookup by id</li>
+</ul>
+<p>if implemented using dynamic array, lookup is O(N) if unsorted, else O(log N)</p>
+<p>what if we use the employee id as the index?</p>
+<pre><code>[name][name][name][name] ... [name]
+   0     1     2     3         9999
+</code></pre>
+<p>Now, lookup is O(1), but we need to use a massive array!</p>
+<p>solution: use &quot;buckets&quot; instead of single name string per index</p>
+<pre><code>|__| |__| |__| |__|  ... |__|
+|__| |__| |__| |__|  ... |__|
+|__| |__| |__| |__|  ... |__|
+  0    1    2    3         999
+^ instead of indexing by id, index by last 3 elements of id!
+</code></pre>
+<ul>
+<li>each bucket points to a linked list (we call this <em>chaining</em>, essentially an array of linked lists)</li>
+<li>hash function: take last 3 digits of id (id MOD 1000, id % 1000)</li>
+</ul>
+<p>Now, suppose we wanted to lookup people by name to get id?</p>
+<ul>
+<li>key is now a string instead of a number -- how do we index? i.e. what is our new hash function?
+<ul>
+<li>ideas:
+<ul>
+<li>use first letters of last name
+<ul>
+<li>1 letter: <code>26</code> buckets</li>
+<li>2 letters: <code>26^2</code> buckets</li>
+<li>3 letters: <code>26^3</code> buckets</li>
+</ul>
+</li>
+<li>take sum of ascii values
+<ul>
+<li>5 letter words: <code>5*26 = 130</code> buckets</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>A good hash function:<br />
+- Doesn't reduce info much<br />
+- ex: not ideal to reduce <code>26^5</code> possible 5 letter words into <code>130</code> buckets<br />
+- Maintains randomness</p>
+<h3>Load factor of a hash table</h3>
+<p>Def: number of records (size) / the capacity (# of buckets)<br />
+ex:</p>
+<pre><code>     |__|
+null |__| |__| null
+  0    1    2    3
+</code></pre>
+<p>load factor = 3/4 = 0.75</p>
+<p>Alpha (α): when load factor is greater than α, triggers resizing &amp; rehashing of hash table</p>
+<ul>
+<li>ex: if α = 0.5, the example above would trigger resizing</li>
+</ul>
+<h3>Pair Structure</h3>
+<pre><code class="language-c">typedef struct {
+    char *key;
+	int value;
+    Pair *next;
+} Pair;
+</code></pre>
+<h3>Table Structure</h3>
+<pre><code class="language-c">typedef struct {
+    Pair **buckets;
+    int capacity;
+    int size;
+} Table;
+</code></pre>
+<h3>Pair functions</h3>
+<pre><code class="language-c">#include &quot;pair.h&quot;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+Pair *pair_create(const char *key, int value, Pair *next) {
+    Pair *p = calloc(1, sizeof(Pair));
+    p-&gt;key = strdup(key);
+    p-&gt;value = value;
+    p-&gt;next = next;
+    return p;
+}
+
+void pair_delete(Pair *p) {
+    if (!p) return;
+
+    pair_delete(p-&gt;next);
+    free(p-&gt;key);
+    free(p);
+}
+</code></pre>
+<h3>Basic Hash Function (sum of ascii values)</h3>
+<pre><code class="language-c">int	hash(char *str) {    
+    int value = 0;
+    for (int i = 0; str[i] != '\0'; i++) {
+    	value += str[i];
+    }
+    return value;
+}
+</code></pre>
+<h3>Table functions</h3>
+<pre><code class="language-c">#include &quot;table.h&quot;
+#include &quot;hash.h&quot;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+Table *table_create() {
+    Table *t = calloc(1, sizeof(Table));
+    t-&gt;capacity = TABLE_DEFAULT_CAPACITY;
+    t-&gt;buckets = calloc(t-&gt;capacity, sizeof(Pair *));
+    return t;
+}
+
+void table_delete(Table *t) {
+    for (int bucket = 0; bucket &lt; t-&gt;capacity; bucket++) {
+        pair_delete(t-&gt;buckets[bucket]);
+    }
+
+    free(t-&gt;buckets);
+    free(t);
+}
+
+int table_lookup(Table *t, char *key) {
+    int bucket = hash(key) % t-&gt;capacity;
+    
+    // look for the key in the bucket's chain of pairs and return value if you find it.
+    for (Pair *p = t-&gt;buckets[bucket]; p != NULL; p = p-&gt;next) {
+        if (strcmp(p-&gt;key, key) == 0) {
+            return p-&gt;value;
+        }
+    }
+    return -1; // key is not found
+}
+
+void table_insert(Table *t, char *key, int value) {
+    if (table_lookup(t, key) != -1) {
+        return;
+    }
+    // inserts a pair at the head of the bucket's chain
+    int bucket = hash(key) % t-&gt;capacity;
+    t-&gt;buckets[bucket] = pair_create(key, value, t-&gt;buckets[bucket]);
+
+    t-&gt;size++;
+}
+
+void table_print(Table *t) {
+    for (int bucket = 0; bucket &lt; t-&gt;capacity; bucket++) {
+        printf(&quot;Bucket %d: &quot;, bucket);
+        for (Pair *curr = t-&gt;buckets[bucket]; curr; curr = curr-&gt;next)
+            printf(&quot; {%s: %d}&quot;, curr-&gt;key, curr-&gt;value);
+        printf(&quot;\n&quot;);
+    }
+}
+</code></pre>
+<h1>2025-10-01</h1>
+<p>what if we don't want to use linked lists in each bucket?</p>
+<h3>Linear Probing</h3>
+<ul>
+<li>if there is a collision, continue down the hash table until there is an empty bucket</li>
+</ul>
+<pre><code>Hash table: Want to insert 11, 19, 30, 15, 22
+|___|___|___|___|___|___|___|___|
+  0   1   2   3   4   5   6   7
+
+|_22|___|___|_11|_19|___|_30|_15|
+  0   1   2   3   4   5   6   7
+                  ^--bucket 3 was already full
+  ^--buckets 6&amp;7 were full (loops around)
+</code></pre>
+<ul>
+<li>
+<p>note that we must distinguish between buckets that are <code>empty-since-start</code> and <code>empty-after-removal</code>:</p>
+<ul>
+<li>when searching, we start at the index given from the hash</li>
+<li>then, we continue until we find the key or reach an <code>empty-since-start</code> bucket</li>
+<li>Note also that items may be inserted in buckets that are <em>either</em> <code>empty-since-start</code> or <code>empty-after-removal</code>.</li>
+</ul>
+</li>
+<li>
+<p>also notice that when probing (for search, insert, or remove), we must:</p>
+<ul>
+<li>keep a count to only probe up to N times, where N is the hash table's size</li>
+<li>use <code>bucket = (bucket + 1) % N</code> to increment bucket index, because the index can wrap around</li>
+</ul>
+</li>
+<li>
+<p>sometimes quadratic probing is used because it can lead to fewer collisions</p>
+</li>
+<li>
+<p>later: lots of good optional pages on the zybooks to check out (on sorting, hashing, etc.)</p>
+</li>
+</ul>
+<h3>Collisions and Hashing</h3>
+<pre><code>Hash table: Want to insert 2, 10, 18
+|___|___|_*_|___|___|___|___|___|
+  0   1   2   3   4   5   6   7
+</code></pre>
+<ul>
+<li>
+<p>using mod 8, they all map to bucket 2!</p>
+</li>
+<li>
+<p>idea: want to take keys and make them as random as possible</p>
+</li>
+<li>
+<p>solution: multiply key by a large random number (<code>abdefg * xyz</code>)</p>
+<ul>
+<li>intuitively, each partial product of each digit (x, y, z) added together feels pretty random (especially taking middle bits)</li>
+<li><code>story about Fred Warren's calculating machine and demo of a 1920s Thales calculator</code></li>
+</ul>
+</li>
+</ul>
+<p>what number <code>abdefg</code> do we choose?</p>
+<ul>
+<li>e.g., <code>1000000</code> would be a very bad choice</li>
+<li>using very large prime numbers work well</li>
+<li>or, use one less than a large power of 2</li>
+</ul>
+<h3>Fast Hashing: Shift and add</h3>
+<ul>
+<li>shifting to the left is the same as multiplying by 2<br />
+multiplying x by 33 is same as <code>(x*32) + x</code> is the same as <code>(x &lt;&lt; 5) + x</code></li>
+</ul>
+<h3>String hash</h3>
+<p>djb2 - Daniel J. Bernstein</p>
+<pre><code class="language-c">unsigned long hash(unsigned char *str) {
+	unsigned long hash = 5381;
+	int c;
+	while (c = *str++)
+		hash = ((hash &lt;&lt; 5) + hash) + c; // hash = hash * 33 + c
+	return hash;
+}
+</code></pre>
+<h3>Comparing hash functions</h3>
+<ul>
+<li>mid square hash: multiplies by itself, takes middle bits</li>
+<li>Donald Knuth's hash: multiplies by &quot;weird&quot; number, takes middle bits</li>
+</ul>
+<pre><code>table index: 4 bits
+table size:  16 buckets
+all keys collide on bin: 1
+ key  key^2       binary key^2  mid-square  knuth
+   1      1                  1       0         9
+  17    289          100100001       8         8
+  33   1089        10001000001       8         6
+  49   2401       100101100001       6         4
+  65   4225      1000010000001       8         2
+  81   6561      1100110100001      10         0
+  97   9409     10010011000001       6        15
+ 113  12769     11000111100001      15        13
+ 129  16641    100000100000001       8        11
+</code></pre>
+<p>Note:</p>
+<ul>
+<li>Say we extract R digits from the result's middle, and return the remainder of the middle digits divided by hash table size N:
+<ul>
+<li>For N buckets, R must be greater than or equal to log(N) to index all buckets</li>
+<li>(where log is base 2, or base 10, etc. depending on the base of the digits we extract)</li>
+<li>we usually use binary because getting the middle bits is fast</li>
+</ul>
+</li>
+</ul>
+<h3>How many buckets?</h3>
+<ul>
+<li>zybook says to use prime number of buckets</li>
+<li>convention is to use a power of 2 (easy to use) and then just trust hash function</li>
+</ul>
+<h1>2025-10-03</h1>
+<ul>
+<li>last topic on exam is doubly-linked lists with dummy elements</li>
+</ul>
+<h3>Moving from C to Python</h3>
+<p>Recall: C dynamic Array</p>
+<pre><code class="language-c">typedef struct {
+    int	  *data;	// Internal array
+    int   capacity;	// Total number of elements
+    int   size;     // Number of valid elements
+} Array;
+
+/* Functions */
+Array*  array_create();
+void    array_delete(Array *array);
+void    array_append(Array *array, int value);
+int     array_at(Array *array, int index);
+int	    array_index(Array *array, int value);
+void    array_insert(Array *array, int index, int value);
+</code></pre>
+<ul>
+<li><code>array_create</code> is our &quot;constructor&quot;</li>
+<li><code>array_delete</code> is our &quot;destructor&quot;</li>
+<li>notice how each method has to be given an <code>Array *array</code> as an argument!</li>
+<li>additionally, <code>array_</code> is used a a prefix to our methods only out of convention</li>
+</ul>
+<p>C++ implementation (object-oriented extension from C):</p>
+<pre><code class="language-cpp">class Array {
+private:
+	int *data
+	int capacity
+	int size
+public:
+	Array(); // constructor
+	~Array(); // destructor
+	
+	void append(int value);
+	int at(int index) const;
+	int index_of(int value) const;
+	void insert(int index, int value);
+	int get_size() const;
+}
+
+int main() {
+	Array arr;
+	arr.append(10);
+	arr.append(20);
+	arr.insert(1, 15);
+	
+	std::cout &lt;&lt; &quot;arr[1] is &quot; &lt;&lt; arr.at(1) &lt;&lt; std::endl;
+	std::cout &lt;&lt; &quot;Value 20 is at index &quot; &lt;&lt; arr.index_of(20) &lt;&lt; std::endl;
+
+	return 0;
+}
+</code></pre>
+<h3>Abstraction</h3>
+<p>Def: hiding private implementation details and exposing a public interface through methods</p>
+<h3>Inheritance</h3>
+<p>Def: Child class takes methods and attributes from parent</p>
+<ul>
+<li>ex: Shape class might contain <code>Shape.draw_fill()</code> or <code>Shape.position</code>
+<ul>
+<li>child classes, e.g. <code>Circle, Square, Pentagon</code> might have similar characteristics</li>
+</ul>
+</li>
+</ul>
+<h3>Polymorphism</h3>
+<p>Def: type-specific methods with the same name</p>
+<ul>
+<li>ex: <code>Shape.calc_perimeter()</code> would want to be implemented differently depending on the child class</li>
+</ul>
+<h3>Python built-in types</h3>
+<pre><code class="language-some">&lt;class 'int'&gt; &lt;class 'float'&gt; &lt;class 'str'&gt; &lt;class 'list'&gt; &lt;class 'set'&gt; &lt;class 'dict'&gt; &lt;class 'tuple'&gt;
+</code></pre>
+<ul>
+<li>Unlike C, the types of variables in Python are determined on the fly based on the values assigned to them
+<ul>
+<li>C is &quot;statically typed&quot;, Python is &quot;dynamically typed&quot;</li>
+</ul>
+</li>
+<li>Everything in Python is an object!!!
+<ul>
+<li>all classes (including built-ins like <code>int</code>, <code>list</code>, etc.), ultimately inherit from the built-in <code>object</code> type.</li>
+</ul>
+</li>
+<li>According to its type, every object has a set of methods that apply to it.
+<ul>
+<li>the function <code>dir()</code> returns a list of all methods of an object.</li>
+</ul>
+</li>
+</ul>
+<h3>Magic methods</h3>
+<ul>
+<li>Regular methods have &quot;regular&quot; names and are called by adding a dot and the method name to the name of an object.  </li>
+<li>Magic methods have &quot;magic&quot; names that begin and end with a double underscore (&quot;dunder&quot;).
+<ul>
+<li>can be called in the same manner as regular methods</li>
+<li>but are &quot;magic&quot; because they can be called by Python language keywords and operators.</li>
+<li>some examples:
+<ul>
+<li><code>__eq__</code> implements <code>==</code></li>
+<li><code>&quot;hello&quot;.__eq__(&quot;goodbye&quot;)</code> is the same as <code>&quot;hello&quot; == &quot;goodbye&quot;</code> (both False)</li>
+<li><code>__contains__</code> can be invoked using <code>in</code> keyword</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Listing of methods for Python base object (from which all objects inherit!):<br />
+<code>['__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']</code></p>
+<h3>Looking at CPython!</h3>
+<p>List implementation:<br />
+<a href="https://github.com/python/cpython/blob/main/Objects/listobject.c">listobject.c</a></p>
+<ul>
+<li>notice how their resize function is less aggressive than the doubling we did</li>
+</ul>
+<p>Set implementation:<br />
+<a href="https://github.com/python/cpython/blob/main/Objects/setobject.c">setobject.c</a></p>
+<ul>
+<li>check out the hash implementation!</li>
+</ul>
+<p>From <a href="https://github.com/python/cpython/blob/main/Objects/listsort.txt">listsort.txt</a>:</p>
+<pre><code>Intro
+-----
+This describes an adaptive, stable, natural mergesort, modestly called
+timsort (hey, I earned it &lt;wink&gt;).  It has supernatural performance on many
+kinds of partially ordered arrays (less than lg(N!) comparisons needed, and
+as few as N-1), yet as fast as Python's previous highly tuned samplesort
+hybrid on random arrays.
+
+In a nutshell, the main routine marches over the array once, left to right,
+alternately identifying the next run, then merging it into the previous
+runs &quot;intelligently&quot;.  Everything else is complication for speed, and some
+hard-won measure of memory efficiency.
+</code></pre>
+<p>Some recommended resources:<br />
+<a href="https://www.w3schools.com/python/default.asp">w3schools.com</a><br />
+<a href="https://www.tutorialspoint.com/python/index.htm">tutorialspoint.com</a><br />
+<a href="https://realpython.com/">realpython.com</a><br />
+<a href="https://docs.python.org/3/">docs.python.org</a></p>
+<h1>2025-10-06</h1>
+<p>Review for Midterm Exam</p>
+<h3>Know your powers of 2!</h3>
+<p>2^0 = 1<br />
+2^1 = 2<br />
+2^2 = 4<br />
+2^3 = 8<br />
+2^4 = 16<br />
+2^5 = 32<br />
+2^6 = 64<br />
+2^7 = 128<br />
+2^8 = 256<br />
+2^9 = 512<br />
+2^10 = 1024  (roughly 10^3)<br />
+...<br />
+2^20 = 1,048,576  (roughly 10^6)<br />
+2^30 = 1,073,741,824  (roughly 10^9)<br />
+2^40 = 1,099,511,627,776  (roughly 10^12)</p>
+<p>Every 10 powers of 2 is roughly 3 powers of 10</p>
+<ul>
+<li>i.e., Every 10 doublings is about a thousand times bigger</li>
+<li>(because 1024=2^10 is roughly 1000=10^3)</li>
+</ul>
+<p>To find other powers, use nearest multiple of 10:<br />
+2^15 = (2^10)(2^5) = roughly 32000 (actually 32768)<br />
+2^23 = (2^20)(2^3) = roughly 8 million (actually 8388608)<br />
+2^25 = (2^20)(2^5) = roughly 32 million (actually 33554432)<br />
+2^32 = (2^30)(2^2) = roughly 4 billion (actually 4294967296)</p>
+<p>Storage Reference:</p>
+<ul>
+<li>1 KB = 2^10 bytes</li>
+<li>1 MB = 2^20 bytes</li>
+<li>1 GB = 2^30 bytes</li>
+<li>1 TB = 2^40 bytes</li>
+</ul>
+<h3>Recall: Regions of Memory</h3>
+<pre><code class="language-c">int p = 3
+
+int main() {
+	int i = 25;
+	char a[] = &quot;wx&quot;;
+	char *s = &quot;yz&quot;;
+	int *m = malloc(10 * sizeof(int));
+	static int t = 2;
+	
+	*m = 100;
+	*(m + 1) = 101;
+	m[2] = 103;
+}
+</code></pre>
+<p>Assume 6-bit memory address: 0x00 - 0x3F (0-63)<br />
+Assume each memory location has enough bits to hold an int, char, or address</p>
+<table>
+<thead>
+<tr>
+<th>STACK</th>
+<th>HEAP</th>
+<th>DATA</th>
+<th>CODE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3F: <code>i: 25</code></td>
+<td>2F:</td>
+<td>1F:</td>
+<td>0F:</td>
+</tr>
+<tr>
+<td>3E: <code>'\0'</code></td>
+<td>2E:</td>
+<td>1E:</td>
+<td>0E:</td>
+</tr>
+<tr>
+<td>3D: <code>'x'</code></td>
+<td>2D:</td>
+<td>1D:</td>
+<td>0D:</td>
+</tr>
+<tr>
+<td>3C: <code>a: 'w'</code></td>
+<td>2C:</td>
+<td>1C:</td>
+<td>0C:</td>
+</tr>
+<tr>
+<td>3B: <code>s: 0x11</code></td>
+<td>2B:</td>
+<td>1B:</td>
+<td>0B:</td>
+</tr>
+<tr>
+<td>3A: <code>m: 0x20</code></td>
+<td>2A:</td>
+<td>1A:</td>
+<td>0A:</td>
+</tr>
+<tr>
+<td>39:</td>
+<td>29:</td>
+<td>19:</td>
+<td>09:</td>
+</tr>
+<tr>
+<td>38:</td>
+<td>28:</td>
+<td>18:</td>
+<td>08:</td>
+</tr>
+<tr>
+<td>37:</td>
+<td>27:</td>
+<td>17:</td>
+<td>07:</td>
+</tr>
+<tr>
+<td>36:</td>
+<td>26:</td>
+<td>16:</td>
+<td>06:</td>
+</tr>
+<tr>
+<td>35:</td>
+<td>25:</td>
+<td>15:</td>
+<td>05:</td>
+</tr>
+<tr>
+<td>34:</td>
+<td>24:</td>
+<td>14: <code>t: 2</code></td>
+<td>04:</td>
+</tr>
+<tr>
+<td>33:</td>
+<td>23:</td>
+<td>13: <code>'\0'</code></td>
+<td>03:</td>
+</tr>
+<tr>
+<td>32:</td>
+<td>22: <code>103</code></td>
+<td>12: <code>'z'</code></td>
+<td>02:</td>
+</tr>
+<tr>
+<td>31:</td>
+<td>21: <code>101</code></td>
+<td>11: <code>'y'</code></td>
+<td>01:</td>
+</tr>
+<tr>
+<td>30:</td>
+<td>20: <code>100</code></td>
+<td>10: <code>p: 3</code></td>
+<td>00: <code>main: *m = 100</code></td>
+</tr>
+</tbody>
+</table>
+<p>remember, in reality, usually:</p>
+<ul>
+<li>size of a data word at each address is 1 byte (8 bits)</li>
+<li>chars are 1 byte</li>
+<li>ints are 4 bytes</li>
+<li>addresses are 8 bytes</li>
+</ul>
+<blockquote>
+<p>in-class activity: Kahoot!</p>
+</blockquote>
+<h1>2025-10-08</h1>
+<p>Midterm Exam</p>
+<h1>2025-10-10</h1>
+<h3>Running Python in VSCode</h3>
+<p><code>python3 first_script.py</code></p>
+<p>if python file contains <code>#!/usr/bin/env python3</code> at the top:<br />
+<code>chmod +x first_script.py</code><br />
+<code>./first_script.py</code></p>
+<h3>Use the VS Code debugger</h3>
+<ol>
+<li>Set a breakpoint in your program</li>
+<li>Click the debugger icon in the sidebar</li>
+<li>Click Run and Debug (no need for a launch.json file)</li>
+<li>Select Python Debugger (only need to set this the first time)</li>
+<li>Select Python File Debug the currently active Python file as the configuration (only need to set this the first time)</li>
+</ol>
+<p>Tip: If you want to set a breakpoint where there isn't conveniently a line to stop on, such as at the very end of a script, you can add a <code>pass</code> statement.</p>
+<h3>basic python stuff</h3>
+<pre><code class="language-python"># Adding two numbers
+x = 5
+y = 10
+z = x + y
+print(z)
+
+# Adding two strings
+x = &quot;Hello&quot;
+y = &quot;World&quot;
+z = x + &quot; &quot; + y
+print(z)
+
+# Formatting strings (f-strings)
+x = 75
+y = 25
+z = f&quot;The sum of {x} and {y} is {x + y}&quot;
+print(z)
+
+# While loop and if statement
+x = 0
+while x &lt; 5:
+    if x % 2 == 0:
+        print(x)
+    x += 1
+
+# For loop
+# Note: range(5) only goes up to 4
+for x in range(5):
+    if x % 2 == 0:
+        print(x)
+
+# list
+x = [100, 200, 300, 400, 500]
+x.append(600)
+x[2] = 350
+
+# for loop with list
+for y in x:
+    print(y)
+
+# slicing a list
+# Note: x[1:3] only includes elements at index 1 and 2
+y = x[1:3]
+print(y)
+
+y = x.pop(0)
+print(y)
+
+# dictionary
+x = {&quot;a&quot;: 100, &quot;b&quot;: 200, &quot;c&quot;: 300}
+x[&quot;d&quot;] = 400
+x[&quot;a&quot;] = 150
+if (&quot;a&quot; in x):
+    print(&quot;Key 'a' exists&quot;)
+
+# set
+x = set()
+x.add(100)
+x.add(200)
+x.add(300)
+x.remove(200)
+print(x)
+</code></pre>
+<h3>Unit Testing</h3>
+<pre><code class="language-python"># functions.py
+def add(a, b): return a + b
+def subtract(a, b): return a - b
+def multiply(a, b): return a * b
+def divide(a, b): return a / b
+</code></pre>
+<pre><code class="language-python"># call_functions.py
+import functions
+
+def main():
+    print(functions.add(5, 3))
+    print(functions.subtract(5, 3))
+    print(functions.multiply(5, 3))
+    print(functions.divide(5, 3))
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<ul>
+<li>Every Python module has a special built-in variable called <code>__name__</code>.
+<ul>
+<li>When the module is run directly, <code>__name__</code> is set to <code>&quot;__main__&quot;</code></li>
+<li>When the module is imported by another script, the <code>__name__</code> variable is set to the module's name (without the <code>.py</code> extension)</li>
+</ul>
+</li>
+<li>This allows behavior to differ depending on whether the script is run directly or imported as a module.</li>
+</ul>
+<pre><code class="language-python"># functions_test.py
+import functions
+import unittest
+
+class TestFunctions(unittest.TestCase):
+    def test_add(self):
+        self.assertEqual(functions.add(5, 3), 8)
+
+    def test_subtract(self):
+        self.assertEqual(functions.subtract(5, 3), 2)
+
+    def test_multiply(self):
+        self.assertEqual(functions.multiply(5, 3), 15)
+
+    def test_divide(self):
+        self.assertEqual(functions.divide(12, 3), 4)
+
+if __name__ == &quot;__main__&quot;:
+    unittest.main() # runs all the methods with wrappers around them for debugging purposes
+</code></pre>
+<p>Equality &amp; Identity</p>
+<ul>
+<li><code>assertEqual(a, b)</code> - values are equal (<code>==</code>)</li>
+<li><code>assertNotEqual(a, b)</code> - values are not equal</li>
+<li><code>assertIs(a, b)</code> - objects are identical (<code>is</code>)</li>
+<li><code>assertIsNot(a, b)</code> - objects are not the same</li>
+<li><code>assertIsNone(x)</code> - value is <code>None</code></li>
+<li><code>assertIsNotNone(x)</code> - value is not <code>None</code></li>
+</ul>
+<p><strong>Boolean &amp; Comparison</strong></p>
+<ul>
+<li><code>assertTrue(expr)</code> - expression is True</li>
+<li><code>assertFalse(expr)</code> - expression is False</li>
+<li><code>assertGreater(a, b)</code> - <code>a &gt; b</code></li>
+<li><code>assertGreaterEqual(a, b)</code> - <code>a &gt;= b</code></li>
+<li><code>assertLess(a, b)</code> - <code>a &lt; b</code></li>
+<li><code>assertLessEqual(a, b)</code> - <code>a &lt;= b</code></li>
+</ul>
+<p><strong>Membership &amp; Sequence</strong></p>
+<ul>
+<li><code>assertIn(a, b)</code> - <code>a</code> is in container <code>b</code></li>
+<li><code>assertNotIn(a, b)</code> - <code>a</code> is not in <code>b</code></li>
+<li><code>assertCountEqual(a, b)</code> - have same elements, regardless of order</li>
+</ul>
+<p><strong>Type &amp; Instance</strong></p>
+<ul>
+<li><code>assertIsInstance(obj, cls)</code> - object is instance of class</li>
+<li><code>assertNotIsInstance(obj, cls)</code> - object is not instance of class</li>
+</ul>
+<p><strong>Exceptions &amp; Warnings</strong></p>
+<ul>
+<li><code>assertRaises(exc)</code> — code inside block raises exception</li>
+</ul>
+<pre><code class="language-python">with self.assertRaises(ValueError):
+    divide(10, 0)
+</code></pre>
+<h4>Use the VS Code Testing panel</h4>
+<ol>
+<li>VS Code has been configured to automatically recognize any file of the form <em>test</em>.py as containing <code>unittest</code> objects</li>
+<li>Click on the flask icon in the VS Code sidebar to open the Testing panel</li>
+<li>Click on the play icon next to a unit test to run it, or else click on a play button higher up in the expansion to run them all.</li>
+<li>Break a unit test, test again, set breakpoint, and click on the Debug Test icon next to the test in the sidebar</li>
+</ol>
+<blockquote>
+<p>VSCode is cool!</p>
+</blockquote>
+<h1>2025-10-13</h1>
+<p>Today's topics:</p>
+<ul>
+<li>Parsing data from stdin</li>
+<li>Python user-defined classes</li>
+<li>Doubly-Linked Lists (in Python, based on what we did in C)</li>
+</ul>
+<p>remember, we use dummy elements for convenience (not performance)</p>
+<ul>
+<li>there is always an object to the left and right, so no NULL/None edge cases!</li>
+</ul>
+<pre><code>  head                                   tail
+   ↓                                      ↓ 
+[dummy] &lt;-&gt; [10] &lt;-&gt; [20] &lt;-&gt; [30] &lt;-&gt; [dummy]
+</code></pre>
+<h3>Parsing data from stdin</h3>
+<pre><code class="language-python">import sys
+
+def main():
+    # Read input from stdin and chomp the newline at the end
+    input = sys.stdin.read().strip()
+
+    # Split the input into a list of strings
+    number_str_list = input.split()
+
+    # Convert the list of strings into a list of integers
+    # Note: This is a list comprehension (more compact alternative to for loop)
+    numbers = [int(num) for num in number_str_list] # could even add an if clause at the end!
+
+    # Increment each number by 1
+    incremented_numbers = [num + 1 for num in numbers]
+
+    # Convert the list of integers into a list of strings
+    incremented_numbers_str_list = [str(num) for num in incremented_numbers]
+
+    # Join the list of strings into a single string with commas and spaces
+    print(', '.join(incremented_numbers_str_list))
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+<h3>Node Class and Constructor Method</h3>
+<pre><code class="language-python">class Node:
+	def __init__(self, data):
+		self.data = data
+		self.next = None # equivalent to NULL pointer
+		self.next = None
+
+# To instantiate:
+some_node = Node(7) # self is a hidden parameter that is sent to Node.__init__
+</code></pre>
+<ul>
+<li>&quot;self&quot; is a reference to the instance of the node that we are dealing with currently
+<ul>
+<li>we don't actually have to name it &quot;self&quot;, but that is convention and it would very confusing otherwise</li>
+</ul>
+</li>
+</ul>
+<h3>Private and Public Methods</h3>
+<ul>
+<li>In languages like C++ and Java, you can declare methods as being private (usually things like helper functions)
+<ul>
+<li>means nothing except member functions of that class can call those methods</li>
+</ul>
+</li>
+<li>Python doesn't have this ability
+<ul>
+<li>we will use underscore to denote &quot;private&quot; methods (just convention, doesn't actually restrict usage)</li>
+</ul>
+</li>
+</ul>
+<h3>Class DoublyLinkedList</h3>
+<ul>
+<li>we will mirror the python built-in <code>list</code> class</li>
+<li>abstraction: we will have same outer interface/function names, but implemented as a doubly linked list instead of a dynamic array</li>
+</ul>
+<pre><code>Constructor:
+	DoublyLinkedList()
+Private:
+	_insert_after(node, data)
+	_pop_node(node)
+Public:
+	append(data)
+	insert(index, data)
+	pop(index)
+	clear()
+	index(data)
+Magic Methods:
+	supports print:
+		__str()__
+	supports emptiness check:
+		__bool()__
+	suports `in`:
+		__contains(data)__
+	supports for ... in:
+		__iter()__
+		__next()__
+</code></pre>
+<h3>doubly_linked_list.py</h3>
+<pre><code class="language-python">class Node:
+    # Constructor for a node with data
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        self.prev = None
+
+class DoublyLinkedList:
+    # Constructor for an empty list
+    def __init__(self):
+        self.head = Node(None)
+        self.tail = Node(None)
+        self.head.next = self.tail
+        self.tail.prev = self.head
+        # Used for __iter__ which supports the syntax: `for data in dll:`
+        self.iter_state = None # this is the current node that we point to while traversing
+    
+    # Insert a new node after the given node
+    # This is a private method and should not be called directly from outside the class
+    def _insert_after(self, node, data):
+        new_node = Node(data)
+        new_node.next = node.next
+        new_node.prev = node
+        node.next.prev = new_node
+        node.next = new_node
+    
+    # Remove the given node and return its data
+    # This is a private method and should not be called directly from outside the class
+    def _pop_node(self, node):
+        node.prev.next = node.next
+        node.next.prev = node.prev # note how we don't do any freeing! (automatic garbage collection)
+        return node.data
+    
+    # Insert after the last node
+    def append(self, data):
+        self._insert_after(self.tail.prev, data)
+  
+    # Insert before the node at the given index
+    def insert(self, index, data):
+        node = self.head
+        for _ in range(index):
+            if node == self.tail:
+                raise IndexError
+            node = node.next
+        self._insert_after(node, data)
+
+    # Remove and return the data of the node at the given index
+    def pop(self, index):
+        node = self.head.next
+        for _ in range(index):
+            if node == self.tail:
+                raise IndexError
+            node = node.next
+        return self._pop_node(node)  
+
+    # Remove all nodes except head and tail
+    def clear(self):
+        self.head.next = self.tail
+        self.tail.prev = self.head
+    
+    # Return the index of the first node with the given data
+    def index(self, data):
+        index = 0
+        node = self.head.next
+        while node != self.tail:
+            if node.data == data:
+                return index
+            index += 1
+            node = node.next
+        return -1
+
+    # Return a string representation of the list - supports `str(dll)`
+    def __str__(self):
+        return &quot; &quot;.join([str(d) for d in self])
+
+    # Return True if the list is not empty
+    # Supports the `if dll:` syntax to check if the list is not empty
+    def __bool__(self):
+        return self.head.next != self.tail
+    
+    # Return True if the list contains a node with the given data (supports the syntax: data in dll)
+    def __contains__(self, data):
+        node = self.head.next
+        while node != self.tail:
+            if node.data == data:
+                return True
+            node = node.next
+        return False
+
+    # Initialize the iterator state (return self)
+    def __iter__(self):
+        self.iter_state = self.head.next # (our starting value)
+        return self
+    
+    # Return the next data from the iterator and increment iterator
+    def __next__(self):
+        if self.iter_state == self.tail:
+            raise StopIteration
+        data = self.iter_state.data
+        self.iter_state = self.iter_state.next
+        return data
+</code></pre>
+<h3>demo</h3>
+<ul>
+<li>note how after we instantiate it, we use our doubly-linked list exactly like we would a usual list!</li>
+</ul>
+<pre><code class="language-python">import doubly_linked_list as dll
+
+lst = dll.DoublyLinkedList() # Create a doubly linked list
+
+lst.append(1) # Append some data
+lst.append(2)
+lst.append(3)
+
+lst.insert(1, 10) # Insert some data
+
+d = lst.pop(1) # Pop some data
+
+i = lst.index(3) # Find the index of some data
+
+s = str(lst) # Get the string representation of the list
+print(lst)
+
+if lst: # Test if the list is empty
+    print(&quot;List is not empty&quot;)
+
+if 3 in lst: # Test if the list contains some data
+    print(&quot;List contains 3&quot;)
+if not 4 in lst:
+    print(&quot;List does not contain 4&quot;)
+
+for data in lst: # Iterate over the list
+    print(data)
+
+lst.clear() # Clear the list
+
+if not lst: # Test if the list is empty
+    print(&quot;List is empty&quot;)
+</code></pre>
+<h1>2025-10-15</h1>
+<h3>Introduction to Binary Trees</h3>
+<ul>
+<li>A binary tree has nodes (vertices) and edges (the link between nodes)</li>
+<li>We use &quot;child&quot; and &quot;parent&quot; to denote the hierarchical relationship between nodes</li>
+</ul>
+<pre><code>        8         &lt;- root node (the one node with no parent; &quot;top&quot; node)
+      /   \
+     3     10     &lt;- internal nodes (a node with at least one child; includes root)
+    / \      \
+   1   6      14  &lt;- (14 is a child of 10, and a parent of 13)
+  / \         /
+ 4   7      13    &lt;- leaf nodes (a node with no children)
+</code></pre>
+<ul>
+<li>A binary tree has strictly 0, 1, or 2 children per node</li>
+</ul>
+<pre><code>    [root]
+     /  \
+ [left] [right]
+</code></pre>
+<ul>
+<li>A node's <strong>ancestors</strong> include the node's parent, the parent's parent, etc., up to the tree's root.</li>
+<li>A node's <strong>depth</strong> is the number of edges between it and the root
+<ul>
+<li>root node has depth 0</li>
+</ul>
+</li>
+<li>All nodes with the same depth form a tree <strong>level</strong></li>
+<li>A tree's <strong>height</strong> is the largest depth of any node
+<ul>
+<li>a tree with one node has height 0</li>
+<li>a tree with no nodes has height -1 (useful later)</li>
+</ul>
+</li>
+</ul>
+<p>Applications of trees: anything that has a hierarchical structure</p>
+<ul>
+<li>family tree</li>
+<li>file system</li>
+<li>HTML DOM (Document Object Model)</li>
+<li>Python inheritance hierarchy</li>
+<li>AST (abstract syntax tree) in a compiler</li>
+<li>Nature of human problem solving! (divide and conquer)</li>
+<li>Binary space partitioning (graphics)</li>
+<li>Similarly, example from Physics: N-Body Problem
+<ul>
+<li>Can divide a space of many different objects (that each act on each other gravitationally) into recursively smaller sub quadrants</li>
+<li>Allows for lower precision while still being accurate within a reasonable compute time</li>
+</ul>
+</li>
+</ul>
+<h3>Perfect Binary Tree</h3>
+<ul>
+<li>all internal nodes have 2 children</li>
+<li>consequently, all leaf nodes are at same level</li>
+</ul>
+<pre><code>       O
+     /   \
+    O     O
+   / \   / \
+  O   O O   O
+</code></pre>
+<h3>Full Binary Tree</h3>
+<ul>
+<li>every node has either 0 or 2 children</li>
+</ul>
+<pre><code>               O
+           /       \
+         O           O
+       /   \       /   \
+      O     O     O     O
+     / \         / \  
+    O   O       O   O
+</code></pre>
+<p>(this tree is full but neither complete nor perfect)</p>
+<h3>Complete Binary Tree</h3>
+<ul>
+<li>A binary tree is complete if all levels, except possibly the last level, contain all possible nodes and all nodes in the last level are as far left as possible</li>
+<li>&quot;Filled level by level, left to right&quot;</li>
+<li>important later for Heaps!</li>
+</ul>
+<pre><code>               O
+           /       \
+         O           O
+       /   \       /   \
+      O     O     O     O
+     / \   /
+    O   O O  
+</code></pre>
+<p>(this tree is complete but neither full nor perfect)</p>
+<h3>Binary Search Tree (BST)</h3>
+<ul>
+<li>In this class, we are going to assume no duplicate elements</li>
+<li>used for looking things up, can be used for a set<br />
+Definition:</li>
+<li>every node &gt; every node in its left subtree</li>
+<li>every node &lt; every node in its right subtree<br />
+for <code>[1, 2, 3]</code>:</li>
+</ul>
+<pre><code>	2
+   / \
+  1   3
+or...
+    3
+   /
+  2
+ /
+1
+or...
+1
+ \
+  2
+   \
+    3
+</code></pre>
+<p>This is a BST:</p>
+<pre><code>    30
+  /    \
+ 10     50
+  \    /  \
+  20  40  70
+         /
+       60
+</code></pre>
+<p>This is not a BST: (60 &gt; 50)</p>
+<pre><code>    30
+  /    \
+ 10     50
+  \    /  \
+  20  40  70
+        \ 
+        60
+</code></pre>
+<ul>
+<li>A BST ordering is the list of nodes in order by values (smallest to largest)
+<ul>
+<li>can be made by traversing the tree depth-first (adding leftmost child each time)</li>
+</ul>
+</li>
+<li>A BST node's <strong>successor</strong> is the node that comes after it in the BST ordering</li>
+<li>A BST node's <strong>predecessor</strong> is the node that comes before it in the BST ordering</li>
+</ul>
+<h3>BST Search (Recursive)</h3>
+<p><code>search(tree, value) -&gt; T/F</code> (where tree is a pointer to the root)</p>
+<pre><code>Base Case:
+	Node is NULL/None -&gt; return False
+Base Case:
+	Node.value matches value -&gt; return True
+Recursive Case:
+	if value &gt; Node.value -&gt; return search(Node.right) 
+	else -&gt; return(Node.left)
+</code></pre>
+<ul>
+<li>Note how our first base accounts allows us to avoids dereferencing NULL pointer without needing to check before recursing</li>
+<li>if we didn't want to use recursion, we could keep a <code>current_node</code> pointer and search left/right in while <code>current_node != NULL</code></li>
+</ul>
+<h3>BST search runtime</h3>
+<ul>
+<li>Searching a BST in the worst case requires <code>H + 1</code> comparisons
+<ul>
+<li>means <code>O(H)</code> comparisons, where H is the tree height</li>
+</ul>
+</li>
+<li>A binary tree's height can be minimized by keeping all levels full, except possibly the last level</li>
+<li>Thus, for an N-node binary tree, H can be as small as <code>H = floor(log_2(N))</code>
+<ul>
+<li>means <code>O(logN)</code> optimal search time (<code>floor(log_2(N)) + 1</code> comparisons)</li>
+</ul>
+</li>
+</ul>
+<h1>2025-10-17</h1>
+<blockquote>
+<p>Implementing Binary Trees in Python</p>
+</blockquote>
+<h3>BST Insert (recursive)</h3>
+<ul>
+<li>idea: Return subtree each time! This way we don't need to even check whether node has children or not :)</li>
+</ul>
+<pre><code class="language-pseudocode">insert(root, key)
+	if root is None
+		return new node with key
+		
+	if key == root.key
+		// do nothing (we only store unique values)
+	if key &lt; root.key
+		root.left = insert(root.left, key)
+	if key &gt; root.key
+		root.right = insert(root.right, key)
+		
+	return root
+</code></pre>
+<p>example from Zybooks without using recursion (much more painful):</p>
+<pre><code class="language-pseudocode">BSTInsert(tree, node)
+	if (tree-&gt;root is null)
+		tree-&gt;root = node
+	else
+		currentNode = tree-&gt;root
+		while (currentNode is not null) {
+	         if (node-&gt;key &lt; currentNode-&gt;key) {
+	            if (currentNode-&gt;left is null)
+	               currentNode-&gt;left = node
+	               currentNode = null
+	            else
+	               currentNode = currentNode-&gt;left
+	         }
+	         else {
+	            if (currentNode-&gt;right is null)
+	               currentNode-&gt;right = node
+	               currentNode = null
+	            else
+	               currentNode = currentNode-&gt;right
+	         }
+		}
+</code></pre>
+<p>Prefixing variable/method names in python:</p>
+<ul>
+<li>Single underscore (<code>_</code>) indicates a protected member (for internal use).</li>
+<li>Double underscore (<code>__</code>) indicates a private variable (triggers name mangling, making direct external access less straightforward and primarily serving to prevent name clashes in inheritance.)</li>
+<li>Double underscore on both sides denotes a special magic method</li>
+</ul>
+<h3>Implementing a <em>BSTree Class</em>, starting with Search and Insert</h3>
+<pre><code class="language-python">from tree_print import pretty_tree
+import sys
+
+class Node:
+    def __init__(self, key, left=None, right=None):
+        self.key = key
+        self.left = left
+        self.right = right
+
+class BSTree:
+    # Constructor
+    # Optionally, you can initialize the tree with a root node
+    def __init__(self, root=None):
+        self.root = root
+    
+    # Clear the tree
+    def clear(self):
+        self.root = None # automatic garbage collection!
+
+    # Insert a Node with a given key into the tree
+    def insert(self, key):
+        self.root = self._insert(self.root, key)
+
+    # Helper function for insert
+    def _insert(self, root, key):
+        if root is None:
+            return Node(key)
+            
+        if key &lt; root.key:
+            root.left = self._insert(root.left, key)
+        elif key &gt; root.key:
+            root.right = self._insert(root.right, key)
+        # if key == root.key, nothing happens
+
+        return root
+
+    # Magic method: check if the tree contains a key
+    # Support for the 'in' operator
+    def __contains__(self, key):
+        return self._search(self.root, key)
+    
+    # Helper function for contains
+    def _search(self, root, key):
+        if root is None:
+            return False
+        if root.key == key:
+            return True
+        if key &lt; root.key:
+            return self._search(root.left, key)
+        return self._search(root.right, key)
+	
+	def __str__(self):
+        return pretty_tree(self)
+		
+	# more next class...
+</code></pre>
+<p>(using an external <a href="https://github.com/joowani/binarytree">library</a> to pretty-print our trees!)</p>
+<h3>BST insert algorithm complexity</h3>
+<ul>
+<li>
+<p>The BST insert algorithm traverses the tree from the root to a leaf node to find the insertion location.</p>
+</li>
+<li>
+<p>One node is visited per level.</p>
+</li>
+<li>
+<p>A BST with <code>N</code> nodes has at least <code>floor(log_2(N))</code> levels and at most <code>N</code> levels.</p>
+</li>
+<li>
+<p>Therefore, the runtime complexity of insertion is best case <code>O(logN)</code> and worst case <code>O(N)</code>.</p>
+</li>
+<li>
+<p>Non-recursive: space complexity of insertion is <code>O(1)</code> because only a single pointer is used to traverse the tree</p>
+</li>
+<li>
+<p>Recursive: space complexity of insertion is best case <code>O(logN)</code> and worst case <code>O(N)</code></p>
+<ul>
+<li>the recursion depth equals the height of the tree, which ranges from <code>floor(log_2(N))</code> (balanced) to <code>N-1</code> (skewed).</li>
+</ul>
+</li>
+</ul>
+<h1>2025-10-27</h1>
+<p>Recap on Binary Search Trees:</p>
+<ul>
+<li>Every node is greater than every node in its left subtree and less than every node in its right subtree</li>
+<li>Perfect for recursive algorithms!</li>
+</ul>
+<h3>BST Inorder Traversal</h3>
+<ul>
+<li>we want to print each element in order</li>
+<li>idea: always print the leftmost subtree (DFS to the left!)</li>
+</ul>
+<pre><code>Base Case:
+	if root is None, return
+Recursive:
+	traverse left child (left subtree)
+	print root value
+	traverse right child (left subtree)
+</code></pre>
+<p>what if we want to return a list? (use <code>+</code> to concatenate lists)</p>
+<pre><code>Base Case:
+	if root is None, return [] (empty list)
+Recursive:
+	return traverse(left child) + [root value] + traverse(right child)
+</code></pre>
+<p>(or we could append to a static/global list)</p>
+<p>What if we don't use recursion?</p>
+<ul>
+<li>need to use a stack!<br />
+What if we want to print/store the reverse order?</li>
+<li>do right then current then left</li>
+</ul>
+<p>Returning to our code from last class...</p>
+<h3><em>BSTree Class</em>: Implementing Inorder Traversal, length, and height of tree</h3>
+<pre><code class="language-python">    # Inorder traversal
+    def inorder(self):
+        return self._inorder(self.root)
+
+    # Helper function for inorder
+    def _inorder(self, root):
+        if not root:
+            return []
+        return self._inorder(root.left) + [root.key] + self._inorder(root.right)
+
+    # Magic method: et the length of the tree 
+    # Support for the len() function 
+    def __len__(self):
+        return self._len(self.root)
+    
+    # Helper function for len
+    def _len(self, root):
+        if not root:
+            return 0
+        return self._len(root.left) + self._len(root.right) + 1
+    
+    # Get the height of the tree
+    def height(self):
+        return self._height(self.root)
+    
+    # Helper function for height
+    def _height(self, root):
+        if root == None:
+            return -1
+        left_height = self._height(root.left)
+        right_height = self._height(root.right)
+        return 1+max(left_height, right_height)
+</code></pre>
+<ul>
+<li>Recall: Height is the max number of edges from root to a leaf</li>
+<li>By our convention, a node with no children has height 0; an empty tree has height -1</li>
+</ul>
+<blockquote>
+<p>For the rest of class, Prof. Brockman talked about using ai tools (e.g., Gemini Code Assist) in VSCode</p>
+</blockquote>
+<h1>2025-10-29</h1>
+<h3>Removing BST Nodes</h3>
+<p>what we want:<br />
+<code>root = remove(root, key)</code> (the root might change after removal)</p>
+<pre><code>Base Case:
+	if root is None, return None (trivial base case)
+Recursive Case:
+	if key &lt; root.key
+		root.left = remove(root.left, key)
+	else if key &gt; root.key
+		root.right = remove(root.right, key)
+	else (the current root == key)
+		Case 1: root has no children
+			return None
+			
+		Case 2: root only has left child
+			return root.left
+		Case 3: root only has right child
+			return root.right
+			
+		Case 4: root has 2 children, height == 1
+			new_root = root.right
+			new_root.left = root.left
+			
+		Case 4+: root has 2 children, height &gt; 1
+			find the smallest node in the right tree:
+				- go to right subtree and keep going left
+				- this node will either be a leaf node, or have one child
+			store the value of the smallest node in the right subtree (the immediate successor)
+			remove that smallest node in the right subtree
+			reassign the root to the stored value of the immediate successor
+	
+	return root
+</code></pre>
+<h3>continuing in <em>BSTree</em> from last class...</h3>
+<pre><code class="language-python">    # Remove a Node with a given key from the tree  
+    def remove(self, key):
+        self.root = self._remove(self.root, key)
+    
+    # Helper function for remove
+    def _remove(self, root, key):
+        if root is None:
+            return root
+        
+        # Key is not yet found
+        if key &lt; root.key:
+            root.left = self._remove(root.left, key)
+        elif key &gt; root.key:
+            root.right = self._remove(root.right, key)
+
+        # Key is found
+        else:
+            # Node with only one child or leaf node: return the non-null child
+            # If the node has no children, return None
+            if root.left is None:
+                return root.right
+            if root.right is None:
+                return root.left
+            
+            # Node with two children: Get the inorder successor (smallest in the right subtree)
+            root.key = self._min_value_node(root.right)
+            # Delete the inorder successor
+            root.right = self._remove(root.right, root.key)
+        return root
+    
+    # Helper function to find the minimum value node in a tree
+    def _min_value_node(self, root):
+        current = root
+        while current.left is not None:
+            current = current.left
+        return current.key
+</code></pre>
+<h3>Time Complexity</h3>
+<ul>
+<li>Best case: <code>O(logN)</code> - occurs when the BST is balanced, and traversal to find and remove the node takes height <code>h = floor(log_2(N))</code></li>
+<li>Worst case: <code>O(N)</code> - occurs when the BST is skewed (every node has only one child), so traversal touches all <code>N</code> nodes</li>
+</ul>
+<h3>Space Complexity</h3>
+<ul>
+<li>Non-recursive: <code>O(1)</code> - only a constant number of pointers are used</li>
+<li>Recursive: best case <code>O(logN)</code> and worst case <code>O(N)</code> - because the recursion depth equals the height of the tree</li>
+</ul>
+<h1>2025-10-31</h1>
+<h3>Depth-First and Bread-First Search of Binary Trees</h3>
+<ul>
+<li>
+<p>An introduction to DFS/BFS, before we apply this to graphs!</p>
+</li>
+<li>
+<p>Depth-first traversal explores as far as possible along each branch before backtracking.</p>
+</li>
+<li>
+<p>Breadth-first traversal visits every node on a level before proceeding to the next layer</p>
+<ul>
+<li>&quot;level-by-level, left-to-right&quot;</li>
+</ul>
+</li>
+<li>
+<p>The example below demonstrates (non-recursive) depth-first and breadth-first search of a binary tree (not necessarily a binary <em>search</em> tree; the node values can be in any order and may contain duplicates).</p>
+</li>
+<li>
+<p>Both DFS and BFS maintain a <strong>frontier</strong> list that keeps tracks of the next nodes to visit and a <strong>visited</strong> list that keeps track of the nodes that have already been visited in the order that they were visited.</p>
+</li>
+<li>
+<p>For DFS the frontier is a stack (LIFO; push/pop from one end)</p>
+</li>
+<li>
+<p>For BFS the frontier is a queue (FIFO; push from one end, pop out the other)</p>
+</li>
+</ul>
+<pre><code class="language-python">
+class Node:
+    def __init__(self, key, left=None, right=None):
+        self.key = key
+        self.left = left
+        self.right = right
+
+class BinaryTree:
+    # Constructor; Optionally, you can initialize the tree with a root node
+    def __init__(self, root=None):
+        self.root = root
+
+    # Depth first search: preorder traversal
+    def dfs(self):
+	    frontier_stack = [self.root]
+        visited_list = []
+        while frontier_stack:
+	        current = frontier_stack.pop()
+            if current is not None:
+                visited_list.append(current.key)
+                frontier_stack.append(current.right)
+                frontier_stack.append(current.left)
+        return visited_list
+    
+    # Breadth first search: level order traversal
+    def bfs(self):
+        frontier_queue = [self.root]
+        visited_list = []
+        while frontier_queue:
+            current = frontier_queue.pop(0)
+            if current is not None:
+                visited_list.append(current.key)
+                frontier_queue.append(current.left)
+                frontier_queue.append(current.right)
+        return visited_list
+    
+if __name__ == &quot;__main__&quot;:
+
+    # Create a binary tree
+    #     __1__
+    #    /     \
+    #   2       3
+    #  / \     / \
+    # 4   5   6   7
+
+    root = Node(1)
+    root.left =  Node(2)
+    root.right = Node(3)
+    root.left.left = Node(4)
+    root.left.right = Node(5)
+    root.right.left = Node(6)
+    root.right.right = Node(7)
+    bt = BinaryTree(root)
+
+    print(&quot;Depth-first search:&quot;)
+    print(bt.dfs())
+    print()
+    print(&quot;Breadth-first search:&quot;)
+    print(bt.bfs())
+    print()
+</code></pre>
+<p>Result:</p>
+<pre><code>Depth-first search:
+[1, 2, 4, 5, 3, 6, 7]
+
+Breadth-first search:
+[1, 2, 3, 4, 5, 6, 7]
+</code></pre>
+<h3>Recursive BFS and DFS</h3>
+<p>just for sake of comparison, here are the recursive implementations of Depth-First Search and Breadth-First Search</p>
+<ul>
+<li>Note how BFS, unlike DFS, is not naturally recursive. To implement a recursive algorithm we pass a new queue each time, so it is recurses level-by-level.  This is a bit silly because it makes it essentially iterative (but hey, no while loop!)</li>
+</ul>
+<pre><code class="language-python">def dfs_recursive(node, visited):
+    if not node:
+        return
+    visited.append(node.key)
+    dfs_recursive(node.left, visited)
+    dfs_recursive(node.right, visited)
+
+from collections import deque
+def bfs_recursive(queue, visited):
+    if not queue:
+        return
+    next_level = deque()
+    for node in queue:
+        visited.append(node.key)
+        if node.left: next_level.append(node.left)
+        if node.right: next_level.append(node.right)
+    bfs_recursive(next_level, visited)
+</code></pre>
+<h3>Preorder / Inorder / Postorder</h3>
+<ul>
+<li><strong>These are variants of depth-first search (DFS) traversals of trees.</strong></li>
+<li>They describe <em>when</em> you visit the current node (N) relative to its left (L) and right (R) subtrees.</li>
+</ul>
+<pre><code>    A
+   / \
+  B   C
+ / \
+D   E
+</code></pre>
+<p>Preorder (N → L → R)</p>
+<ul>
+<li>Visit node first, recurse left, recurse right.</li>
+<li>Use: Copying/serializing a tree.</li>
+<li>Example: A, B, D, E, C</li>
+</ul>
+<blockquote>
+<p><strong>Iterative DFS with stack is nearly always preorder traversal</strong><br />
+Inorder and postorder rely on waiting until after children are processed, which is tricky with a stack</p>
+</blockquote>
+<p>Inorder (L → N → R)</p>
+<ul>
+<li>Recurse left, then visit node, recurse right.</li>
+<li>Use: Retrieves sorted order in BST.</li>
+<li>Example: D, B, E, A, C</li>
+</ul>
+<p>Postorder (L → R → N)</p>
+<ul>
+<li>recurse left, recurse right, then visit node.</li>
+<li>Use: Deleting/freeing a tree.</li>
+<li>Example: D, E, B, C, A</li>
+</ul>
+<blockquote>
+<p>Reminder: These apply to DFS only, not to BFS (which uses level order).</p>
+</blockquote>
+<hr />
+<h3>BFS is very useful with Complete Trees!</h3>
+<ul>
+<li>we can store a complete binary tree as an array, and always perfectly reconstruct it</li>
+</ul>
+<pre><code>	      1
+	   /     \
+	  2       3
+	 / \     / \
+	4   N   5   N
+   / \
+  N   N
+</code></pre>
+<p>using BFS to print this tree gives us:<br />
+<code>[1, 2, 3, 4, None, 5, None, None, None]</code><br />
+(we can then remove the trailing <code>None</code> values)</p>
+<h3>Finishing our BSTree Class with a BFS method!</h3>
+<pre><code class="language-python">    def write_bfs(self):
+        # If the tree is empty, return an empty list
+        if self.root is None:
+            return []
+        
+        # Push the root node to the queue
+        queue = [self.root]
+
+        # List to store the BFS traversal results
+        bfs = []
+
+        # While there are nodes to process
+        while queue:
+            # Pop the first node from the queue
+            node = queue.pop(0)
+
+            # If the node is None (missing children), append None to the BFS list
+            if node is None:
+                bfs.append(None)
+            
+            # If the node is not None, append its key to the results and push its children to the queue
+            else:
+                bfs.append(node.key)
+                queue.append(node.left)
+                queue.append(node.right)
+        
+        # Remove trailing None values
+        while bfs and bfs[-1] is None:
+            bfs.pop()
+        
+        # Return the BFS traversal list
+        return bfs
+</code></pre>
+<h1>2025-11-3</h1>
+<h3>AVL Trees</h3>
+<ul>
+<li>AVL trees are self-balancing trees</li>
+<li>AVL stands for Adelson-Velsky and Landis</li>
+</ul>
+<p>Motivation - say we insert 1, 3, 5, 9 in order:</p>
+<pre><code>1
+ \
+  3
+   \
+    5
+     \
+      9
+</code></pre>
+<p>Here, our tree is essentially just a linked list! We won't get any of the logarithmic benefits of trees!</p>
+<ul>
+<li>another self-balancing tree is called a red-black tree
+<ul>
+<li>has mathematical bounds on how unbalanced it can get</li>
+<li>mathematical bounds give you a predictable upper bound of the worst-case time complexity</li>
+</ul>
+</li>
+</ul>
+<h3>Key Idea: Rotation</h3>
+<p>Can rotate tree around a node while maintaining BST ordering properties<br />
+starting from:</p>
+<pre><code>1
+ \
+  2
+   \
+    3
+</code></pre>
+<p>rotate left:</p>
+<pre><code>  2
+ / \
+1   3
+</code></pre>
+<hr />
+<p>starting from:</p>
+<pre><code>    3
+   /
+  2
+ /
+1
+</code></pre>
+<p>rotate right:</p>
+<pre><code>  2
+ / \
+1   3
+</code></pre>
+<h3>General Case: Rotate Left</h3>
+<pre><code>  4
+ / \
+2   6
+   / \
+  5   7
+       \
+        8
+</code></pre>
+<p>rotate left:</p>
+<pre><code>    6
+   / \
+  4   7
+ / \   \
+2   5   8
+</code></pre>
+<h3>General Case: Rotate Right</h3>
+<pre><code>      4
+     / \
+    2   6
+   / \
+  1   3
+ /
+0
+</code></pre>
+<p>rotate right:</p>
+<pre><code>    2
+   / \
+  1   4
+ /   / \
+0   3   6
+</code></pre>
+<h3>Detecting Imbalance</h3>
+<p>Modifying our Node subclass:</p>
+<pre><code>Node:
+- key
+- left
+- right
+- height 
+</code></pre>
+<ul>
+<li>Whenever we add, remove, or rotate, we recursively update the heights</li>
+<li>Height is the number of edges from leaf to root - leaf node has h=0, null node has h=-1</li>
+<li><strong>Balance factor</strong> = height of left subtree - height of right subtree</li>
+<li>We rebalance when |balance factor| &gt; 1</li>
+</ul>
+<h3>Example: Height and Balance Factor</h3>
+<p>Add 47, then 21&amp;76, then 55, then 45</p>
+<pre><code>	   47  h=0-&gt;1-&gt;2
+	  /  \ 
+h=0  21  76 h=0-&gt;1-&gt;2
+         /
+        55  h=0-&gt;1
+       /
+      45  h=0
+</code></pre>
+<ul>
+<li>every time we add or remove an element, we update the heights up the tree (<code>O(logN))</code>)</li>
+</ul>
+<h3>Imbalance: 4 possible cases</h3>
+<p>&quot;left-left&quot;:<br />
+balance factor of root &gt; 1 (imbalance, root is left heavy)<br />
+balance factor of root.left &gt; 0 (child is left heavy)</p>
+<pre><code>    3
+   /
+  2
+ /
+1
+</code></pre>
+<p>To fix: ROTATE RIGHT</p>
+<p>&quot;right-right&quot;:<br />
+balance factor of root &lt; -1 (imbalance, root is right heavy)<br />
+balance factor of root.right &lt; 0 (child is right heavy)</p>
+<pre><code>1
+ \
+  2
+   \
+    3
+</code></pre>
+<p>To fix: ROTATE LEFT</p>
+<p>&quot;left-right&quot;:<br />
+balance factor of root &gt; 1 (imbalance, root is left heavy)<br />
+balance factor of root.left &lt; 0 (child is right heavy)</p>
+<pre><code>  3 
+ /
+1
+ \
+  2
+</code></pre>
+<p>To fix:</p>
+<ol>
+<li>Left rotate around (1)
+<ul>
+<li>becomes a &quot;left-left&quot;</li>
+</ul>
+</li>
+<li>Right rotate around root</li>
+</ol>
+<p>&quot;right-left&quot;:<br />
+balance factor of root &lt; -1 (imbalance, root is right heavy)<br />
+balance factor of root.right &gt; 0 (child is left heavy)</p>
+<pre><code>1
+ \
+  3
+ /
+2
+</code></pre>
+<p>To fix:</p>
+<ol>
+<li>Right rotate around (3)
+<ul>
+<li>becomes a &quot;right-right&quot;</li>
+</ul>
+</li>
+<li>Left rotate around root</li>
+</ol>
+<h3>Balance Example 1</h3>
+<pre><code>  40
+ /  \
+20   60
+    /  \
+   50  70 
+         \
+         75
+</code></pre>
+<p>unbalance around root because left height = 0, right hight = 2 (balance factor = -2)</p>
+<ul>
+<li>
+<p>this is a &quot;right-right&quot; case; think of 50 as an &quot;innocent bystander&quot; - 75 caused our issue</p>
+</li>
+<li>
+<p>beads on a chain analogy:</p>
+<ul>
+<li>50 would snag on our arm, so we remove it</li>
+<li>then we drape the chain over our arm (from the root) and do a single rotate left</li>
+<li>then, we reinsert 50</li>
+</ul>
+</li>
+</ul>
+<pre><code>     60
+    /  \
+   40  70 
+  /  \   \
+ 20  50  75
+</code></pre>
+<h3>Balance Example 2</h3>
+<pre><code>  40
+ /  \
+20   60
+    /  \
+   50  70 
+      /
+	 65
+</code></pre>
+<ul>
+<li>unbalanced around 40 (left h=0 vs right h=2)</li>
+<li>this is still a &quot;right right&quot; case<br />
+becomes:</li>
+</ul>
+<pre><code>	   60 
+     /    \
+   40      70 
+  /  \    /
+ 20  50  65
+</code></pre>
+<h3>Balance Example 3</h3>
+<pre><code>  40
+ /  \
+20  60
+   /  \
+  50  70 
+    \
+    55
+</code></pre>
+<ul>
+<li>this is now a &quot;right-left&quot; case<br />
+To fix, we:</li>
+<li>rotate right about 60</li>
+</ul>
+<pre><code>  40
+ /  \
+20  50
+      \
+      60
+     /  \
+	55  70
+</code></pre>
+<p>then we rotate left about the root:</p>
+<pre><code>     50
+    /  \
+  40   60
+ /    /  \
+20	 55  70
+</code></pre>
+<h1>2025-11-5</h1>
+<h3>Implementing AVL Tree Class in Python</h3>
+<pre><code class="language-python">from tree_print import pretty_tree
+
+class Node:
+    def __init__(self, key, left=None, right=None):
+        self.key = key
+        self.left = left
+        self.right = right
+        self.height = 0
+
+class AVLTree:
+    # Constructor
+    # Optionally, you can initialize the tree with a root node
+    def __init__(self, root=None):
+        self.root = root
+    
+    # Clear the tree
+    def clear(self):
+        self.root = None
+
+    # Helper function to get the height of a node for AVL balancing
+    # Note: The height of a null node is -1
+    def _get_height(self, node):
+        if not node:
+            return -1
+        return node.height
+    
+    # Helper function to update the height of a node
+    def _update_height(self, node):
+        if node:
+            node.height = 1 + max(self._get_height(node.left), self._get_height(node.right))
+        
+    
+    # Helper function to get the balance factor of a node
+    # Note: The balance factor of a null node is 0
+    def _balance_factor(self, node):
+        if not node:
+            return 0
+        return self._get_height(node.left) - self._get_height(node.right)
+
+    # Helper functions to rotate left for AVL balancing
+    def _rotate_left(self, z):
+        &quot;&quot;&quot;
+        Example:
+            Given the following tree:
+            z
+           / \
+          T1  y
+             / \
+            T2  T3
+
+            After _left_rotate(z), the tree becomes:
+              y
+             / \
+            z   T3
+           / \
+          T1  T2
+        &quot;&quot;&quot;
+        # Do the rotation
+        y = z.right
+        t2 = y.left
+
+        y.left = z
+        z.right = t2
+
+        # Update the heights
+        self._update_height(z)
+        self._update_height(y)
+
+        # Return the new root
+        return y
+
+    # Helper functions to rotate right for AVL balancing
+    def _rotate_right(self, z):
+        &quot;&quot;&quot;
+        Example:
+            Given the following tree:
+              z
+             / \
+            y  T3
+           / \
+          T1  T2
+
+            After _right_rotate(z), the tree becomes:
+              y
+             / \
+            T1  z
+               / \
+              T2  T3
+        &quot;&quot;&quot;
+        # Do the rotation
+        y = z.left
+        T2 = y.right
+
+        y.right = z
+        z.left = T2
+
+        # Update the heights
+        self._update_height(z)
+        self._update_height(y)
+
+        # Return the new root
+        return y
+
+    def _balance(self, node):
+        # update height
+        self._update_height(node)
+
+        # left heavy
+        if self._balance_factor(node) &gt; 1:
+            # left child is right heavy
+            if self._balance_factor(node.left) &lt; 0:
+                node.left = self._rotate_left(node.left)
+            return self._rotate_right(node)
+
+        # right heavy
+        if self._balance_factor(node) &lt; -1:
+            # right child is left heavy
+            if self._balance_factor(node.right) &gt; 0:
+                node.right = self._rotate_right(node.right)
+            return self._rotate_left(node)
+
+        return node
+
+    # Insert a Node with a given key into the tree
+    def insert(self, key):
+        self.root = self._insert(self.root, key)
+
+    # Helper function for insert
+    def _insert(self, root, key):
+        # Regular BST insertion
+        if root is None:
+            return Node(key)
+        
+        if key == root.key:
+            return root
+        
+        if key &lt; root.key:
+            root.left = self._insert(root.left, key)
+        else:
+            root.right = self._insert(root.right, key)
+
+        # return balanced tree
+        return self._balance(root)
+    
+    # Remove a Node with a given key from the tree  
+    def remove(self, key):
+        self.root = self._remove(self.root, key)
+    
+    # Helper function for remove
+    def _remove(self, root, key):
+        # Regular BST removal
+        if root is None:
+            return root
+        
+        # Key is not yet found
+        if key &lt; root.key:
+            root.left = self._remove(root.left, key)
+        elif key &gt; root.key:
+            root.right = self._remove(root.right, key)
+
+        # Key is found
+        else:
+            # Node with only one child or leaf node: return the non-null child
+            # If the node has no children, return None
+            if root.left is None:
+                return root.right
+            if root.right is None:
+                return root.left
+            
+            # Node with two children: Get the inorder successor (smallest in the right subtree)
+            root.key = self._min_value_node(root.right)
+            # Delete the inorder successor
+            root.right = self._remove(root.right, root.key)
+
+        # return balanced tree
+		return self._balance(root)
+    
+    # Helper function to find the minimum value node in a tree
+    def _min_value_node(self, node):
+        current = node
+        while current.left is not None:
+            current = current.left
+        return current.key
+    
+    # Write the BFS traversal of the tree to a list
+    def write_bfs(self):
+        # If the tree is empty, return an empty list
+        if self.root is None:
+            return []
+        
+        # Push the root node to the queue
+        queue = [self.root]
+
+        # List to store the BFS traversal results
+        bfs = []
+
+        # While there are nodes to process
+        while queue:
+            # Pop the first node from the queue
+            node = queue.pop(0)
+
+            # If the node is None (missing children), append None to the BFS list
+            if node is None:
+                bfs.append(None)
+            
+            # If the node is not None, append its key to the results and push its children to the queue
+            else:
+                bfs.append(node.key)
+                queue.append(node.left)
+                queue.append(node.right)
+        
+        # Remove trailing None values
+        while bfs and bfs[-1] is None:
+            bfs.pop()
+        
+        # Return the BFS traversal list
+        return bfs
+    
+    # Magic method: string representation of the tree
+    # Support for the print() function
+    def __str__(self):
+        return pretty_tree(self)
+</code></pre>
+<h1>2025-11-7</h1>
+<p>Note: Type hints are just &quot;hints&quot; and are not checked or enforced by the Python interpreter.</p>
+<h3>Python Iterables, Iterators, and Generators</h3>
+<p>Problem we're trying to solve:</p>
+<ul>
+<li>want to iterate through objects in a tree</li>
+<li>want to get these objects one at a time</li>
+<li>want to use Python for-in protocol</li>
+</ul>
+<h3>Implementing With Magic Methods: Two Approaches</h3>
+<ul>
+<li>
+<p>Old Way:</p>
+<ul>
+<li><code>__iter__()</code></li>
+<li><code>__next__()</code></li>
+</ul>
+</li>
+<li>
+<p>New Way:</p>
+<ul>
+<li>uses a generator</li>
+<li><code>__iter__()</code> is all you need</li>
+</ul>
+</li>
+<li>
+<p>An iterable in python is any object that implements the <code>__iter__()</code> magic method</p>
+<ul>
+<li>If it doesn't define <code>__iter__()</code> but defines <code>__getitem__()</code> (with integer indices starting at 0), Python will still treat it as iterable by repeatedly calling <code>obj[i]</code> starting from <code>i = 0</code> until an <code>IndexError</code> is raised.</li>
+</ul>
+</li>
+</ul>
+<h3>Example (Old Way): Linked List</h3>
+<pre><code>head --&gt; [ ] --&gt; [ ] --&gt; [ ] --&gt; [ ] --&gt; None
+tail -----------------------------^
+</code></pre>
+<pre><code class="language-python">class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.next = new_node
+            self.tail = new_node
+
+    def __str__(self):
+        return self.recursive_function(self.head)
+    
+    # Function recursively returns a string representation of the linked list
+    def recursive_function(self, current):
+        if not current:
+            return ''
+        return str(current.data) + ' ' + self.recursive_function(current.next)
+
+    def __iter__(self):
+        # attribute added on the fly!
+        self.current = self.head
+        return self
+
+    def __next__(self):
+        if not self.current:
+            raise StopIteration # signal to python tuntime system that you've reached the end of the list
+        else:
+            data = self.current.data
+            self.current = self.current.next
+            return data
+
+# ---- Example usage ----
+        
+# Create a linked list and append some elements
+lst = LinkedList()
+lst.append(1)
+lst.append(2)
+lst.append(3)
+
+# Print the type of the linked list
+print(&quot;Print using __str__:&quot;)
+print(f&quot;type(lst.__str__()): {type(lst.__str__())}&quot;)
+print(lst)
+
+# Iterate over the linked list using a for loop
+print()
+print(&quot;Iterate using for loop:&quot;)
+for i in lst:
+    print(i)
+
+# Iterate over the linked list using a while loop and generator
+print()
+print(&quot;Iterate using while loop and generator:&quot;)
+iterator = iter(lst)
+print(f&quot;type(iterator): {type(iterator)}&quot;)
+while True:
+    try:
+        print(next(iterator))
+    except StopIteration:
+        print(&quot;End of list&quot;)
+        break
+
+# Convert the linked list to a list
+print(&quot;Convert iterable to list: list(lst)&quot;)
+print(list(lst))
+</code></pre>
+<h3>Why Use Generators?</h3>
+<ul>
+<li>Greatly simplifies process</li>
+<li>Don't need next</li>
+<li>New keyword: <code>yield</code> (and <code>yield from</code> when calling a function)</li>
+</ul>
+<pre><code class="language-python">def firstn(n):
+    num = 0
+    while num &lt; n:
+        yield num
+        num += 1
+</code></pre>
+<ul>
+<li>In most functions, when you reach <code>return</code>, a value is returned and the function ends.</li>
+<li>Any function with <code>yield</code> is labeled as a generating function in Python</li>
+<li>Each time a function reaches <code>yield</code>, a value is returned, and the function is paused
+<ul>
+<li>its local variables and execution state are stored on the heap, allowing it to resume later</li>
+</ul>
+</li>
+<li>When you call a generating function a second time, the function goes back on the stack and resumes executing at &quot;a continuation&quot; of the function, after the previous yield instruction</li>
+</ul>
+<h3>Modifying the Linked List Example to Use Generator:</h3>
+<pre><code class="language-python">    def __iter__(self):
+        return self.recursive_generator(self.head)
+    
+    # Generator function recursively yields the elements of the linked list
+    def recursive_generator(self, current):
+        if not current:
+            return
+        yield current.data
+        yield from self.recursive_generator(current.next)
+</code></pre>
+<ul>
+<li>acts exactly the same as before</li>
+</ul>
+<h1>2025-11-10</h1>
+<h3>Heap</h3>
+<ul>
+<li>A heap is a Binary Tree (<em>Not</em> a Binary Search Tree)</li>
+<li>A heap is a complete tree</li>
+<li>left-right ordering of children doesn't matter</li>
+<li>duplicates allowed</li>
+<li>2 operations: push/pop</li>
+<li>Main Usage: Priority Queue</li>
+</ul>
+<p>Max Heap: Every node's key is greater than or equal to that of its children<br />
+Min Heap: Every node's key is less than or equal to that of its children</p>
+<p>Push/Pop Time Complexity: <code>O(logN)</code> (only along one branch of the tree)</p>
+<p>Example Min Heap:</p>
+<pre><code>     3
+   /   \
+  6     4
+ / \    /
+8   7  8
+</code></pre>
+<p>Example Max Heap:</p>
+<pre><code>     9
+   /    \
+  5      7
+ / \    / \
+3   4  2   2
+</code></pre>
+<p>This is not a Min Heap:</p>
+<pre><code>     3
+   /    \
+  6      4
+ / \    /
+8   1  8
+</code></pre>
+<p>This is not a Heap (not complete):</p>
+<pre><code>    O
+   / \
+  O   O
+ / \   \
+O   O   O
+</code></pre>
+<h3>Heap Push</h3>
+<p>Suppose we had a heap like this:</p>
+<pre><code>    O
+   / \
+  O   O
+ /
+O
+</code></pre>
+<p>After pushing, we know our resulting topology will always look like this:</p>
+<pre><code>    O
+   / \
+  O   O
+ / \
+O   O
+</code></pre>
+<p>Then, we swap values around as needed</p>
+<p>Example: Pushing 8</p>
+<pre><code>    6
+   / \
+  5   2
+ / \   
+2   8
+</code></pre>
+<p>We <strong>Bubble/Percolate</strong> the value 8 up the tree, by swapping parent and children</p>
+<ul>
+<li>swap 5 and 8</li>
+<li>swap 6 and 8 (8 is now root)</li>
+</ul>
+<pre><code>    8
+   / \
+  6   2
+ / \   
+2   5
+</code></pre>
+<h3>Heap Pop</h3>
+<p>Example: Popping 6 (the root)</p>
+<pre><code>    6
+   / \
+  5   2
+ / \   
+2   3
+</code></pre>
+<p>We replace the root with the rightmost node of the last layer (last value in bfs of the complete tree; so that tree remains complete)<br />
+Then, we Bubble/Percolate Down, swapping the parent with the max child (or min child for min heap)</p>
+<ul>
+<li>remove 3 from bottom</li>
+<li>3 (new &quot;root&quot;) swaps with 5</li>
+</ul>
+<pre><code>    5
+   / \
+  3   2
+ /    
+2   
+</code></pre>
+<p>It would seem that we would need a doubly-linked tree to do bubbling, or at least some complicated recursive algorithm...but,</p>
+<h3>We don't even need a linked data structure!!</h3>
+<pre><code>     A
+   /   \
+  B     C
+ / \    /
+D   E  F
+</code></pre>
+<p>BFS traversal gives us the array:<br />
+<code>[a, b, c, d, e, f]</code></p>
+<p><strong>There are formulas that let us know what the parent is!</strong></p>
+<pre><code>i: index of parent
+2i+1: index of left-child
+2i+2: index of right-child
+
+j: index of child
+(j-1)//2: index of parent
+</code></pre>
+<h3>MaxHeap: Push</h3>
+<p>let's push in order: <code>10, 2, 5, 18, 22</code></p>
+<p>start with 10:</p>
+<pre><code>    10
+</code></pre>
+<p>push 2:</p>
+<pre><code>   10
+  /
+ 2
+</code></pre>
+<p>push 5:</p>
+<pre><code>   10
+  /  \
+ 2    5
+</code></pre>
+<p>push 18:</p>
+<pre><code>     10
+    /  \
+   2    5
+  /
+ 18
+</code></pre>
+<p>bubble it up...</p>
+<pre><code>     18
+    /  \
+   10   5
+  /
+ 2 
+</code></pre>
+<p>push 22:</p>
+<pre><code>     18
+    /  \
+   10   5
+  /  \
+ 2    22
+</code></pre>
+<p>bubble it up...</p>
+<pre><code>     22
+    /  \
+   18   5
+  /  \
+ 2    10
+</code></pre>
+<p>This would return the array:<br />
+<code>[22, 18, 5, 2, 10]</code></p>
+<p>continuing this example, if we pop the root:</p>
+<pre><code>     18
+    /  \
+   10   5
+  /
+ 2 
+</code></pre>
+<p>our array becomes: <code>[18, 10, 5, 2]</code></p>
+<p>Next time...Heapsort!</p>
+<h1>2025-11-12</h1>
+<ul>
+<li>Say we are pushing and popping an equal number of values</li>
+<li>Between Stack, Queue, and Heap, which has the worst average time complexity?
+<ul>
+<li>Queue! One side is <code>O(1)</code>, but other side is <code>O(N)</code> (need to shift elements)</li>
+<li>You might think Heap because it has to do percolating, etc., but its average is always <code>O(logN)</code></li>
+</ul>
+</li>
+</ul>
+<p>Recall that that we represent a heap as an array, where the root is at index 0</p>
+<pre><code>i: index of parent
+2i+1: index of left-child
+2i+2: index of right-child
+
+j: index of child
+(j-1)//2: index of parent
+</code></pre>
+<pre><code class="language-python">class MaxHeap:
+
+    def __init__(self):
+        self.heap_array = []
+        
+    def percolate_up(self, node_index):
+        while node_index &gt; 0:
+            # compute the parent node's index
+            parent_index = (node_index - 1) // 2
+            
+            # check for a violation of the max heap property
+            if self.heap_array[node_index] &lt;= self.heap_array[parent_index]:
+                # no violation, so percolate up is done.
+                return
+            else:
+                # swap heap_array[node_index] and heap_array[parent_index]
+                print(&quot;   percolate_up() swap: %d &lt;-&gt; %d&quot; % (self.heap_array[parent_index], self.heap_array[node_index]))
+                temp = self.heap_array[node_index]
+                self.heap_array[node_index] = self.heap_array[parent_index]
+                self.heap_array[parent_index] = temp
+                
+                # continue the loop from the parent node
+                node_index = parent_index
+
+    def percolate_down(self, node_index):
+        child_index = 2 * node_index + 1
+        value = self.heap_array[node_index]
+
+        while child_index &lt; len(self.heap_array):
+            # Find the max among the node and all the node's children
+            max_value = value
+            max_index = -1
+            i = 0
+            while i &lt; 2 and i + child_index &lt; len(self.heap_array):
+                if self.heap_array[i + child_index] &gt; max_value:
+                    max_value = self.heap_array[i + child_index]
+                    max_index = i + child_index
+                i = i + 1
+
+            # check for a violation of the max heap property
+            if max_value == value:
+                return
+            else:
+                # swap heap_array[node_index] and heap_array[max_index]
+                print(&quot;   percolate_down() swap: %d &lt;-&gt; %d&quot; % (self.heap_array[node_index], self.heap_array[max_index]))
+                temp = self.heap_array[node_index]
+                self.heap_array[node_index] = self.heap_array[max_index]
+                self.heap_array[max_index] = temp
+                
+                # continue loop from the max index node
+                node_index = max_index
+                child_index = 2 * node_index + 1
+
+    def insert(self, value):
+        # add the new value to the end of the array.
+        print(&quot;insert(%d):&quot; % value)
+        self.heap_array.append(value)
+        
+        # percolate up from the last index to restore heap property.
+        self.percolate_up(len(self.heap_array) - 1)
+        
+    def remove(self):
+        # save the max value from the root of the heap.
+        print(&quot;remove():&quot;)
+        max_value = self.heap_array[0]
+        
+        # move the last item in the array into index 0.
+        replace_value = self.heap_array.pop()
+        if len(self.heap_array) &gt; 0:
+            self.heap_array[0] = replace_value
+            
+            # percolate down to restore max heap property.
+            self.percolate_down(0)
+                
+        # return the max value
+        return max_value
+        
+# Program to test the heap class.
+h = MaxHeap()
+input_list = [ 10, 2, 5, 18, 22 ]
+for item in input_list: 
+    h.insert(item)
+    print('   --&gt; array: %s\n' % h.heap_array)
+while len(h.heap_array) &gt; 0: 
+    removed_value = h.remove()
+    print('   --&gt; removed %d, array: %s\n' % (removed_value, h.heap_array))
+print()
+</code></pre>
+<p>output:</p>
+<pre><code>insert(10):
+   --&gt; array: [10]
+
+insert(2):
+   --&gt; array: [10, 2]
+
+insert(5):
+   --&gt; array: [10, 2, 5]
+
+insert(18):
+   percolate_up() swap: 2 &lt;-&gt; 18
+   percolate_up() swap: 10 &lt;-&gt; 18
+   --&gt; array: [18, 10, 5, 2]
+
+insert(22):
+   percolate_up() swap: 10 &lt;-&gt; 22
+   percolate_up() swap: 18 &lt;-&gt; 22
+   --&gt; array: [22, 18, 5, 2, 10]
+
+remove():
+   percolate_down() swap: 10 &lt;-&gt; 18
+   --&gt; removed 22, array: [18, 10, 5, 2]
+
+remove():
+   percolate_down() swap: 2 &lt;-&gt; 10
+   --&gt; removed 18, array: [10, 2, 5]
+
+remove():
+   --&gt; removed 10, array: [5, 2]
+
+remove():
+   --&gt; removed 5, array: [2]
+
+remove():
+   --&gt; removed 2, array: []
+</code></pre>
+<p><strong>Notice how when we remove items, they are removed in sorted (descending) order</strong></p>
+<h3>Heap Sort: Main Idea</h3>
+<ol>
+<li>start with unordered array</li>
+<li>push each value onto heap</li>
+<li>pop until empty</li>
+<li>done!</li>
+</ol>
+<ul>
+<li>But...we don't actually need to push each value to build a heap.  We can &quot;Heapify&quot; an array in place:
+<ul>
+<li>going from bottom to top, bubble down all non-leaf nodes into place</li>
+</ul>
+</li>
+</ul>
+<p>How do we find the first non leaf node?</p>
+<ul>
+<li>well, we know that the last leaf node is at the last index (because heap is complete)</li>
+<li>and we know that <code>parent index = (child//2) - 1</code></li>
+</ul>
+<pre><code>[5, 5, 7, 3, 9, 2, 8]
+       ^
+       first non-leaf node (index = (6//2)-1 = 2)
+</code></pre>
+<ul>
+<li>
+<p>Notice how because our array is a bfs representation of the heap, moving our non-leaf node pointer to the left traverses right to left, bottom to top!</p>
+</li>
+<li>
+<p>After heapify, the max value is at index 0.</p>
+</li>
+<li>
+<p>After pop, the length of array shrinks by 1.</p>
+</li>
+<li>
+<p>So, after each pop we can just put that max value at the end of the original (sub)array</p>
+</li>
+<li>
+<p>i.e., we can sort in place too!</p>
+</li>
+<li>
+<p>Time Complexity: O(NlogN)</p>
+</li>
+<li>
+<p>Space Complexity: O(1)</p>
+</li>
+<li>
+<p>Adaptive? No.</p>
+</li>
+<li>
+<p>Stable? No.</p>
+</li>
+</ul>
+<h3>Heap Sort Code</h3>
+<pre><code class="language-python"># Binary max heap percolate down
+def max_heap_percolate_down(node_index, heap_list, list_size):
+    child_index = 2 * node_index + 1
+    value = heap_list[node_index]
+
+    while child_index &lt; list_size:
+        # Find the max among the node and all the node's children
+        max_value = value
+        max_index = -1
+        i = 0
+        while i &lt; 2 and i + child_index &lt; list_size:
+            if heap_list[i + child_index] &gt; max_value:
+                max_value = heap_list[i + child_index]
+                max_index = i + child_index
+            i = i + 1
+                                    
+        if max_value == value:
+            return
+
+        # Swap heap_list[node_index] and heap_list[max_index]
+        temp = heap_list[node_index]
+        heap_list[node_index] = heap_list[max_index]
+        heap_list[max_index] = temp
+        
+        node_index = max_index
+        child_index = 2 * node_index + 1
+
+
+# Sorts the list of numbers using the heap sort algorithm
+def heap_sort(numbers):
+    # Heapify numbers list
+    i = len(numbers) // 2 - 1
+    while i &gt;= 0:
+        max_heap_percolate_down(i, numbers, len(numbers))
+        i = i - 1
+                
+    i = len(numbers) - 1
+    while i &gt; 0:
+        # Swap numbers[0] and numbers[i]
+        temp = numbers[0]
+        numbers[0] = numbers[i]
+        numbers[i] = temp
+
+        max_heap_percolate_down(0, numbers, i)
+        i = i - 1
+</code></pre>
+<h3>Python heapq module</h3>
+<pre><code class="language-python">import heapq
+
+heap = [] # just a normal list
+
+# Insert elements into the heap
+for i in [10, 2, 5, 18, 22]:
+    heapq.heappush(heap, i)
+	
+# Heaps in heapq are min heaps!
+print(heap) # [2, 10, 5, 18, 22]
+while heap: 
+    smallest_element = heapq.heappop(heap)
+
+# Using heapify() to convert list into heap
+lst = [5, 5, 7, 3, 9, 2, 8]
+heapq.heapify(lst)
+print(lst) # [2, 3, 5, 5, 9, 7, 8]
+</code></pre>
+<h1>2025-11-14</h1>
+<blockquote>
+<p>talked about mini-project due 2025-12-10<br />
+watched <a href="https://www.youtube.com/watch?v=w5ebcowAJD8">Veritasium video on morse &amp; qr codes</a></p>
+</blockquote>
+<h3>Fixed-length compression codes:</h3>
+<ul>
+<li>ASCII</li>
+</ul>
+<h3>Variable-length compression codes:</h3>
+<ul>
+<li>Morse Code</li>
+<li>Huffman Code</li>
+</ul>
+<h3>Prefix Codes</h3>
+<ul>
+<li>No character code could possibly be a prefix of any other character code</li>
+<li>Morse Code is <em>not</em> a prefix code
+<ul>
+<li>ex: E is <code>.</code>, I is <code>..</code>, so <code>....</code> is ambiguous</li>
+<li>must use a delimiter/delay between characters</li>
+</ul>
+</li>
+<li>They way to come up with these is with a tree:</li>
+</ul>
+<pre><code>    start
+   /    \
+  0      1
+ / \    / \
+0   1  0   1
+^   ^  ^   ^
+A   B  C   D
+</code></pre>
+<ul>
+<li>Here, A is <code>00</code>, B is <code>01</code>, C is <code>10</code>, D is <code>11</code></li>
+<li>In a sequence of 0's and 1's, we traverse the tree and know we have reached a letter when we reach a leaf</li>
+</ul>
+<h3>Huffman Codes</h3>
+<ul>
+<li>
+<p>Use letter frequencies to create an unbalanced tree with shortest paths to most frequent letters</p>
+</li>
+<li>
+<p>Example: ab (<code>a: 1</code>, <code>b:1</code>)</p>
+</li>
+</ul>
+<pre><code> / \
+a   b
+</code></pre>
+<p><code>a=0, b=1</code></p>
+<ul>
+<li>Example: abbccc (<code>a: 1</code>, <code>b: 2</code>, <code>c: 3</code>)</li>
+</ul>
+<pre><code>   / \ 
+  0   c
+ / \
+a   b
+</code></pre>
+<p><code>a=00, b=01, c=1</code></p>
+<ul>
+<li>if we used a fix length code, we would need at least 2 bits for 3 chars<br />
+abbccc = <code>000101111</code> (9 bits instead of 12 bits)</li>
+<li>compression ratio: <code>9/12</code></li>
+</ul>
+<h3>Huffman Encoding Algorithm:</h3>
+<ul>
+<li>
+<p>Get frequencies of letters</p>
+</li>
+<li>
+<p>Build tree</p>
+<ul>
+<li>push nodes by frequency onto a priority queue (min heap)</li>
+<li>while priority queue still has more than more than 1 entry:
+<ul>
+<li>pop lowest 2 nodes from queue, combine frequencies into one node (add 2 nodes as children), and push to queue</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Get codes from tree</p>
+</li>
+<li>
+<p>Example: abbcccdddd (<code>a: 1</code>, <code>b: 2</code>, <code>c: 3</code>, <code>d: 4</code>)</p>
+</li>
+</ul>
+<pre><code>  abcd:10
+ /    \
+d:4   abc:6
+     /    \ 
+   c:3    ab:3
+          /   \
+         a:1   b:2
+</code></pre>
+<p>(0 is left, 1 is right)<br />
+<code>a=110, b=111, c=10, d=0</code></p>
+<h1>2025-11-17</h1>
+<h3>Graph Representation</h3>
+<ul>
+<li>A graph is defined by sets of vertices &amp; edges</li>
+<li>Example notation: G = (V, E)</li>
+<li>vertices are nodes, and edges are the lines that connect them!</li>
+</ul>
+<p><code>V = {1, 2, 3, 4, 5, 6}</code><br />
+<code>E = {(1,2), (2,3), (3,4), (4,2), (5,3)}</code></p>
+<h3>Graph Applications</h3>
+<ul>
+<li>Knowledge graph</li>
+<li>GPS, directions, maps</li>
+<li>social networks</li>
+<li>the web/internet</li>
+<li>road planning</li>
+<li>dependency graph - scheduling</li>
+<li>cracking a code (decision graph)</li>
+</ul>
+<h3>Graph Properties</h3>
+<ol>
+<li>Directed vs. Undirected Graphs<br />
+Definition: Directed graphs use arrows to show one-way movement between nodes, while undirected graphs use lines to show two-way, mutual connections.</li>
+</ol>
+<pre><code>   Directed (Digraph)      Undirected
+   (1) ----&gt; (2)           (1) ----- (2)
+    ^         |             |         |
+    |         v             |         |
+   (3) &lt;---- (4)           (3) ----- (4)
+</code></pre>
+<ol start="2">
+<li>Weighted vs. Unweighted Graphs<br />
+Definition: Weighted graphs assign a numerical cost or value to each edge, whereas unweighted graphs treat every connection as having equal value.</li>
+</ol>
+<pre><code>   Weighted                Unweighted
+   (1) --5-- (2)           (1) ----- (2)
+    |         |             |         |
+    3         8             |         |
+    |         |             |         |
+   (3) --1-- (4)           (3) ----- (4)
+</code></pre>
+<ol start="3">
+<li>Cyclic vs. Acyclic Graphs (Directed)<br />
+Definition: A cyclic graph contains at least one path allowing a return to the start, while an acyclic graph (DAG) progresses strictly forward without loops.</li>
+</ol>
+<pre><code>   Cyclic                  Acyclic
+   (1) ----&gt; (2)           (1) ----&gt; (2)
+    ^         |             |         |
+    |         v             v         v
+   (3) &lt;---- (4)           (3) ----&gt; (4)
+</code></pre>
+<ol start="4">
+<li>Connected vs. Disconnected Graphs<br />
+Definition: A connected graph has a path between every pair of nodes, while a disconnected graph has isolated nodes or separate islands of nodes.</li>
+</ol>
+<pre><code>   Connected               Disconnected
+   (1) --- (2)             (1)    (2)---(5)
+     \     /                |      |
+      \   /                (3)    (4)
+       (3)
+</code></pre>
+<ol start="5">
+<li>Simple vs. Non-simple Graphs<br />
+Definition: Simple graphs allow only one edge between unique nodes, whereas non-simple graphs allow multiple edges between the same nodes or self-loops.- non-simple graphs can have self-directed edges and repeated edges</li>
+</ol>
+<pre><code>   Simple                  Non-simple
+                           (1) === (2)  &lt;-- Multi-edge
+   (1) ----- (2)
+                           (3)&lt;-- 
+                            |    |       &lt;-- Self-loop
+                             \__/
+</code></pre>
+<h3>Adjacency List Representation:</h3>
+<p>Example graph:</p>
+<pre><code>(0) -------- (1)
+ |          / |  \
+ |        /   |   \
+ |      /     |    (2)
+ |    /       |   /
+ |  /         |  /
+ (4) ------- (3)
+</code></pre>
+<p>for each node, an adjacency list stores a list of its neighbors</p>
+<pre><code>graph = {
+0: [1,4]
+1: [0,2,3,4]
+2: [1,3]
+3: [1,2,4]
+4: [0,1,3]
+}
+</code></pre>
+<h3>Edge List File Format</h3>
+<pre><code>5 7 (num_nodes, num_edges) &lt;- optional header, but convenient
+0 1
+1 2
+2 3
+3 4
+4 0
+1 4
+1 3 (note: weighted graph would have a third entry for weight)
+</code></pre>
+<h3>Creating a graph (adjacency list) from an edge list</h3>
+<ul>
+<li>In Python, we will use a defaultdict</li>
+<li>allows us to append to elements in a dictionary without first checking if they exist<br />
+&quot;how the pros do it&quot;</li>
+</ul>
+<pre><code class="language-python">from collections import defaultdict
+
+dd = defaultdict(list) # &quot;factory method&quot; - you give it the function to call if you get a keyError
+					   # (here, it will create an empty list)
+
+dd[3].append(1) # works!
+</code></pre>
+<pre><code class="language-python"># Represent graph as adjacency list.
+import sys
+from collections import defaultdict
+
+# Type declaration
+AdjacencyList = dict[int, list[int]]
+
+def read_graph(stream) -&gt; AdjacencyList:
+    # Read number of vertices and number of edges
+    num_vertices, num_edges = [int(x) for x in stream.readline().split()]
+
+    # Initialize empty adjacency list
+    # Use defaultdict to automatically create empty neighbor
+    # lists for vertices that have not been encountered yet
+    # prior to appending neighbors
+    graph = defaultdict(list)
+
+    # Read each edge and update adjacency list
+    for _ in range(num_edges):
+        source, target = [int(x) for x in stream.readline().split()]
+
+        # Update both directions since graph is undirected
+        graph[source].append(target)
+        graph[target].append(source)
+
+    return graph
+
+def main(stream=sys.stdin) -&gt; None:
+    # read a single graph
+    graph = read_graph(stream)
+
+    # print the adjacency list with vertices in sorted order
+    for vertex, neighbors in sorted(graph.items()):
+        print(f'{vertex}: {sorted(neighbors)}')
+
+if __name__ == '__main__':
+    main()
+</code></pre>
+<h3>Adjacency Matrix</h3>
+<ul>
+<li>A complete, square matrix where each entry indicates whether a pair of vertices (row, col) in a graph is connected by an edge</li>
+<li>For an unweighted graph, stores 0 and 1; For a weighted graph, stores 0 and weight</li>
+<li>An undirected graph always produces a symmetric matrix</li>
+</ul>
+<pre><code>(for exmaple graph above)
+    0 1 2 3 4
+  +-----------
+0 | 0 1 0 0 1
+1 | 1 0 1 1 1
+2 | 0 1 0 1 0
+3 | 0 1 1 0 1
+4 | 1 1 0 1 0
+</code></pre>
+<p>Advantages of Adjacency Matrices:</p>
+<ul>
+<li>fast lookup for if an edge exists between two nodes</li>
+<li>good when using a graph algorithm that has a linear algebraic solution
+<ul>
+<li>ex: SPICE circuit simulator (solving systems of equations using g)<br />
+Disadvantage:</li>
+</ul>
+</li>
+<li>Size - bad for sparse graphs!
+<ul>
+<li>imagine a matrix for a social network of the world</li>
+</ul>
+</li>
+</ul>
+<h3>Adjacency Matrix in Python</h3>
+<ul>
+<li>we represent a matrix as a list of lists</li>
+</ul>
+<pre><code>graph = [
+[0,1,0,0,1],
+...
+[1,1,0,1,0]
+]
+</code></pre>
+<p>python trick - initialize matrix with all zeros using list comprehension:</p>
+<pre><code class="language-python">graph = [[0] * num_vertices for _ in range(num_vertices)]`
+</code></pre>
+<h1>2025-11-19</h1>
+<blockquote>
+<p><a href="https://www.youtube.com/watch?v=ZMQbHMgK2rw">Veritasium video on mouse mazes</a></p>
+</blockquote>
+<h3>Breadth-First Search:</h3>
+<ul>
+<li>level by level</li>
+<li>guaranteed to find shortest path, but lots of backtracking</li>
+<li>visited set + queue (FIFO)</li>
+<li>for a queue, we want O(1) for both push/pop
+<ul>
+<li>could use a linked list (push to tail, pop from head)
+<ul>
+<li>but...each node requires a malloc (system call, which is slow)</li>
+</ul>
+</li>
+<li>instead we use a deque
+<ul>
+<li>takes short segments of dynamic arrays and strings them together with pointers (linked list of array chunks)</li>
+<li>Advantages: O(1) push/pop from both ends, fewer mallocs than linked list (allocate chunks not individual nodes), better cache locality than linked list (elements in each chunk are contiguous)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Depth-First Search:</h3>
+<ul>
+<li>the &quot;head-strong&quot; mouse</li>
+<li>will find a path to the target node, but not necessarily the shortest one</li>
+<li>visited set + stack (LIFO)</li>
+</ul>
+<h3>Dealing with Cycles:</h3>
+<ul>
+<li>If a node has not been visited, don't push it</li>
+<li>It's possible for a node to be on the frontier multiple times
+<ul>
+<li>when popping, don't add neighbors if already visited</li>
+</ul>
+</li>
+</ul>
+<h3>Example Graph: Directed w/ Cycles</h3>
+<p>Edge List:</p>
+<pre><code>(source, target)
+1 2
+1 3
+2 3
+2 5
+3 4
+4 5
+5 3
+</code></pre>
+<p>Adjacency List (dictionary):</p>
+<pre><code>1: [2, 3]
+2: [3, 5]
+3: [4]
+4: [5]
+5: [3]
+</code></pre>
+<p>Visualized:</p>
+<pre><code>1 ---&gt; 2 -----+
+|      |      |
+|      v      v
++----&gt; 3 &lt;--- 5
+       |      ^
+       v      |
+       4 -----+
+</code></pre>
+<ul>
+<li>A typical question for an unweighted graph is &quot;can I get to node X from node Y?&quot;</li>
+</ul>
+<h3>Implementation in Python:</h3>
+<pre><code class="language-python">from collections import defaultdict, deque
+import sys
+
+# Types
+
+Graph = dict[int, list[int]]
+
+# Functions
+
+def read_graph(stream=sys.stdin) -&gt; Graph:
+    graph = defaultdict(list)
+
+    for line in stream:
+        source, target = [int(x) for x in line.split()]
+        graph[source].append(target)
+
+    return graph
+
+def bfs(graph: Graph, vertex: int) -&gt; None:
+    frontier = deque([vertex])   # Vertices to be visited
+    visited  = set()             # Vertices already visited
+
+    while frontier:
+        vertex = frontier.popleft()
+
+        if vertex in visited:
+            continue
+
+        visited.add(vertex)
+        
+        print(vertex, end=' ')
+
+        for neighbor in graph[vertex]:
+            if neighbor not in visited:
+                frontier.append(neighbor)
+    print()
+
+def dfs(graph: Graph, vertex: int) -&gt; None:
+    frontier = deque([vertex])   # Vertices to be visited
+    visited  = set()             # Vertices already visited
+
+    while frontier:
+        vertex = frontier.pop()
+
+        if vertex in visited:
+            continue
+
+        visited.add(vertex)
+        
+        print(vertex, end=' ')
+
+        for neighbor in graph[vertex]:
+            if neighbor not in visited:
+                frontier.append(neighbor)
+    print()
+
+# Main Execution
+
+def main(stream=sys.stdin):
+    graph = read_graph(stream)
+
+    bfs(graph, min(graph.keys()))
+    dfs(graph, min(graph.keys()))
+
+if __name__ == '__main__':
+    main()
+</code></pre>
+<p><strong>Note how similar BFS and DFS are in this implementation!!</strong> - (exactly identical, except bfs pops from left)</p>
+<h1>2025-11-21</h1>
+<h3>Dijkstra's Algorithm is a Single-Source Shortest Path Algorithm</h3>
+<ul>
+<li>What is the shortest distance from a single source node to every other node?
+<ul>
+<li>usually this is asked of <strong>weighted &amp; directed graphs</strong></li>
+</ul>
+</li>
+<li>Before, we just stored a list of neighbors for each node
+<ul>
+<li>Now, with a weighted graph, each node has a <code>{dictionary of node:weight pairs}</code></li>
+</ul>
+</li>
+<li>recall Depth-First and Breadth-First Search:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Frontier List Data Structure</th>
+<th>Visited List Data Structure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DFS</td>
+<td>Stack</td>
+<td>Set</td>
+</tr>
+<tr>
+<td>BFS</td>
+<td>Queue</td>
+<td>Set</td>
+</tr>
+<tr>
+<td>Dijkstra's</td>
+<td>Priority Queue (Min Heap)!</td>
+<td>Set</td>
+</tr>
+</tbody>
+</table>
+<h3>Dijkstra's Algorithm is a Greedy Algorithm!!!</h3>
+<ul>
+<li>Greedy -&gt; we are not omniscient. we just pick the best option at each step.</li>
+</ul>
+<p>two example graphs:</p>
+<pre><code>GRAPH 1                                   GRAPH 2                       
+
+A ---4---&gt; B &lt;---1--- D                   A ---4---&gt; B &lt;---1--- D
+|          ^          ^                   |                     ^
+1          1          1                   1                     1
+v          |          |                   v                     |
+C ---1---&gt; E -------- +                   C ---1---&gt; E ---1---&gt; F
+</code></pre>
+<p>note how to go from A-&gt;B in graph 1 it is fastest to go A-&gt;C-&gt;E-&gt;B, while A-&gt;B is fastest in graph 2</p>
+<ul>
+<li>The idea is to pick the closest node each time!</li>
+<li>We could keep track of shortest distance with a <code>{dictionary of node:distance pairs}</code>
+<ul>
+<li>But...finding the next shortest node would be slow - O(N)</li>
+</ul>
+</li>
+<li>Instead, we use a priority queue!
+<ul>
+<li>as we encounter nodes, we just push the accumulated distance to a priority queue</li>
+<li>note how this priority queue could have multiple different entries for the same node</li>
+<li>but this is fine...</li>
+<li>we will <em>always</em> pop the shortest path to such a node (and then add it to the visited list, so any subsequent pop is disregarded)</li>
+<li>^Why? (&quot;proof by contradiction&quot;):
+<ul>
+<li>Imagine that when we pop a certain node for the first time, it is not the shortest possible distance to that node.</li>
+<li>This means that, by some other path, we could reach the node faster</li>
+<li>In other words, there must exist a node which has an accumulated distance &lt; current shortest distance</li>
+<li>But this is impossible!  If there was such a node, we would have popped that node first! (contradiction)</li>
+<li>Well, you say, perhaps <em>that</em> node just hasn't been reached yet!</li>
+<li>But no, in fact it will be reached before, just like for this node (proof by induction, i.e. trust me bro)
+<ul>
+<li>more concretely, (to summarize) we have already shown that nonnegative edge weights guarantee that the shortest prefix of any optimal path is always discovered before any longer-distance alternative.  This holds for any node.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Dijkstra's Algorithm pseudocode:</h3>
+<pre><code>initialize frontier with (0, source node)
+while frontier not empty:
+    pop vertex with lowest accumulated distance
+    if not already visited:
+        mark vertex as visited and store distance
+        for each neighbor of vertex:
+            push (vertex dist + dist to neighbor, neighbor name) to frontier
+</code></pre>
+<p>(note that this is just for finding the length of the shortest distance, we will discuss reconstructing path later.)</p>
+<ul>
+<li>code next time!</li>
+</ul>
+<h1>2025-11-24</h1>
+<h3>What is the time complexity of Dijkstra's Algorithm?</h3>
+<ul>
+<li>Let V be the number of vertices</li>
+<li>Let E be the number of edges (can have at most <code>V^2</code> edges)</li>
+<li>Edges certainly dominate our time complexity...</li>
+<li>For each edge, we push/pop on a min heap (takes O(log(E)) time)</li>
+<li>This gives us <code>O(E * logE)</code>
+<ul>
+<li>which is the same as <code>O(E * logV^2)</code></li>
+<li>which is equivalent to <code>O(E * 2*logV)</code></li>
+<li>which is equivalent to <code>O(E * logV)</code></li>
+</ul>
+</li>
+<li>Our book says time complexity is <code>O(E * logV)</code></li>
+</ul>
+<h3>Dijkstra's Algorithm implemented in Python:</h3>
+<pre><code class="language-python">import collections
+from heapq import heappush, heappop
+import sys
+
+# Types
+'''
+The graph is represented as an adjacency list using
+a dictionary, where the key is the source node and
+the value is another dictionary, where the keys
+are neigbor vertices and the values are the edge weights
+to each vertex, e.g.
+
+{
+    source_vertex1 : {neighbor1: weight1, neighbor2: weight2}
+    source_vertex2 : . . .
+    . . .
+}
+
+'''
+Graph = dict[str, dict[str, int]]
+
+def read_graph(stream) -&gt; Graph:
+    ''' 
+    Read in directed graph 
+    Each line is an edge: source, target, weight
+    '''
+    graph = collections.defaultdict(dict)
+    for line in stream:
+        source, target, weight = line.split()
+        graph[source][target] = int(weight)
+    return graph
+
+def compute_sssp(graph: Graph, start: str) -&gt; dict[str, int]:
+    ''' Use Dijkstra's Algorithm to compute the single-source shortest path '''
+    
+    # frontier is a priority queue of tuples (distance, vertex)
+    frontier: list[tuple[int, str]] = []
+
+    # visited is a dict of vertex:distance
+    visited: dict[str, int] = {}
+
+    # use heap to implement frontier priority queue
+    heappush(frontier, (0, start))
+
+    while frontier:
+        # pop total_distance, vertex from frontier
+        total_distance, vertex = heappop(frontier)
+
+        # if vertex in visited, continue to next iteration
+        if vertex in visited:
+            continue
+        
+        # add vertex:total_distance to visited
+        visited[vertex] = total_distance
+
+        # push each unvisited neighbor with its total_distance to frontier
+        for neighbor, weight in graph[vertex].items():
+            if neighbor not in visited:
+                heappush(frontier, (weight+total_distance, neighbor))
+
+    return visited
+
+# Main Execution
+
+def main(stream=sys.stdin) -&gt; None:
+    # Read Graph
+    graph   = read_graph(stream)
+
+    # Compute SSSP
+    start   = min(graph.keys())
+    visited = compute_sssp(graph, start)
+
+    # Display Distances
+    for target in sorted(graph.keys())[1:]:
+        print(f'{start} -&gt; {target} = {visited[target]}')
+
+if __name__ == '__main__':
+    main()
+</code></pre>
+<p>We can now find the length of the shortest path to each node from a given starting node...but how do we find the actual path?</p>
+<ul>
+<li>Quite simple: just store the node that precedes the ending node on the shortest path
+<ul>
+<li>we can then reconstruct the shortest path by going backwards!</li>
+<li>(at each node we know which node will get us closer to origin!)</li>
+</ul>
+</li>
+<li>Revised Dijkstra's Algorithm pseudocode:</li>
+</ul>
+<pre><code>initialize frontier with (0, source node, source node)
+while frontier not empty:
+    pop vertex with lowest accumulated distance
+    if not already visited:
+        mark vertex as visited and store distance **and predecessor**!
+        for each neighbor of vertex:
+            push (vertex dist + dist to neighbor, neighbor name, vertex as predecessor) to frontier
+</code></pre>
+<p>In practice, this means that in our code we would change:</p>
+<ul>
+<li>Visited Dictionary
+<ul>
+<li>Before: <code>{vertex: distance}</code></li>
+<li>Now: <code>{vertex: (distance, predecessor)}</code></li>
+</ul>
+</li>
+<li>Frontier (Min Heap) List
+<ul>
+<li>Before: <code>[(distance, vertex)]</code></li>
+<li>Now: <code>[(distance, vertex, predecessor)]</code></li>
+</ul>
+</li>
+<li>(then, of course, must make necessary changes to the above code to support these new dicts/lists)</li>
+<li>Finally, we just implement a function to reconstruct the shortest path:</li>
+</ul>
+<pre><code class="language-python">def reconstruct_path(visited: dict[str, tuple[int,str]], origin: str, destination: str) -&gt; list[str]:
+    path = []
+
+    # Reconstruct path from destination to origin
+    curr = destination
+    while curr != origin:
+        # Append the current vertex to the end of the path and update the current vertex to its predecessor.
+        # Note that the order of the path in the list is reversed, so the path must be reversed before returning.
+        path.append(curr)
+        curr = visited[curr][1] # predecessor
+
+	print(f&quot;path from {origin} to {destination} is of length {visited[destination][0]}&quot;)
+    path.append(origin)
+    return list(reversed(path))
+</code></pre>
+<p>Next class - Prim's Algorithm!</p>
+<h1>2025-12-1</h1>
+<h3>Prim's Algorithm</h3>
+<ul>
+<li>
+<p>We want to find a <strong>Minimum Spanning Tree</strong> (MST) of a graph</p>
+<ul>
+<li>A set of edges that gives me the shortest possible distance such that every single node is connected</li>
+</ul>
+</li>
+<li>
+<p>Analogy: given a group of buildings, what is the least amount of pavement use to connect all of them?</p>
+</li>
+<li>
+<p>The algorithm we will use, like before, is frontier-based</p>
+</li>
+<li>
+<p>We are using an undirected graph</p>
+</li>
+</ul>
+<p>Example graph:</p>
+<pre><code>(A)--3--(B)--1--(D)
+ |       |       |
+ 4       5       2
+ |       |       |
+ +------(C)------+
+</code></pre>
+<p>What is the MST?</p>
+<ul>
+<li>The edges: <code>A-B</code>, <code>B-D</code>, <code>C-D</code></li>
+<li>Total weight of MST edges = 6</li>
+<li>Note that if we used Dijkstra's to find shortest path from A to every node, it would be a different set of edges!
+<ul>
+<li>(<code>A-&gt;C</code> would be faster than <code>A-&gt;B-&gt;D-&gt;C</code>)</li>
+</ul>
+</li>
+</ul>
+<p>How might we implemented this?</p>
+<ul>
+<li>Idea: starting from any node, add neighbors to a priority queue and then pop the edge with the shortest distance
+<ul>
+<li>Add this shortest edge to MST, and then repeat process as you traverse</li>
+</ul>
+</li>
+<li>Again, greedy!</li>
+<li>We use the same approach as Dijkstra's...
+<ul>
+<li>except instead of pushing accumulated distance to our priority queue, we push the <em>immediate distance</em> from a node to its neighbor</li>
+<li>like our revised implementation of Dijkstra's, we want to store the source/predecessor of each node</li>
+</ul>
+</li>
+<li>Visited Dictionary: <code>{vertex: predecessor}</code></li>
+<li>Frontier (Min Heap) List: <code>[(weight, vertex, predecessor)]</code> (weight instead of distance)</li>
+</ul>
+<h3>Prim's Algorithm Pseudocode</h3>
+<pre><code>initialize frontier with (0, source node, source node)
+while frontier not empty:
+    pop vertex with lowest weight
+    if not already visited:
+        mark vertex as visited and store its predecessor
+        for each neighbor of vertex:
+            push (weight to neighbor, neighbor name, vertex as predecessor) to frontier
+</code></pre>
+<p><strong>Time Complexity</strong>: <code>O(E*logE)</code></p>
+<h3>Prim's Algorithm in Python</h3>
+<pre><code class="language-python">from collections import defaultdict
+from heapq import heappop, heappush
+import sys
+
+# Type definition
+Graph = dict[str, dict[str, int]]
+
+def read_graph(stream) -&gt; Graph:
+    graph: Graph = defaultdict(dict)
+    for line in stream:
+        source, target, weight = line.split()
+        # Graph is undirected, so we add edges in both directions
+        graph[source][target] = int(weight)
+        graph[target][source] = int(weight)
+    return graph
+
+def compute_mst(graph: Graph, origin: str) -&gt; tuple[int, dict[str, str]]:
+    '''
+    Compute the Minimum Spanning Tree (MST) from the origin vertex.
+    Return the total weight of the MST and a dict of {vertex:source, }
+    where source is the predecessor of the vertex.
+    '''
+
+    # frontier is priority queue of tuples (distance, vertex, source),
+    # where source is the predecessor of the current vertex
+    frontier = [(0, origin, origin)]
+
+    # visited is a dict of {vertex:source, }
+    visited  = {}
+    total_weight = 0
+
+    while frontier:
+        weight, vertex, source = heappop(frontier)
+
+        if vertex in visited:
+            continue
+
+        # add vertex:source to the visited list and update total weight
+        visited[vertex] = source
+        total_weight += weight
+
+        for neighbor, weight in graph[vertex].items():
+            if not neighbor in visited:
+                # Push the neighbor to the frontier as a tuple
+                # (weight from predecessor, vertex, predecessor)
+                heappush(frontier, (weight, neighbor, vertex))
+
+    del visited[origin] # Delete origin vertex from visited list to be returned
+    return total_weight, visited
+
+def main(args=None) -&gt; None:
+    if args is None:
+        args = sys.argv[1:]
+    if len(args) != 2:
+        print('Usage:  mst_prim.py graph_file origin')
+        sys.exit(1)
+
+    with open(args[0], 'r') as stream:
+        graph = read_graph(stream)
+    
+    origin = args[1]
+
+    # MST
+    mst_length, mst_edges = compute_mst(graph, origin)
+    edges = sorted(sorted(t) for t in mst_edges.items())
+
+    print(f'MST length = {mst_length}')
+    print('MST edges: '+' '.join(f'{source}{target}' for source, target in edges))
+
+if __name__ == '__main__':
+    main()
+</code></pre>
+<ul>
+<li>You can think of Prim's as an even greedier version of Dijkstra's</li>
+<li>All of the algorithms we have covered so far can be implemented in a variety of ways, but the intention in this class is to present each as <em>frontier-based</em> algorithms, with only minor tweaks to how we we push/pull elements in our frontier list.</li>
+</ul>
+<p>Let's recap again:</p>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th>Frontier List Data Structure</th>
+<th>Visited List Data Structure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DFS</td>
+<td>Stack</td>
+<td>Set</td>
+</tr>
+<tr>
+<td>BFS</td>
+<td>Queue</td>
+<td>Set</td>
+</tr>
+<tr>
+<td>Dijkstra's</td>
+<td>Priority Queue (Min Heap)</td>
+<td>Set</td>
+</tr>
+<tr>
+<td>Prim's</td>
+<td>Priority Queue (Min Heap)</td>
+<td>Set</td>
+</tr>
+<tr>
+<td>next...</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>Topological Sort!</h3>
+<ul>
+<li>Topological sort is an algorithm that orders the vertices of a directed graph linearly such that for every directed edge u-&gt;v, vertex u appears before v in the ordering.</li>
+<li>Imagine a course listing of prerequisites:</li>
+</ul>
+<pre><code>A --&gt; B --&gt; E
+            ^
+			|
+C --&gt; D ----+
+</code></pre>
+<ul>
+<li>If we want to take course E, we can take multiple paths, but must always begin from A or C!</li>
+<li>some viable topological orderings (orders in which we can take classes):
+<ul>
+<li>ABCDE</li>
+<li>ACBED</li>
+<li>CDEAB</li>
+<li>CADEB</li>
+</ul>
+</li>
+<li>Example from our book:</li>
+</ul>
+<pre><code>+-------------------------+
+|                         |
+v                         |
+A -------------&gt; B        |
+|                |        |
+|                |        |
+v                v        |
+F        +-----&gt; C &lt;------D
+|        |
+|        |         
++------&gt; E 
+</code></pre>
+<p>some possible orderings:</p>
+<ul>
+<li>DABFEC</li>
+<li>DAFEBC</li>
+</ul>
+<h3>Degree of a vertex:</h3>
+<ul>
+<li>the number of edges incident on a vertex (# of arrows coming <em>in</em> to a vertex)</li>
+</ul>
+<pre><code>&lt;--D--&gt; degree = 0
+
+--&gt;B    degree = 1
+
+   v 
+--&gt;C&lt;-- degree = 3
+</code></pre>
+<ul>
+<li>Given a graph (stored as an adjacency list), we could construct a degree table (dictionary):</li>
+</ul>
+<pre><code>degrees = {
+	A: degree,
+	...
+	E: degree
+}
+</code></pre>
+<p>How might we implement an algorithm to find viable topological orderings?</p>
+<ul>
+<li>we know that we can only visit a node if all of its predecessors have been visited</li>
+<li>idea: keep track of each node's degree, and when degree is 0, visit it!
+<ul>
+<li>(after we visit a node, we can &quot;remove&quot; it from the graph by decrementing its children's degrees)</li>
+</ul>
+</li>
+</ul>
+<h3>Kahn's Topological Sort Algorithm</h3>
+<ul>
+<li>Frontier: Queue/Stack/List (order does not matter! we just want something O(1))</li>
+<li>Visited: List (our final ordering matters)<br />
+pseudocode:</li>
+</ul>
+<pre><code>create table of degrees for each node
+add vertices with degree 0 to frontier
+while the frontier not empty:
+	pop vertex
+	append to visited
+	for each neighbor of vertex:
+		decrement degree
+		if degree equals 0, append to frontier
+</code></pre>
+<h1>2025-12-3</h1>
+<p>Last time we covered topological sort.  Question: what happens if a graph has cycles?</p>
+<ul>
+<li>Topological sort would not be possible!</li>
+<li>At some point, we would reach a state where there are nodes remaining in the graph, but none have degree 0!</li>
+<li>The frontier would be empty -&gt; algorithm thinks it's done</li>
+<li>Therefore, we can detect if a graph is cyclical</li>
+<li>simply by checking if the length of the visited/resulting topological list is less than the number of nodes in the graph</li>
+</ul>
+<h3>Complexity of Kahn's Algorithm:</h3>
+<ol>
+<li>compute the in-degree for every vertex (E edges total) -&gt; <code>O(E)</code></li>
+<li>we visit each vertex once -&gt; <code>O(V)</code></li>
+<li>for each vertex, we must decrement (and potentially push) nodes along each edge -&gt; <code>O(E)</code><br />
+Adding up, this gives us <code>O(V + E)</code></li>
+</ol>
+<h3>Implementing Kahn's Topological Sort in Python</h3>
+<p>Example Application: Makefile!! (in what order should we process the files?)</p>
+<pre><code class="language-Makefile">library.o:  	library.c library.h
+	$(CC) $(CFLAGS) -o library.o -c library.c
+
+main.o:     	main.c library.h
+	$(CC) $(CFLAGS) -o main.o -c main.c
+
+program:    	main.o library.o
+	$(CC) $(LDFLAGS) -o program main.o library.o
+</code></pre>
+<p>A makefile is a graph:</p>
+<pre><code>main.c       library.h       library.c
+   |            |   |             |
+   |    +-------+   +-------+     |
+   |    |                   |     |
+   v    v                   v     v
+ (main.o)               (library.o)
+    |                       |
+    +-----------+-----------+
+                |
+                v
+           [ program ]
+</code></pre>
+<pre><code class="language-python">from collections import defaultdict
+import sys
+
+# Type definition
+Graph = dict[str, set[str]]
+
+def read_edgefile(stream) -&gt; Graph:
+    graph: Graph = defaultdict(set)
+
+    for line in stream:
+        source, target = line.split()
+        graph[source].add(target)
+
+    return graph
+
+def read_makefile(stream) -&gt; Graph:
+    graph: Graph = defaultdict(set)
+
+    for line in stream:
+        if ':' not in line:
+            continue
+
+        targets_string, sources_string = line.split(':')
+        targets = targets_string.split()
+        sources = sources_string.split()
+
+        for source in sources:
+            graph[source].update(targets)
+
+    return graph
+
+def compute_degrees(graph: Graph) -&gt; dict[str, int]:
+    # degrees is a dictionary {vertex:incoming_edges}
+    # defaultdict is used to create a default value of 0
+    degrees: dict[str, int] = defaultdict(int)
+
+    for source, targets in graph.items():
+        # If the source hasn't been seen yet, include it in the dictionary with a value of 0
+        degrees[source]
+        # For each target, increment the number of incoming edges
+        for target in targets:
+            # Creates an entry with value 0 before incrementing
+            degrees[target] += 1
+
+    return degrees
+
+def topological_sort(graph: Graph) -&gt; list[str]:
+    visited  = []
+    degrees  = compute_degrees(graph)
+
+    # Initialize the frontier with vertices that have no incoming edges
+    frontier = [node for node,degree in degrees.items() if degree==0]
+
+    while frontier:
+        vertex = frontier.pop()
+        visited.append(vertex)
+
+        for neighbor in graph[vertex]:
+            degrees[neighbor] -= 1
+            if degrees[neighbor] == 0:
+                frontier.append(neighbor)
+
+    return visited
+
+def main(args=None) -&gt; None:
+    if args is None:
+        args = sys.argv[1:]
+
+    # Set the name of the function to be called to read the graph depending on whether
+    # the first argument is '-m' for a makefile or otherwise for an edgefile
+    if args[0] == '-m':
+        args = args[1:]
+        read_graph = read_makefile
+    else:
+        read_graph = read_edgefile
+
+    with open(args[0], 'r') as stream:
+        graph = read_graph(stream)
+
+    vertices = topological_sort(graph)
+
+    if len(vertices) == len(graph):
+        print(' '.join(vertices))
+    else:
+        print('There is a cycle!')
+
+if __name__ == '__main__':
+    main()
+
+</code></pre>
+<h1>2025-12-5</h1>
+<p>(bonus topics, not on exam)</p>
+<h3>N Queens</h3>
+<ul>
+<li>For an NxN board, is there a way that I can place N Queens on the board such that no queen is attacking any other queen?
+<ul>
+<li>How many such configurations are there?</li>
+</ul>
+</li>
+</ul>
+<p>example configuration with N=4 queens:</p>
+<pre><code>-------------------------
+|     |  Q  |     |     |
+| --- | --- | --- | --- |
+|     |     |     |  Q  |
+| --- | --- | --- | --- |
+|  Q  |     |     |     |
+| --- | --- | --- | --- |
+|     |     |  Q  |     |
+-------------------------
+</code></pre>
+<p>Idea:</p>
+<ul>
+<li>Each row must hold one queen.</li>
+<li>Start by picking a column to place a queen in the first row</li>
+<li>Then, move to the next row and place a queen in any safe column</li>
+</ul>
+<p><em>we don't need to store an entire matrix to represent the board!</em></p>
+<ul>
+<li>we just store the column index of each queen by row; ex: <code>b = [1, 3, 0, 2]</code></li>
+</ul>
+<p>Candidate List (iterative backtracking):</p>
+<ul>
+<li>We start with a list of candidates: <code>candidates = [[]]</code></li>
+<li>After first row, <code>candidates = [[0], [1], [2], [3]]</code></li>
+<li>After second row, <code>candidates = [[0,2], [0,3], [1,3], [2,0], [3,0], [3, 1]]</code></li>
+<li>continue for third and fourth rows...</li>
+<li><code>candidates = [[1,3,0,2],[2,0,3,1]]</code></li>
+</ul>
+<p>How to determine if a spot is safe?</p>
+<ul>
+<li>we already know queens won't be on the same row (because we are going row by row)</li>
+<li>if the queens are in same column, not safe</li>
+<li>to check diagonals:
+<ul>
+<li>if abs(r1-r2) == abs(c1-c2), not safe</li>
+<li>intuition: if rise/run == 1 (or -1), the queens are along a diagonal line</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python">def solve_n_queens(n):
+    # candidates: stores valid board configurations for placing `row` queens
+    candidates = [[] for _ in range(n + 1)]
+    candidates[0] = [[]]  # Base case: one way to place 0 queens
+
+    # Iterate row by row, building configurations
+    for row in range(1, n + 1):
+        for config in candidates[row - 1]:  # Take each valid configuration from the previous row
+            for col in range(n):  # Try placing a queen in each column
+                if is_safe(config, row - 1, col):
+                    candidates[row].append(config + [col])
+
+    return candidates[n]
+
+def is_safe(board, row, col):
+    # Check previous queens for conflicts
+    for r, c in enumerate(board):
+        if c == col or abs(c - col) == abs(r - row):
+            return False
+    return True
+
+def print_solutions(n, solutions):
+    for solution in solutions:
+        for row in solution:
+            print(&quot; &quot;.join(&quot;Q&quot; if i == row else &quot;.&quot; for i in range(n)))
+        print(&quot;\n&quot;)
+
+# Example usage
+n = 4
+solutions = solve_n_queens(n)
+print(f&quot;Found {len(solutions)} solutions for {n}-Queens.&quot;)
+print_solutions(n, solutions[:1])  # Print the first solution
+</code></pre>
+<blockquote>
+<p>at-home exercise: implement recursive N-Queens algorithm!</p>
+</blockquote>
+<h3>Longest Common Substring (Dynamic Programming)</h3>
+<p>What is the longest common substring between &quot;BREAK&quot; and &quot;BEAK&quot;?</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>B</th>
+<th>R</th>
+<th>E</th>
+<th>A</th>
+<th>K</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>E</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>A</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>K</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>max element in table: 3 =&gt; longest common substring is of length 3 ending with K<br />
+small optimization: we don't need to store the whole table, just the previous row<br />
+- still <code>O(N*M)</code> time complexity, but now <code>O(M)</code> space complexity</p>
+<pre><code class="language-python">def longest_common_substring_optimized(str1, str2):
+    # Create one row of the matrix.
+    matrix_row = [0] * len(str2)
+
+    # Variables to remember the largest value, and the row it occurred at.
+    max_value = 0
+    max_value_row = 0
+    for row in range(len(str1)):
+        # Variable to hold the upper-left value from the current matrix position.
+        up_left = 0
+        for col in range(len(str2)):
+            # Save the current cell's value; this will be up_left for the next iteration.
+            saved_current = matrix_row[col]
+        
+            # Check if the characters match
+            if str1[row] == str2[col]:
+                matrix_row[col] = 1 + up_left
+                
+                # Update the saved maximum value and row, if appropriate.
+                if matrix_row[col] &gt; max_value:
+                    max_value = matrix_row[col]
+                    max_value_row = row
+            else:
+                matrix_row[col] = 0
+                
+            # Update the up_left variable
+            up_left = saved_current
+
+    # The longest common substring is the substring in str1 
+    # from index max_value_row - max_value + 1, 
+    # up to and including max_value_row.
+    start_index = max_value_row - max_value + 1
+    return str1[start_index : max_value_row + 1]
+</code></pre>
+<h1>2025-12-8</h1>
+<p>(no lecture)</p>
+<h1>2025-12-10</h1>
+<blockquote>
+<p>Final Exam Review (Kahoot!)</p>
+</blockquote>
+
+            </main>
+
+            <footer>
+                <section>
+                    <p>Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, code under <a href="https://opensource.org/licenses/MIT">MIT</a>.  Last <a href="https://github.com/maxficco/maxficco.com">updated</a> 2026 by Max Ficco.</p>
+                </section>
+            </footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,165 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+:root {
+    --font-sans: Helvetica, Arial, sans-serif;
+    --font-serif: Palatino, Georgia, serif;
+
+    --bg: #000000;
+    --fg: #ffffff;
+    --accent: rgba(255, 0, 0, 0.75);
+    --strip: rgba(255, 0, 0, 0.25);
+    --muted: #ffffff66;
+    --link: #ff0000;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg: #ffffff;
+        --fg: #000000;
+        --accent: rgba(0, 0, 255, 0.75);
+        --strip: rgba(0, 0, 255, 0.25);
+        --muted: #00000066;
+        --link: #0000ff;
+    }
+}
+
+html[data-theme="light"] {
+    --bg: #ffffff;
+    --fg: #000000;
+    --accent: rgba(0, 0, 255, 0.75);
+    --strip: rgba(0, 0, 255, 0.25);
+    --muted: #00000066;
+    --link: #0000ff;
+}
+
+html[data-theme="dark"] {
+    --bg: #000000;
+    --fg: #ffffff;
+    --accent: rgba(255, 0, 0, 0.75);
+    --strip: rgba(255, 0, 0, 0.25);
+    --muted: #ffffff66;
+    --link: #ff0000;
+}
+
+html[data-theme="dark"] .moon { display: none; }
+html[data-theme="light"] .sun { display: none; }
+
+#background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;    /* never eat clicks */
+}
+
+body {
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--fg);
+}
+
+.container {
+    border-left: 2rem solid var(--strip);
+    max-width: 100ch;
+    width: 92vw;
+    margin: 0 auto;
+    padding-inline: 1rem;
+    min-height: 100vh;       /* fallback */
+    min-height: 100dvh;      /* better on mobile address-bar browsers */
+
+    display: flex;
+    flex-direction: column;
+}
+
+main { flex: 1; }          /* takes remaining space and pushes footer down */
+
+body { 
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+header section {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--accent);
+    width:100%;
+    flex-wrap: wrap;
+}
+
+#theme-toggle {
+    margin-left: auto;
+    cursor: pointer; /* Ensures the cursor indicates it's clickable */
+}
+.moon, .sun {
+    width: 1rem;
+    height: 1rem;
+    fill: currentColor; 
+    display: block; /* removes the text-descender gap below the image */
+}
+
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+header a { 
+    color: var(--fg);
+    padding: 0.25rem 0.5rem;
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
+}
+.current-page {
+    border-right: 2px solid var(--accent);
+}
+
+
+footer section {
+    border-top: 2px solid var(--accent);
+    width:100%;
+    padding-left: 0.5rem;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+footer section * {
+    margin:0; padding:0; /* reset in case any of the below modify */
+}
+
+h1, h2, h3, h4, h5, h6 { 
+    line-height: 1.25;
+    margin: 1rem 0 0.5rem;
+}
+
+p, blockquote {
+    margin: 0.75rem 0;
+}
+
+ul, ol {
+    margin: 0.75rem 0;
+    padding-left: 2rem;
+}
+
+hr {
+    border-color: var(--accent);
+}
+
+img {
+    margin:0.75rem; width:90%; max-width:32rem;
+}
+
+table {
+    border-collapse: collapse; /* Makes adjacent cell borders merge into a single border */
+}
+td {
+    border: 2px solid var(--accent);
+}
+
+code {
+    color: #689d6a;
+}
+
+blockquote { 
+    color: var(--muted);
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent);
+}

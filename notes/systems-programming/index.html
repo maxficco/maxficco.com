@@ -1,0 +1,3812 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../../style.css">
+        <title>SystemsProgramming</title>
+        <link rel="icon" type="image/x-icon" href="../../images/happycat.svg">
+        <script defer src="../../script.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <section>
+                    <a href="https://maxficco.com">Max Ficco</a>
+                    <a href="../../about.html">about</a>
+                    <a href="../../now.html">now</a>
+                    <a href="../../weblog.html">weblog</a>
+                    <a href="../../notes.html">notes</a>
+                    <a href="../../photos.html">photos</a>
+                    <a href="../../projects.html">projects</a>
+                    <a href="../../contact.html">contact</a>
+                    <button id="theme-toggle" aria-label="Toggle theme">
+                        <svg class="moon" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/>
+                        </svg>
+                        <svg class="sun" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+                        </svg>
+                    </button>
+                </section>
+            </header>
+            <main>
+<blockquote>
+<p>Systems Programming (CSE 20289)<br />
+Prof. <a href="https://sdf.org/~cmc/">Collin McMillan</a>, Fall 2025</p>
+</blockquote>
+<p>&quot;How to use a computer, from a computer scientist's perspective&quot;</p>
+<h1>2025-08-25</h1>
+<p>Arthur C. Clark 1961 Daisy Bell story</p>
+<ul>
+<li>(leaves deeply disturbed, goes on to write 2001 a space odyssey)</li>
+<li>role of humans vs. machines</li>
+<li>proud engineers (human endeavor) vs. (disturbing?) experience interfacing w/ computer</li>
+<li>computer scientist vs. consumer experience</li>
+</ul>
+<p>&quot;Thinking&quot; Machines, 1959 Alex Bernstein</p>
+<ul>
+<li>how do we interface with machines?</li>
+</ul>
+<p>PDP 7, a few years later</p>
+<ul>
+<li>&quot;gimmick&quot;: typer and printer in one device (&quot;not a big deal&quot;)</li>
+<li>a lot faster</li>
+<li>$30-40M, significant portion of time sitting idle</li>
+<li>wouldn't it be great if multiple people could use it at the same time?</li>
+</ul>
+<p>enter: UNIX operating system (AT&amp;T)</p>
+<ul>
+<li>had to:</li>
+<li>interface with (multiple) users</li>
+<li>total dictatorship over hardware (main control over machine)
+<ul>
+<li>the picture (going outward concentrically):
+<ul>
+<li>center: kernel</li>
+<li>drivers (helper programs, interface with hardware)</li>
+<li>user programs (can make request for kernel to do things)</li>
+<li>outer part: the shell</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1>2025-08-27</h1>
+<p>recap: kernel --&gt; drivers --&gt; user programs --&gt; shell<br />
+What are the main components of a compuer?</p>
+<ul>
+<li>CPU (Central Processing Unit)</li>
+<li>short term memory (relatively less ways to store)</li>
+<li>long term memory (lots of different ways to store these)</li>
+<li>some interface<br />
+^ all connected by some kind of bus that drives between each</li>
+</ul>
+<p>The problem: need multiple different people to access multiple different forms of long term storage</p>
+<ul>
+<li>Screams for standardization!</li>
+<li>centered around the file system</li>
+</ul>
+<p>basic demo in the terminal: <code>pwd</code>, <code>mkdir</code>, <code>ls -alh</code>, <code>vim</code>, <code>uname -a</code>, <code>cd</code></p>
+<p>root folder: <code>/</code></p>
+<p>cmc showing his motherboard on the doc cam:</p>
+<ul>
+<li>cpu, ram</li>
+<li>512mb nvme ssd (fast but expensive) - connected directly to motherboard &quot;bus&quot;</li>
+<li>4TB hard drive (magnetic spinning platter, slow) - plug into Serial ATA (SATA) ports</li>
+</ul>
+<p><code>lsblk -e 7</code><br />
+nvme ssd mounted to <code>/</code><br />
+hard drive mounted to <code>/mnt/tmp</code></p>
+<ul>
+<li>Can easily copy file from one device to another (everything completely transparent from file system)</li>
+</ul>
+<p>file system &quot;basically&quot; has two things: directories and files</p>
+<ul>
+<li>its structure is maintained by inodes
+<ul>
+<li>in a library you have all of the books but also all the indexes to the books<br />
+two types of inodes: directory inodes and file inodes</li>
+</ul>
+</li>
+</ul>
+<p>dir inode</p>
+<ul>
+<li>contains inode #s of files inside</li>
+</ul>
+<p>file inode</p>
+<ul>
+<li>id</li>
+<li>permissions</li>
+<li>owner</li>
+<li>date</li>
+<li>...</li>
+<li>data location pointer</li>
+</ul>
+<p><code>stat hi.txt</code> gives file inode info^</p>
+<ul>
+<li>every file has a Gid (group owner) and Uid (user owners)</li>
+</ul>
+<p><code>chown cmc:users hi.txt</code></p>
+<ul>
+<li>edited the inode to add hi.txt to group</li>
+</ul>
+<p><code>ln hi.txt othername.txt</code></p>
+<ul>
+<li>changes directory inode to add another filename with same inode number (two entries for the same book)</li>
+<li>called a hard link</li>
+</ul>
+<p><code>ln -s hi.txt other2.txt</code></p>
+<ul>
+<li>have different inode numbers</li>
+<li>creates another file inode whose data location points to the same file</li>
+<li>called a symlink (symbolic link)</li>
+</ul>
+<p>(hidden folders start with <code>.</code>)</p>
+<p><strong>permissions</strong></p>
+<ul>
+<li>three types of permissions: read access, write access, and execute access</li>
+</ul>
+<p>grouped in threes:<br />
+(d or -) --- user access --- group access --- world access</p>
+<p><code>chmod -w hi.txt</code></p>
+<ul>
+<li>write priveledge goes away (read only)<br />
+change back by <code>chmod +w hi.txt</code></li>
+</ul>
+<p><code>chmod u+w</code> only user can write<br />
+<code>chmod g+w</code> only group can write<br />
+<code>chmod a+w</code> all can write</p>
+<p>also have codes (octal codes):<br />
+<code>chmod 777 hi.txt</code><br />
+<code>chmod 600 hi.txt</code><br />
+<code>chmod 644 hi.txt</code></p>
+<p>rwx 111 7<br />
+rw  110 6<br />
+r x 101 5<br />
+r   100 4<br />
+wx 011 3<br />
+w  010 2<br />
+x 001 1</p>
+<h1>2025-08-29</h1>
+<p>In a navy warehouse:<br />
+600 pallets * 45 boxes = ~27000 boxes filled with punch cards<br />
+27000 * 2000 punched cards = ~54 million cards<br />
+54 million cards * 80 characters = ~4.3 billion characters = ~4.3GB</p>
+<ul>
+<li>data is piling up! need a way to search and deal with all of it. (computers)</li>
+<li>Unix developed so that multiple people could log in and search through datasets at same time</li>
+</ul>
+<h3>misc. commands shown on cmc@reptar</h3>
+<p><code>lsblk -e 7</code> lists info about devices, ignoring loopback (virtual) devices</p>
+<p>you can add <code>time</code> to the start of any command to show how long it takes<br />
+mv is faster than cp:</p>
+<ul>
+<li>
+<p>Every file has an inode, directories are basically name -&gt; inode# tables.</p>
+</li>
+<li>
+<p><code>mv</code> just removes the old inode # from the source directory and adds it to the target directory. No file data is moved on disk.</p>
+</li>
+<li>
+<p><code>cp</code> actually reads and writes the file contents to a new inode.</p>
+</li>
+<li>
+<p>mv keeps the same inode, preserving permissions, ownership, timestamps, and hard links; cp creates a new inode (use cp -p to preserve metadata).</p>
+</li>
+<li>
+<p>moving/copying onto another device (e.g. /scratch) slower (Unix shows it all as one big tree, but different mount points are separate filesystems)</p>
+<ul>
+<li>moving across filesystems forces <code>mv</code> to fall back to copy+delete because inodes are unique per filesystem, and is just as slow as cp.</li>
+</ul>
+</li>
+<li>
+<p>there is an environment variable named $PATH<br />
+<code>echo $PATH</code> -&gt; where the shell knows where to go hunting for executable files<br />
+<code>which vim</code> -&gt; /usr/bin/vim</p>
+</li>
+</ul>
+<h3>regex!</h3>
+<p><code>dog+</code>: dog, dogg, doggg, ... (1 or more g's)<br />
+<code>dog*</code>: do, dog, dogg, ... (0 or more g's)<br />
+<code>dog?</code>: do, dog (0 or 1 g's)<br />
+<code>(dog)+</code>: dog, dogdog, dogdogdog, ...<br />
+<code>dog{1,4}</code>: dog, dogg, doggg, dogggg (1 to 4 g's)<br />
+<code>(dog|cat)</code>: dog, cat (dog or cat)</p>
+<p>use <code>\</code> to escape special characters<br />
+<code>\s</code> for any whitespace character (space, tab, etc.)<br />
+could do <code>\s+</code> for any number of spaces</p>
+<p><code>^</code> means start of line<br />
+<code>$</code> means end of line</p>
+<p><code>.</code> means any single character (except for new lines <code>\n</code>!)<br />
+so, <code>.*</code> matches anything, repeated any number of times in a single line</p>
+<p><code>\w</code> means any &quot;word&quot; character - any alphanumeric character (letters A-Z, a-z, digits 0-9, and underscore _)</p>
+<p><code>[abc]</code> set for a, b, or c<br />
+<code>[a-z0-9]</code><br />
+<code>[a-zA-Z0-9]</code></p>
+<p><code>\b</code> indicates a word boundary<br />
+<code>\d</code> is any digit (0–9)</p>
+<h3>searching through files: <code>sed</code></h3>
+<ul>
+<li>uses &quot;regular expressions&quot; (regex)</li>
+</ul>
+<p><code>find</code> prints out all files and folders (recursively) underneath cwd<br />
+^ can pipe the output of this into another program!</p>
+<p><code>find | sed -nE ''</code><br />
+-n suppresses automatic printing; -E enables extended regular expressions (so you don't need to escape things like +, ?, |, or parentheses)</p>
+<p>search and replace: <code>s/searchingfor/replacewith/gp</code> (g means global/whole string, p means print it out)</p>
+<p>ex: <code>find | sed -nE 's/\.\/Movies\/(.*)\/(.*)\.mkv/\1/p' </code><br />
+- takes the path like <code>./Movies/&lt;dir&gt;/&lt;file&gt;.mkv</code> and prints just the directory name (<code>\1</code>)</p>
+<ul>
+<li>can then pipe into <code>sort</code> to sort by alphabetical order:<br />
+<code>find | sed -nE 's/\.\/Movies\/(.*)\/(.*)\.mkv/\1/p' | sort</code></li>
+<li>and even remove duplicates!<br />
+<code>find | sed -nE 's/\.\/Movies\/(.*)\/(.*)\.mkv/\1/p' | sort | uniq -c</code> (-c optionally counts the number of each occurrence)</li>
+<li>and then sort again!<br />
+<code>find | sed -nE 's/\.\/Movies\/(.*)\/(.*)\.mkv/\1/p' | sort | uniq -c | sort -rh</code><br />
+(-r for reverse, -h for human-numeric sort - otherwise would treat these values as strings and sort them alphabetically, so &quot;10M&quot; would come before &quot;2G&quot;)</li>
+</ul>
+<h1>2025-09-01</h1>
+<p>2014: Yahoo had password database breached (plain text usernames and passwords)</p>
+<p><code>cat yahoo.clean.txt | sed -nE '/obama/p'</code></p>
+<p><code>cat yahoo.clean.txt | sed -nE '/obama/p' | uniq</code></p>
+<ul>
+<li>uniq only removes duplicates that are right next to each other!!!<br />
+So, we must sort first:<br />
+<code>cat yahoo.clean.txt | sed -nE '/obama/p' | sort | uniq -c | sort -rh</code></li>
+</ul>
+<p><code>cat yahoo.clean.txt | sed -nE '/^[a-z]+[0-9]+[a-z]+$/p' | sort | uniq -c | sort -rh</code></p>
+<p><code>cat yahoo.clean.txt | sort | uniq -c | sort -rh</code></p>
+<ul>
+<li>we need s/ (search and replace / subsitute) if we want to replace text: ...</li>
+</ul>
+<p><code>cat shakespeare.txt | sed -nE 's/friend/pal/p'</code></p>
+<ul>
+<li>...or use groups () to manipulate and return what we want: (groups are numbered in order left to right: \1, \2, ...)</li>
+</ul>
+<p><code>cat yahoo.clean.txt | sed -nE 's/^([a-z])+([0-9])+([a-z])+$/\1/p' | sort | uniq -c | sort -rh</code></p>
+<p><code>cat yahoo.clean.txt | sed -nE 's/^([a-z])+([0-9])+([a-z])+$/\1\2\3/p' | sort | uniq -c | sort -rh</code> (this just replicates what we find)</p>
+<p>building a bash script (bash is the shell we are using)</p>
+<ul>
+<li>bash is &quot;bourne again shell&quot; which started as an sh-compatible implementation, has more advanced stuff</li>
+</ul>
+<p>use shebang at top of bash script:<br />
+<code>#!/bin/bash</code><br />
+creates a new bash shell and then runs command inside it</p>
+<p>ex:</p>
+<pre><code class="language-sh">#!/bin/bash
+
+TEXTDOC=$1
+NOUN=$2
+
+cat $TEXTDOC | sed -nE &quot;s/$NOUN/pal/p&quot;
+</code></pre>
+<ul>
+<li>$1 and $2 refer to first and second command line arguments</li>
+<li>!!! Need to use double quotes &quot;&quot; with sed if using a variable ('' means interpret it literally)</li>
+</ul>
+<h1>2025-09-03</h1>
+<blockquote>
+<p>intro analogy about layers of the earth and the shell, lithosphere</p>
+</blockquote>
+<p><code>/etc</code> - holds system-wide configuration files</p>
+<ul>
+<li>bash is a product of 1980s technology - the 80s were a strange time!</li>
+<li>sometimes we have to live with things the way they were given to us (regardless, Bash and C have stood the test of time!)</li>
+</ul>
+<h3>variables in bash</h3>
+<p>NO SPACES!!!</p>
+<pre><code class="language-sh">MYVAR=$1
+ANOTHER=$2 # if no second argument, will default to &quot;&quot;
+echo $MYVAR
+</code></pre>
+<p><code>echo $#</code> - number of command line arguments</p>
+<h3>if statements:</h3>
+<pre><code class="language-sh">if [ $MYVAR -lt 7 ];
+then
+    echo &quot;myvar is less than 7&quot;;
+else
+    echo &quot;not less than 7&quot;;
+fi
+</code></pre>
+<p>^use single brackets, not double brackets (older/more supported)</p>
+<h3>The open bracket <code>[</code> is not a symbol!! Bash is simple.  Everything is a command to run another program</h3>
+<p><code>[</code> calls <code>test</code>, -lt is a command line argument (less than)</p>
+<p>another example:<br />
+<code>echo &quot;5 + 4&quot; | bc -l</code></p>
+<h3>storing things:</h3>
+<p><code>VAR=$(echo &quot;5 + 4&quot; | bc -l)</code> - command output capturing<br />
+<code>echo $VAR</code> --&gt; 9 ! YAY! SO EZ!</p>
+<p>adding 1 to a variable:<br />
+<code>NEWVAR=$(echo &quot;$VAR + 1&quot; | bc -l)</code></p>
+<h3>for loops:</h3>
+<p>format: <code>seq [FIRST] [INCREMENT] LAST</code> (increment is optional, defaults to 1)<br />
+<code>seq 1 2 10</code><br />
+1<br />
+3<br />
+5<br />
+7<br />
+9</p>
+<pre><code class="language-sh">VAR=$1
+
+for i in $(seq 0 $VAR); do
+    echo &quot;something $i&quot;
+done
+</code></pre>
+<h3>working with strings:</h3>
+<p><code>STR=&quot;testing&quot;</code><br />
+<code>echo ${#STR}</code> --&gt; 7 (length of string)</p>
+<p>substring format: ${variable:offset:length}<br />
+<code>echo ${STR:2:4}</code> --&gt; stin</p>
+<p>we can loop through each letter in a string:</p>
+<pre><code class="language-sh">VAR=$1
+
+for i in $(seq 0 ${#VAR}); do
+    echo &quot;something: ${VAR:i:1}&quot;
+done
+</code></pre>
+<h3>case statements:</h3>
+<pre><code class="language-sh">VAR=$1
+case $VAR in
+    -m) echo &quot;mario&quot; ;;
+    -l) echo &quot;luigi&quot; ;;
+    *) echo &quot;player not supported&quot; ;;
+esac
+</code></pre>
+<h3>functions:</h3>
+<pre><code class="language-sh">MYVAR=$1
+foo()
+{
+    local VAR=$1        # refers to the first argument of the function (~different scope)
+    echo &quot;$VAR&quot;
+    let RETFOO=57       # how we return variables in bash
+}
+
+echo &quot;$VAR&quot;     # prints a newline (nothing)
+
+foo 5           # prints 5
+
+echo &quot;$VAR&quot;     # prints 5 (unless we add &quot;local&quot; before VAR inside of foo)
+
+echo &quot;$RETFOO&quot;  # prints 57
+</code></pre>
+<h1>2025-09-05</h1>
+<h3>in bashwrk folder:</h3>
+<p><code>cat shakespeare.txt | sed -nE &quot;s/^([a-zA-Z ,]+\?)$/\1/p&quot; </code></p>
+<ul>
+<li>prints all lines with questions in shakespeare.txt</li>
+</ul>
+<p><code>cat shakespeare.txt | sed &quot;s/^\s+([a-zA-Z ,]+)\..*$/\1/p&quot; | sort</code></p>
+<ul>
+<li>prints all the names used in shakespeare (looks for period, e.g. &quot;    HAMLET. asdf&quot;)</li>
+</ul>
+<p>Let's turn these into a script:</p>
+<pre><code class="language-sh"># step 1) set globals
+
+# * in bash, we actually do want to set global variables at the top of our scripts
+SED=&quot;sed -nE&quot; # potentially useful for switching to different machines
+
+# step 2) usage message
+
+usage(){
+    cat 1&gt;&amp;2 &lt;&lt;EOF
+Usage: $(basename $0) &lt;FILENAME&gt; &lt;FORMAT&gt; &lt;REGEX_TYPE&gt;
+
+FILENAME    The name of the file with the Shakespeare data.
+
+FORMATS     u: print in uppercase
+            l: print in lowercase
+
+OPERATIONS  q: extract questions
+            n: extract names
+
+EOF
+    exit $1
+}
+
+# step 3) function area
+
+set_regex(){
+    local WHICHREGEX=$1 # remember, refers to first parameter of that function, not first parameter of program
+    
+    if [ $WHICHREGEX != 'q' ] &amp;&amp; [ $WHICHREGEX != 'n']; then
+        echo &quot;invalid operation&quot;
+        exit 1
+    fi
+
+    case $WHICHREGEX in
+        q) REGEX=&quot;^([a-zA-Z ,]+\?)$&quot;; GRP=&quot;\1&quot; ;; 
+        n) REGEX=&quot;^\s+([a-zA-Z ,]+)\..*$&quot;; GRP=&quot;\1&quot; ;;
+        # if we didn't want to use the if statement above, we could have used  *)  here
+    esac
+}
+
+set_format(){
+    FORM=$1
+
+    case $FORM in
+        u) OPTIONS=&quot;\U&quot; ;;
+        l) OPTIONS=&quot;\L&quot; ;;
+    esac
+}
+
+# step 4) handle parameters
+
+FILENAME=$1
+P_FORMAT=$2
+P_OPERATION=$3
+
+if [ $# -ge 3 ]; then
+    set_regex $P_OPERATION
+    set_format $P_FORMAT
+else
+    usage 1
+fi
+
+# step 5) run the command
+
+cat $FILENAME | $SED &quot;s/$REGEX/$OPTIONS$GRP/p&quot;
+</code></pre>
+<h3>5 sections of bash script:</h3>
+<ul>
+<li>globals</li>
+<li>define usage (describes what you want your script to do for user)</li>
+<li>functions</li>
+<li>parameters</li>
+<li>calls/command</li>
+</ul>
+<h1>2025-09-08</h1>
+<ul>
+<li>Welcome to Jurrasic Park Scene</li>
+<li><code>dinosaurs.dat</code> (a real dataset with a lot of mess)
+<ul>
+<li>contains every single dinosaur find up to a certain date</li>
+</ul>
+</li>
+</ul>
+<h3>starting in <code>zipcodes.dat</code>, semicolon delimited</h3>
+<p><code>cat zipcodes.dat | sort -t';' -k2,2</code></p>
+<ul>
+<li><code>-t</code> sets delimeter to ';'</li>
+<li><code>-k</code> sets key to sort based on the i-th specified element</li>
+<li><code>-k2,2</code> means start at 2 and stop at 2 (<code>-k2</code> would sort starting at 2 and include everything after it)</li>
+</ul>
+<p>to sort across a range we can do<br />
+<code>cat zipcodes.dat | sort -t';' -k2,4</code></p>
+<ul>
+<li>start at second and stop at fourth</li>
+</ul>
+<p>to sort by two different values we can pass multiple k's:<br />
+<code>cat zipcodes.dat | sort -t';' -k2,2 -k1,1</code></p>
+<ul>
+<li>sorts based on second value first, then based on first</li>
+</ul>
+<h3>awk</h3>
+<p><code>cat zipcodes.dat | awk -v FS=';' '{print $1,$3;}'</code></p>
+<ul>
+<li>prints first and third element</li>
+<li><code>-v</code> allows us to define variables before processing is done</li>
+<li><code>FS</code> is &quot;Field Separator&quot;.  Here we define ';' as our delimeter (default is whitespace)</li>
+<li>note: <code>;</code> at the end of print is just the syntax to end the command</li>
+</ul>
+<p>But default output delimeter is also space! So we can do:<br />
+<code>cat zipcodes.dat | awk -v FS=';' -v OFS=';' '{print $2,$1,$3;}'</code></p>
+<ul>
+<li><code>OFS</code> is &quot;Output Field Separator</li>
+</ul>
+<p>technically we don't need cat with awk:<br />
+<code>awk -v FS=';' -v OFS=';' '{print $1,$3;}' zipcodes.dat</code><br />
+but...awk is old.<br />
+gawk is newer...(but like 1992 still)<br />
+we don't want to trust awk/gawk to read files (differences in file systems, etc)!</p>
+<p><code>cat zipcodes.dat | awk -v FS=';' -v OFS=$'\t' '{print $2,$1,$3;}'</code><br />
+tab might get confused between awk and bash - we send it to bash with <code>$</code> first to be safe</p>
+<p>conditions:<br />
+<code>cat zipcodes.dat | awk -v FS=';' -v OFS=$'\t' 'NR&lt;=6 {print $2,$1,$3;}'</code><br />
+<code>cat zipcodes.dat | awk -v FS=';' -v OFS=$'\t' 'NR&gt;1 {print $2,$1,$3;}'</code></p>
+<ul>
+<li><code>NR</code> &quot;Number of Records&quot;, means line number</li>
+</ul>
+<p>we can also filter:<br />
+<code>cat zipcodes.dat | awk -v FS=';' -v OFS=$'\t' '$2~/Augusta/ {print $2,$1,$3;}'</code><br />
+<code>cat zipcodes.dat | awk -v FS=';' -v OFS=$'\t' '$1~/4661[0-9]/ {print $2,$1,$3;}'</code><br />
+<code>cat zipcodes.dat | awk -v FS=';' -v OFS=$'\t' 'NR&gt;1 &amp;&amp; $2~/4661[0-9]/ {print $2,$1,$3;}'</code><br />
+<code>cat zipcodes.dat | awk -v FS=';' -v OFS=$'\t' 'NR&lt;10 || $2~/4661[0-9]/ {print $2,$1,$3;}'</code><br />
+bottom line: if using regex in awk, be very explicit because it can have slightly different meanings (e.g. <code>+</code> behaves differently)</p>
+<ul>
+<li>if you want to make more complicated expressions, pipe to sed and then back to awk</li>
+</ul>
+<p><code>cat dinosaur.dat | awk -v FS=$'\t' '$19&lt;=-89.55222 &amp;&amp; $19&gt;=-91.55222 &amp;&amp; $20&gt;=39.134957 &amp;&amp; $20&lt;=41.134957 {print ;}'</code></p>
+<ul>
+<li>finds dinosaurs near where Prof. McMillan is from</li>
+<li><code>{print ;}</code> just means print everything. Here, we might want a number like <code>$15</code> to print the name of dinosaur, etc.</li>
+</ul>
+<h1>2025-09-10</h1>
+<h3>recap from hw:</h3>
+<p><code>'...'</code> takes everything inside as is</p>
+<p><code>&quot;...&quot;</code> will interpret variables inside.</p>
+<ul>
+<li>If we don't want <code>$1</code> to evaluate to an external variable (e.g. in awk) we need to escape the symbol: <code>\$1</code></li>
+</ul>
+<p><code>VAR=$(...)</code> will run <code>...</code> and store it in <code>VAR</code></p>
+<h3>find most northerly dinosaur:</h3>
+<p><code>cat dinosaur.dat | awk -v FS=$'\t' -v OFS=$'\t' '{print $6, $19, $20}' | sort -t$'\t' -k3,3hr | head -n 10</code></p>
+<h3>talked about dinosaurs for a while :)</h3>
+<h3>some more bash stuff</h3>
+<p>parameter reading:<br />
+<code>$#</code> tells you the number of parameters</p>
+<pre><code class="language-sh">while [ $# -gt 0 ] do
+    case $1 in
+        -h) echo &quot;got h&quot;; echo $2; shift; ;; # captures 2 things and shifts left twice
+        -a) echo &quot;got a&quot;; ;;
+    esac
+    shift # shifts parameters to the left and throws first away ($2 becomes $1, etc.)
+</code></pre>
+<p>reading from a file:</p>
+<pre><code class="language-sh">cat bash_notes.txt | while IFS= read -r line; do # while input file separator is nothing (read whole line)
+    echo $line
+done
+</code></pre>
+<ul>
+<li>here, exactly the same as doing <code>cat bash_notes.txt</code></li>
+</ul>
+<h1>2025-09-12</h1>
+<h3>Review for Exam</h3>
+<p>File permissions (octal codes):<br />
+rwx 111 7<br />
+rw  110 6<br />
+r x 101 5<br />
+r   100 4<br />
+wx 011 3<br />
+w  010 2<br />
+x 001 1</p>
+<ul>
+<li>be able to interpret <code>ls -alh</code>
+<ul>
+<li>permissions, 1 (?), user owner, group owner, size, date last modified, filename</li>
+</ul>
+</li>
+</ul>
+<p>can change permissions:<br />
+<code>chmod g+r dinosaur.dat</code> - allows group to read<br />
+<code>chmod 777 dinosaur.dat</code> - rwx for all</p>
+<p>might have to do something like<br />
+<code>VAR=$(ls -alh dinosaur.dat</code><br />
+and do something with it!</p>
+<ul>
+<li>for example: print out owner of a file:<br />
+<code>echo $VAR | awk -v FS=' ' '{print $3}'</code></li>
+</ul>
+<p><code>stat dinosaur.dat</code><br />
+two types of inodes - directory inodes and file inodes:<br />
+- a directory inode is basically like an index<br />
+- tells you which files are there<br />
+- essentially a table of names, and their inode number<br />
+- I can make a hardlink, which has different name but same inode number<br />
+- can also make softlink, which has different inode number but its file inode points to same file</p>
+<p>Example command that we want to make a script build up to:<br />
+<code>cat dinosaur.dat | awk -v IGNORECASE=1 -v FS=$'\t' -v OFS=$'\t' '$6~/tyrannosaur/ {print $6, $19, $20}'</code><br />
+will be generalized as:<br />
+<code>cat $FILENAME | $AWK $AWKARGS &quot;$AWKPROG&quot;</code></p>
+<h3>wrote example program for what to expect for exam</h3>
+<p>(didn't copy, but main point - have good structure!)</p>
+<h1>2025-09-15</h1>
+<p>Exam 1</p>
+<h1>2025-09-17, 2025-09-19, 2025-09-22</h1>
+<p>Wednesday class was canceled<br />
+Friday class just went over exam 1 solutions<br />
+Monday class was canceled</p>
+<h1>2025-09-24</h1>
+<ul>
+<li>motivating example about bash: teleradiology - 1987 early system</li>
+<li>weird high fashion</li>
+<li>steve jobs visiting xerox and being blown away by gui</li>
+<li>xerox - smalltalk: everything is an object!</li>
+<li>smalltalk was the high fashion of computing</li>
+<li>1991 first version of python released (much too weird to be adopted for a while)
+<ul>
+<li>no language specification release, guido just built interpreter</li>
+<li>everything is an object</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python">&gt;&gt;&gt; name=5
+&gt;&gt;&gt; type(name)
+&lt;class 'int'&gt;
+&gt;&gt;&gt; name=&quot;Max&quot;
+&gt;&gt;&gt; type(name)
+&lt;class 'str'&gt;
+&gt;&gt;&gt; dir(name)
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', 'expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isdecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']
+&gt;&gt;&gt; name.replace(&quot;M&quot;, &quot;D&quot;)
+'Dax'
+&gt;&gt;&gt; help(name.replace) # shows usage
+</code></pre>
+<p>python is dynamically typed!</p>
+<pre><code class="language-python">def foo(x, y):
+    return x+y
+
+foo(5,6) # 11
+foo(&quot;He&quot;, &quot;lloo&quot;) # Helloo
+</code></pre>
+<p>in python, everything is an object, and resources come from modules</p>
+<p>using regex in python:</p>
+<pre><code class="language-python">import re
+
+matches = re.findall(r&quot;\d+&quot;, &quot;The airplane has 130 seats and 111 passengers.&quot;)
+# r means &quot;raw string&quot;, which means to be interpreted literally
+
+# iterables
+for match in matches:
+    print(match)
+
+matches = re.findall(r&quot;aiRpLAnE&quot;, &quot;The airplane has 130 seats and 111 passengers.&quot;, re.IGNORECASE)
+
+# re also has search (find first occurence)
+first_letter_a = re.search(&quot;a&quot;, &quot;The airplane has 130 seats and 111 passengers.&quot;, re.IGNORECASE)
+
+print(len(matches)) # 1
+</code></pre>
+<h3>some extended notes on <code>re</code> functions:</h3>
+<ul>
+<li><code>re.search(pattern, string)</code> -&gt; returns first Match object or <code>None</code></li>
+</ul>
+<pre><code class="language-python">m = re.search(&quot;a&quot;, &quot;The airplane&quot;, re.IGNORECASE)
+if m: print(m.group(), m.start())  # a 4
+#  ^ match satements are &quot;truthy&quot;
+</code></pre>
+<ul>
+<li><code>re.findall(pattern, string)</code> -&gt; returns list of strings or <code>[]</code></li>
+</ul>
+<pre><code class="language-python">nums = re.findall(r&quot;\d+&quot;, &quot;abc123def456&quot;)
+if nums: print(nums)  # ['123', '456']
+#  ^ empty list [] is falsy
+</code></pre>
+<ul>
+<li><code>re.finditer(pattern, string)</code> -&gt; returns iterator of Match objects</li>
+</ul>
+<pre><code class="language-python">   for m in re.finditer(r&quot;\d+&quot;, &quot;abc123def456&quot;):
+       print(m.group(), m.start())
+       # 123 3
+       # 456 9
+</code></pre>
+<h3>Data Frame (just a list of lists)</h3>
+<pre><code class="language-python">
+f = open(&quot;movies.dat&quot;, &quot;r&quot;)
+
+df = list() # using this as dataframe
+
+for line in f: # yay this is so much nicer than bash!!! (f is an iterable)
+    print(line)
+    # line is also an object!
+    dataitems = line.split(&quot;::&quot;) 
+    print(dataitems[1]) # prints movie name
+
+    # could also store as a tuple
+    (mid, nameyear, genrelist) = line.split(&quot;::&quot;) 
+    
+    # let's just store the whole linesplit
+    df.append(dataitems)
+
+print(df[2][2])
+</code></pre>
+<h3>Reading input</h3>
+<pre><code class="language-python">import sys
+# EVERYTHING IS AN OBJECTTTTTTT WOOOOO
+filename = sys.argv[1] # (just like in c)
+
+f = open(filename, &quot;r&quot;)
+# Don't forget to close file after you're done!
+f.close()
+...
+</code></pre>
+<h1>2025-09-26</h1>
+<pre><code class="language-python">import sys
+import re
+import pdb
+
+f = open(&quot;movies.dat&quot;, &quot;r&quot;)
+
+pdb.set_trace()
+
+for line in f:
+	(mid, nameyear, genres) = line.split(&quot;::&quot;)
+	
+	mid = int(mid)
+
+f.close()
+</code></pre>
+<p>way to debug: in the server side, because that would require serializing a socket</p>
+<ul>
+<li>ask: &quot;what assumptions am I making?&quot;</li>
+<li>use debugger!!!</li>
+</ul>
+<p>Navigation:<br />
+<code>b</code> / <code>break [line | func]</code> - set a breakpoint (e.g. <code>b 23</code> or <code>b my_func</code>)<br />
+<code>cl</code> / <code>clear</code> - clear all breakpoints (<code>cl 2</code> clears one)<br />
+<code>c</code> / <code>continue</code> - continue execution until next breakpoint<br />
+<code>n</code> / <code>next</code> - execute next line (don't step into functions)<br />
+<code>s</code> / <code>step</code> - step into the next function call<br />
+<code>r</code> / <code>return</code> - run until the current function returns<br />
+<code>q</code> / <code>quit</code> - exit the debugger</p>
+<p>Inspection:<br />
+<code>l</code> / <code>list [start,stop]</code> - show source around current line<br />
+<code>a</code> / <code>args</code> - display arguments of the current function<br />
+<code>p [expr]</code> - print the value of an expression<br />
+<code>pp [expr]</code> - pretty-print an expression<br />
+<code>whatis [expr]</code> - show the type of an expression<br />
+<code>w</code> / <code>where</code> - show the current call stack<br />
+<code>u</code> / <code>up</code> - move up one frame in the call stack<br />
+<code>d</code> / <code>down</code> - move down one frame<br />
+<code>break</code> - list all current breakpoints and their numbers</p>
+<p>dataframe.py:</p>
+<pre><code class="language-python">class Dataframe:
+	def __init__(self, headers): # self is a reference to the instance of the object you are using right now
+		self.dataframe = list()
+		self.dataframe.append(headers)
+		# or could do something like self.headers = headers
+	def append(self, l):
+		self.dataframe.append(l)
+	
+</code></pre>
+<h1>2025-09-29</h1>
+<ul>
+<li>do chairs exist?</li>
+</ul>
+<pre><code class="language-python">def noodle(x):
+    return 2 * x
+
+def tofu(x):
+    return 3 * x
+
+def mittens(fluffy, boots):
+    cleo = fluffy 
+    # preprocessing
+    def muffin():
+        print(boots(cleo))
+    # postprocessing
+    return muffin
+
+felix = mittens(853497, noodle)
+felix()
+
+felix = mittens(91, tofu)
+felix()
+</code></pre>
+<ul>
+<li>
+<p>when you define a function, variables outside of its scope get their values at the time that the function is defined</p>
+<ul>
+<li>this concept is called a closure</li>
+</ul>
+</li>
+<li>
+<p>currying: transforming a function with multiple arguments into a sequence of functions each taking a single argument.</p>
+</li>
+</ul>
+<pre><code class="language-python">import pdb
+import time
+
+cached = dict()
+
+def cache(fcn):
+    def inner(a):
+        if a not in cached.keys():
+            cached[a] = fcn(a)
+        return cached[a]
+    return inner
+
+@cache # python decorator: same as expensive = cache(expensive)
+def expensive(a):
+    time.sleep(3)
+    return a+1
+
+#expensive = cache(expensive)
+
+pdb.set_trace()
+expensive(5)
+expensive(5) # much faster
+</code></pre>
+<h1>2025-10-01</h1>
+<p>Intro Video: &quot;The Computer Chronicles - The Internet (1993)&quot;</p>
+<ul>
+<li>origin of the internet: highly distributed system to protect against government collapse in case of nuclear attack</li>
+</ul>
+<h3>Key things to know:</h3>
+<ol>
+<li>MAC Address (aka &quot;Hardware Address&quot;)</li>
+</ol>
+<ul>
+<li>unique to each physical device</li>
+<li>used as a local address (think first name vs. last name)</li>
+</ul>
+<ol start="2">
+<li>IP Address</li>
+</ol>
+<ul>
+<li>like a telephone number</li>
+</ul>
+<p>program called <code>traceroute</code> to get messages sent from each computer that is traversed</p>
+<pre><code>[maxficco@pinatubo] ~ $ traceroute server.maxfic.co                               12:00
+traceroute to server.maxfic.co (15.204.248.135), 64 hops max, 40 byte packets
+ 1  10.12.0.1 (10.12.0.1)  5.705 ms  4.698 ms  4.840 ms
+ 2  core9500-hu1-0-12.guest.gw.nd.edu (172.21.2.53)  4.722 ms
+    core9500-hu2-0-11.guest.gw.nd.edu (172.21.2.57)  3.425 ms  3.387 ms
+ 3  172.21.2.66 (172.21.2.66)  5.727 ms  4.456 ms  5.324 ms
+ 4  jbr0-inside.gw.nd.edu (129.74.248.65)  5.066 ms  5.255 ms  5.117 ms
+ 5  et-4-2-1.402.rtr.ictc.indiana.gigapop.net (149.165.183.33)  11.654 ms  10.485 ms  10.815 ms
+ 6  ae-9.0.rtr.ll.indiana.gigapop.net (149.165.255.102)  10.879 ms  11.541 ms  12.625 ms
+ 7  ae-7.1.rtr2.chic.indiana.gigapop.net (149.165.255.93)  13.609 ms  15.925 ms  13.947 ms
+ 8  lo-0.1.rtr.star.indiana.gigapop.net (149.165.255.11)  13.615 ms  13.547 ms  14.281 ms
+ 9  149.165.183.86 (149.165.183.86)  13.866 ms  13.833 ms  13.209 ms
+10  r-equinix-isp-ae0-2401.ip4.wiscnet.net (140.189.9.133)  13.305 ms  13.394 ms  13.776 ms
+11  eqx.chi.ovh.net (208.115.136.152)  14.755 ms  15.192 ms  16.459 ms
+12  * * *
+13  * * *
+</code></pre>
+<ol start="3">
+<li>Hostname</li>
+</ol>
+<ul>
+<li>name of computer (for human convenience only)</li>
+<li><code>ip addr</code></li>
+<li>DNS needed for  hostname &lt;-&gt; IP address</li>
+</ul>
+<ol start="4">
+<li>Port</li>
+</ol>
+<ul>
+<li>tells computer where to send stuff from the internet (which program)</li>
+<li>operating system assigns port numbers to programs kare bound
+<ul>
+<li>ex: ssh is port 22</li>
+</ul>
+</li>
+<li>65k port numbers</li>
+</ul>
+<ol start="5">
+<li>Packets</li>
+</ol>
+<ul>
+<li>when you send a message from one computer to another, the data is broken down into tiny packets that are sent</li>
+<li>like a bunch of envelopes, which are then reconstructed on the other side</li>
+</ul>
+<ol start="6">
+<li>Sockets</li>
+</ol>
+<ul>
+<li>two sides
+<ul>
+<li>server: person who picks up the call</li>
+<li>client: person who calls the number</li>
+</ul>
+</li>
+<li>each has an ip address and a port number</li>
+<li>bind, listen, accept, send, recv, connect</li>
+</ul>
+<h1>2025-10-03</h1>
+<ul>
+<li>
+<p>using <code>traceroute</code> from South Bend, Indiana to Augusta, Illinois</p>
+<ul>
+<li>jump through a lot of nd.edu</li>
+<li>then through indiana.gigapop.net - sorta like ND's internet service provider</li>
+</ul>
+</li>
+<li>
+<p>port is just a way of routing to a particular program on a computer</p>
+</li>
+<li>
+<p>netcat - <code>nc</code></p>
+</li>
+<li>
+<p>&quot;everything&quot; is either server (listening) or client (sending)</p>
+</li>
+<li>
+<p><code>nc -l 9999</code> starts listening on port 9999 (port 9999 is now bound/cannot be used by other programs)</p>
+</li>
+<li>
+<p>then we can do <code>nc localhost 9999</code></p>
+<ul>
+<li><code>locahost</code> is the local machine that you are on</li>
+</ul>
+</li>
+</ul>
+<p><code>sudo tcpdump port 9999 -i lo -s0</code> &quot;snoops&quot; on the connection<br />
+<code>... IP localhost.57196 &gt; localhost.9999 ...</code></p>
+<ul>
+<li>shows seq packet ids, length of packet</li>
+<li>localhost.9999 responds with <code>ack</code> for &quot;acknowledge&quot;</li>
+<li>note that a client port has a port number associated with it too!</li>
+</ul>
+<p>weird analogy:</p>
+<ul>
+<li>on the server side, when you pick up the call, it is as though a new phone materializes and you set the old phone back down</li>
+</ul>
+<ul>
+<li>first 1024 ports are reserved for admin</li>
+</ul>
+<h1>2025-10-06</h1>
+<h3>analogy: take-out kitchen with a telephone in it</h3>
+<ul>
+<li>when we receive a connection, person (t0) picks up the phone (s), and a new phone (c) materializes</li>
+<li>multi-threading: new person clone (t1) picks up (c) phone
+<ul>
+<li>clone (t1) cooks food and stuff, then when delivers food</li>
+<li>phone disappears (<code>c.close()</code>)</li>
+<li>clone dies :(</li>
+</ul>
+</li>
+<li>Can have multiple threads (t1, t2, etc.) running at same time</li>
+<li>person t0's only job is to accept calls, materialize new phone, and spawn a new person</li>
+</ul>
+<h3>in code:</h3>
+<pre><code class="language-python">import threading
+
+def somefunct(a, b, c):
+    ...
+
+th = threading.Thread(target=somefunc, args=(x, y, z))
+
+th.start()
+</code></pre>
+<p>if we implemented this for our dinoserver socket example, can handle multiple connections at once! (don't need to wait for inner while statement to finish and close)</p>
+<p>concurrency problems: multiple threads need to use the same resource (they need to take turns!)</p>
+<p>python was designed in an era when having more than one core/thread available was rare</p>
+<ul>
+<li>solved concurrency problems by not allowing concurrency<br />
+enter: Abominable snowman shaped monster named G.I.L.</li>
+<li>Global Interpreter Lock</li>
+<li>micromanages the movements of each &quot;thread&quot;, so it ends up being just as though it were one thread</li>
+</ul>
+<pre><code>C=compute, S=store
+C
+C - cpu bound
+S - i/o bound
+| (takes a long time)
+C
+C
+S
+| (takes a long time)
+C
+C
+S
+...
+</code></pre>
+<p>Now let's use threading (with GIL)</p>
+<pre><code>t0 t1
+C 
+C     (compute and store can each only happen one at a time)
+S  C
+|  C
+C  S
+C  |
+S  
+| (takes a long time)
+C
+C
+S
+</code></pre>
+<ul>
+<li>note that even if we were able to solve the concurrency issues and not use GIL, it wouldn't matter in this case where the i/o bound operations take so long</li>
+</ul>
+<p>but if my task were instead:</p>
+<pre><code>C
+C
+C
+S
+(x3)
+</code></pre>
+<p>then with GIL:</p>
+<pre><code>C
+C
+C
+S C
+  C
+  C
+C S
+C
+C
+S
+</code></pre>
+<p>without GIL:</p>
+<pre><code>C C C
+C C C
+C C C
+S
+  S
+    S
+</code></pre>
+<p>Moral of the story: GIL is a frustrating monster (yay python 3.14!)</p>
+<h1>2025-10-08</h1>
+<ul>
+<li>G.I.L. gives the illusion of doing multiple things at once when in fact it is not.</li>
+<li>pseudo-threading</li>
+</ul>
+<pre><code class="language-python">import ray
+import time
+
+ray.init(log_to_driver=False)
+
+@ray.remote # decorator that takes the function and &quot;drops it&quot; in the new space where it operates
+def foo(x):
+    time.sleep(x)
+    print(x) # useless print statement! no console in this new space
+    return(x*x)
+
+f1 = foo.remote(4) # submits a task to Ray and returns a future object (ObjectRef), not the actual result
+f2 = foo.remote(2) # ^these are IOU's
+
+f1r = ray.get(f1) # blocks the main process until the remote task finishes, then retrieves the computed result
+f2r = ray.get(f2) # ^ redeems IOU's (in any order, when I want)
+
+print(f1r)
+print(f2r)
+
+# can also do with lists:
+futures = [ foo.remote(i) for i in range(2,5)]
+
+fr = ray.get(futures)
+print(fr)
+
+</code></pre>
+<h1>2025-10-10</h1>
+<p>What is a program actually?</p>
+<ul>
+<li>just a set of instructions (list of things cpu has to do)</li>
+</ul>
+<p>when I execute program, the os will create a space in memory for that program to run</p>
+<ul>
+<li>program code will be copied from long term storage (disk) to memory</li>
+</ul>
+<p><code>ps -ef</code> lists all the processes running on a machine</p>
+<ul>
+<li>every process has a process id</li>
+<li>can type <code>kill &lt;PID&gt;</code></li>
+<li>when we use ray, lots of processes created to run stuff in new spaces!
+<ul>
+<li>e.g., <code>foo.remote(5)</code> doesn't run on the main process</li>
+</ul>
+</li>
+<li>behind the scenes, a network socket is created to communicate with the new process
+<ul>
+<li>what is sending over that socket? How do you do that?</li>
+</ul>
+</li>
+<li>sockets just send bytes, so we need to serialize</li>
+<li>serialization means to take an object in memory and turn it into a string of bytes that we can then send somewhere</li>
+<li>in python, serialization library is called pickle</li>
+</ul>
+<pre><code class="language-python">import pickle
+
+a = &quot;hello&quot;
+
+pickle.dump(a, open('a.pkl', 'wb')) # wb is write bytes
+
+</code></pre>
+<p><code>xxd a.pkl</code> shows the bytes, where we can find &quot;hello&quot;!</p>
+<p>now:</p>
+<pre><code class="language-python">import pickle
+
+a = pickle.load(open('a.pkl', 'rb')) # rb is read bytes
+
+print(a)
+</code></pre>
+<ul>
+<li>
+<p>ray is doing this for the inputs and outputs of functions</p>
+</li>
+<li>
+<p>sending pickles over sockets!</p>
+</li>
+<li>
+<p>you cannot serialize socket objects or open files (~only objects that are internally consistent that do not depend on external things can be serialized)</p>
+</li>
+<li>
+<p>this means that we can't do parallelism in the server side, because that would require serializing a socket</p>
+</li>
+</ul>
+<h3>examples before exam</h3>
+<pre><code class="language-python">import socket
+import sys
+import ray
+
+ray.init(log_to_driver=False)
+
+@ray.remote
+def scktwrk(host, port):
+    try:
+        s = socket.socket()
+        s.settimeout(2)
+        s.connect((host, port))
+
+        hostver = s.recv(64)
+        hostver = hostver.decode('utf-8')
+        hostver = hostver.rstrip()
+
+        s.close()
+
+    except OSError as ex:
+        hostver = &quot;&lt;connection refused&gt;&quot;
+
+    except socket.timeout as ex:
+        hostver = &quot;&lt;connection timeout&gt;&quot;
+
+    except ConnectionRefusedError as ex:
+        hostver = &quot;&lt;connection refused&gt;&quot;
+
+    return (f'{host}:{port}\t{hostver}')
+
+
+f = open(sys.argv[1])
+
+futures = list()
+
+for line in f:
+    line = line.rstrip()
+    (host, port) = line.split(':')
+    port = int(port)
+
+    futures.append(scktwrk.remote(host, port))
+
+f.close()
+
+for scktfuture in futures:
+    resp = ray.get(scktfuture)
+    print(resp)
+</code></pre>
+<pre><code class="language-python">import random
+
+princesses = [ 'cinderella', 'belle', 'ariel', 'moana' ]
+
+dinosaurs = [ 'tyrannosaur', 'allosaur', 'raptor' ]
+
+def fate(func):
+    def wrapper(princess):
+        outcome = random.choice(['run', 'defeat', 'eaten'])
+        dino = random.choice(dinosaurs)
+        func(princess)
+        if outcome == 'run':
+            print(' was able to run away')
+        elif outcome == 'eaten':
+            print(f' got eaten by {dino}')
+        else:
+            print(f' defeated the {dino} in epic single combat')
+    return wrapper
+
+@fate
+def princess_print(princess):
+    print(f'{princess}', end='')
+
+for princess in princesses:
+    princess_print(princess)
+</code></pre>
+<h1>2025-10-13</h1>
+<p>Exam 2</p>
+<h1>2025-10-15</h1>
+<p>deeper dive into processes - &quot;what killed student10.cse.nd.edu?&quot;</p>
+<ul>
+<li>
+<p>logging onto student machines drops you in a new bash shell</p>
+</li>
+<li>
+<p>running programs creates a new process that runs programs (instructions are things on disk that happen to be executable)</p>
+</li>
+<li>
+<p>ex: run <code>ls</code> means &quot;please operating system execute these instructions from disk&quot;<br />
+analogy - bash must prostrate himself before the solar deity (the operating system)</p>
+</li>
+<li>
+<p>operating system creates a new process to run ls - becomes bash's child process</p>
+</li>
+<li>
+<p>boundaries around processes are very strict</p>
+</li>
+<li>
+<p>operating system has total control, its job is to keep things isolated</p>
+</li>
+<li>
+<p>bash can't just reach into the ls process (have to communicate through a socket, just as though it were on a different computer)</p>
+</li>
+</ul>
+<h3>lifecycle of a process</h3>
+<ul>
+<li>os bestows parenthood</li>
+</ul>
+<ol>
+<li>start state (more like not-ready state)
+<ul>
+<li>loads instructions, sets up memory space</li>
+</ul>
+</li>
+<li>ready/sleep state (program is loaded)
+<ul>
+<li>interruptable sleep (could be woken up to continue running at any moment)</li>
+<li>uninterruptable sleep (waiting on something necessary for the process to continue, usually i/o)</li>
+</ul>
+</li>
+<li>running state (can go back and forth from sleep)</li>
+<li>killed state</li>
+<li>or...zombie state (sits there occupying resources with a return value for a parent that never comes to collect it)</li>
+</ol>
+<p>some letter states you'll see:<br />
+T start<br />
+R eady<br />
+S leep (I or U)<br />
+K illed<br />
+Z ombie</p>
+<ul>
+<li>every process has some return value (exit status)</li>
+</ul>
+<p><code>echo $?</code> - prints return value of previously ran command</p>
+<ul>
+<li>
+<p>it is the parents job to collect the return value</p>
+</li>
+<li>
+<p>parent has to go over to process, request return value, and go back</p>
+</li>
+<li>
+<p>operating sytem maintains process space until that return value is collected</p>
+</li>
+<li>
+<p>sometimes there are bad parents...</p>
+</li>
+<li>
+<p>maybe parent got busy doing something else or got frozen/died</p>
+</li>
+<li>
+<p>operating system can't destroy these zombie child processes!</p>
+</li>
+</ul>
+<h3>now why did student10 break?</h3>
+<ul>
+<li>usually we run <code>ps</code> as <code>ps ef</code>, which shows:<br />
+PID - every process is assigned a unique id number<br />
+TTY<br />
+STAT - status (usually S or R)<br />
+TIME<br />
+COMMAND - shows command ran (<code>\_</code> denotes which commands are children of other commands)</li>
+</ul>
+<p><code>ps axfo user,pid,ppid,stat,command</code> - a for all processes, x shows background stuff, f shows process tree, o allows us to specify which headers we want<br />
+USER - user who ran command<br />
+PPID - parent process id</p>
+<blockquote>
+<p>demo using ray to create multithreaded processes in python</p>
+</blockquote>
+<ul>
+<li>
+<p>we can see all the child processes created by ray!<br />
+Aside: Ray is useful for doing cluster programming because it can be scaled up really easily and run processes on different machines</p>
+</li>
+<li>
+<p>weak point: raylet manager - what if we kill the raylet manager?</p>
+</li>
+<li>
+<p>usually fine, but what if I froze the raylet manager by creating way too many processes?</p>
+<ul>
+<li>it wouldn't crash, which would mean that the python process that owned it would be still alive</li>
+<li>all the raylet children become zombies</li>
+</ul>
+</li>
+<li>
+<p>then contagion across file system of multiple machines...!</p>
+</li>
+</ul>
+<h1>2025-10-17</h1>
+<h3>Recap on processes:</h3>
+<ul>
+<li>A process uses the operating system when it wants to do privileged or managed actions (create children, access resources, send signals)
+<ul>
+<li>these requests go through system calls</li>
+</ul>
+</li>
+<li>When a process (parent) creates another process (child), the child runs independently
+<ul>
+<li>but... the parent is still responsible for collecting the child's return value (exit status).</li>
+</ul>
+</li>
+<li>If the child finishes and the parent does not collect its return value, the child becomes a zombie (defunct) process</li>
+</ul>
+<h3>Demo:</h3>
+<ul>
+<li>
+<p>Program creates a child process that finishes in 5 seconds but the parent does not clean it up!</p>
+<ul>
+<li>using <code>ps xfo user,pid,ppid,stat,command</code>, we child labeled as zombie (state Z / defunct).</li>
+</ul>
+</li>
+<li>
+<p>What if we kill this lazy parent process manually?</p>
+<ul>
+<li>Because it ends cleanly/as the os excpects, a special process called init will become the new adoptive parent of the zombie children</li>
+<li>init will clean up by &quot;reaping the abandoned zombie children&quot; (actual technical language!)
+<ul>
+<li>gets all the return values and puts them in some log file</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Otherwise, a lingering parent that crashes/hangs/freezes can leave zombie processes indefinitely</p>
+</li>
+</ul>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/types.h&gt;
+
+int main(void) {
+    pid_t pid = fork();
+    if (pid &lt; 0) {
+        perror(&quot;fork&quot;);
+        return 1;
+    }
+    if (pid == 0) {
+        sleep(5);
+        _exit(0);
+    } else {
+        printf(&quot;parent pid=%d child pid=%d -- sleeping 60s\n&quot;, getpid(), pid);
+        sleep(60);
+    }
+
+    return 0;
+}
+</code></pre>
+<h3>inter-process communication (ICP)</h3>
+<p>Signals are a lightweight IPC mechanism that deliver small integer-coded messages to a process.</p>
+<p>Common examples:</p>
+<ul>
+<li>SIGINT: interrupt from keyboard (Ctrl+C) - typically number 2.</li>
+<li>SIGTERM: termination request (default for kill) - typically number 15.</li>
+<li>SIGKILL: forceful kill (kill -9) - number 9 - cannot be caught/ignored by the process.</li>
+<li>SIGUSR1, SIGUSR2: user-defined signals (numbers vary) for application-level use.</li>
+</ul>
+<p><strong>remember: kill is just a program that sends signals to processes</strong></p>
+<ul>
+<li>Note: a process may only send signals to other processes owned by the same user (the kernel enforces this)</li>
+</ul>
+<h3>What actually happens when you press Ctrl+C?</h3>
+<ul>
+<li>Ctrl+C is delivered not to the program but to the shell (bash)</li>
+<li>the shell then sends a signal to the process (SIGINT, which is just a 2)
+<ul>
+<li>The program recieves this signal and then (in theory) knows to clean up close (via default handler)</li>
+</ul>
+</li>
+</ul>
+<p>But we can override this behavior!</p>
+<ul>
+<li>A process can install a custom handler for signals (override the default handler) using OS APIs (example in python below):</li>
+</ul>
+<pre><code class="language-python">import signal
+import time
+
+def handle_signal(signum, frame):
+    print('haha no')
+
+signal.signal(signal.SIGINT, handle_signal) # overrides Ctrl+C !!
+signal.signal(signal.SIGUSR1, handle_signal) # overrides kill -10 &lt;PID&gt;
+signal.signal(signal.SIGTERM, handle_signal) # overrides default kill &lt;PID&gt; command !!
+
+signal.signal(signal.SIGKILL, handle_signal) # ERROR; not allowed by OS :( ... kill -9 &lt;PID&gt; will always kill the process (but uncleanly)
+
+while True:
+    time.sleep(1)
+</code></pre>
+<ul>
+<li>
+<p>System call: a request of a process to the operating system (create process, send signal, open file, etc.)</p>
+</li>
+<li>
+<p>Remember, everything must go through the operating system! (we need to both ask to send the signal and ask to override the handler)</p>
+</li>
+<li>
+<p>Note that signal handlers allow one process to control the behavior of another process (cause another function to execute)</p>
+<ul>
+<li>but... it only received instruction code to execute that function - no data received! (foreshadowing...more ICP to come...)</li>
+</ul>
+</li>
+</ul>
+<h1>2025-10-27</h1>
+<p>Recall egg analogy of OS:<br />
+kernel &lt;- libraries/drivers &lt;- programs &lt;- shell</p>
+<ul>
+<li>when we run a python program, we are in the program space</li>
+<li>python is an interpreted language (lines are translated in real time and</li>
+<li>different from a compiled language which is comverted to machine code prior to executing</li>
+<li>recipe analogy: some people like to immediately go step by step (interpreted), while others like to get all the ingredients first and then start (compiled)</li>
+</ul>
+<p>4 steps involved in compiling a program (say, <code>wrk.c</code>):<br />
+<code>gcc -o wrk wrk.c</code> does everything all in one (or we can do certain steps individually and combine others in order)<br />
+colloquially we call this &quot;compiling&quot; a program, even though compilation is just one step</p>
+<ol>
+<li>preprocessing -&gt; <code>wrk_.c</code></li>
+</ol>
+<p><code>cpp wrk.c &gt; wrk_.c</code> (cpp is the C PreProcessor)</p>
+<ul>
+<li>takes all of the includes (.h files), and copies their code alongside your code into <code>wrk_.c</code></li>
+</ul>
+<ol start="2">
+<li>compiling -&gt; <code>wrk.s</code></li>
+</ol>
+<p><code>gcc -S -o wrk.s wrk_.c</code></p>
+<ul>
+<li>converts from C code to human-readable assembly instructions</li>
+<li>the assembly code will depend on the cpu architecture</li>
+</ul>
+<ol start="3">
+<li>assembling -&gt; <code>wrk.o</code></li>
+</ol>
+<p><code>as -o wrk.o</code></p>
+<ul>
+<li>
+<p>assembles human readable instructions to machine readable binary instructions</p>
+</li>
+<li>
+<p><code>.o</code> is called an object file</p>
+</li>
+<li>
+<p>it is in binary, so we can only read it with something like <code>xxd</code></p>
+</li>
+<li>
+<p>just because the computer can now read the code, we still need to make it executable...</p>
+</li>
+<li>
+<p>in out analogy, each object file is like a recipe card</p>
+<ul>
+<li>sometimes we have multiple recipe cards for a meal! Sometimes there are dependencies (think thanksgiving)!</li>
+</ul>
+</li>
+</ul>
+<ol start="4">
+<li>Linking -&gt; <code>wrk</code> (or <code>wrk.exe</code> on windows)</li>
+</ol>
+<p><code>gcc -o wrk wrk.o</code></p>
+<ul>
+<li>now we get &quot;hello world!&quot;</li>
+</ul>
+<h3>Example</h3>
+<p>say we just had this file, foo.c</p>
+<pre><code class="language-c">int foo() {
+    return (0);
+}
+</code></pre>
+<p><code>cpp foo.c &gt; foo_.c</code><br />
+<code>gcc -S -o foo.s foo_.c</code><br />
+<code>as -o foo.o foo.s</code><br />
+<code>gcc -o foo foo.o</code> -&gt; gives an error! (there is no main function)</p>
+<p>returning to solar-deity analogy of of the operating system:</p>
+<ul>
+<li>each process can only operate within its little box</li>
+<li>bash, for example, can ask the solar-deity kindly to run a program</li>
+</ul>
+<h3>(zooming in) What are these little boxes?</h3>
+<ul>
+<li>the kernel has given you an area of memory:</li>
+</ul>
+<pre><code>ffffffffffffffff
+_________________
+Stack (grows downward)
+- contains function local variables
+______ vv _______
+
+
+______ ^^ _______
+Heap (grows upward)
+- from malloc, calloc, free
+_________________               ^^ created at runtime (above)^^   vv (below) created at compile time vv
+DATA - FIXED SIZE
+- contains global variables, static variables, constant strings
+_________________
+(Text) Code
+- contains machine code to run program
+_________________
+0000000000000000
+</code></pre>
+<ul>
+<li>
+<p>the kernel goes to long term memory (disk) and copies them into memory</p>
+</li>
+<li>
+<p>then it looks inside code segment for a label called main</p>
+</li>
+<li>
+<p>if it doesn't see that, it can't execute because it doesn't know where in memory to start!</p>
+</li>
+<li>
+<p>one of the first things linking does is make sure that your program has an entry point</p>
+</li>
+<li>
+<p>also makes sure that all dependencies are available</p>
+</li>
+</ul>
+<h3>Let's update our wrk.c</h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &quot;foo.h&quot; // quotes mean look in current directory
+
+int main() {
+    int a = foo();
+    printf(&quot;hello world!\n&quot;);
+    return 0;
+}
+</code></pre>
+<p>foo.h:</p>
+<pre><code class="language-c">int foo(); // preprocessor step will put this in wrk.c
+</code></pre>
+<p><code>cpp wrk.c &gt; wrk_.c</code><br />
+<code>gcc -S -o wrk.s wrk_.s</code><br />
+<code>as -o wrk.o</code><br />
+going fine so far...<br />
+if we look in wrk.s, we will see <code>call    foo</code> (but we have never given it foo!)</p>
+<p><code>gcc -o wrk wrk.o</code> -&gt; fails! &quot;undefined reference to <code>foo</code>&quot;</p>
+<p>okay, let's fix this:<br />
+<code>gcc -o libfoo.o foo.s</code> -&gt; still gives an error (</p>
+<p><code>gcc -fPIC -shared -o libfoo.so foo.c</code> -&gt; creates a shared object file</p>
+<p><code>gcc -o wrk wrk.c</code> <em>still</em> gives an error!<br />
+we have to tell it to look for foo...<br />
+<code>gcc -o wrk wrk.c -lfoo</code> <em>still</em> gives an error! (&quot;cannot findd -lfoo&quot;)<br />
+we have to tell it where to look for foo...<br />
+<code>gcc -o wrk wrk.c -lfoo -L.</code> &lt;- <code>-lfoo</code> looks for <code>libfoo.so</code> or <code>libfoo.a</code></p>
+<ul>
+<li>lib prefix is convention; we could link directly by just doing <code>./foo.so</code> (if we built it as <code>foo.so</code>, for example) in place of <code>-lfoo</code></li>
+</ul>
+<p>now we're good...<br />
+<code>./wrk</code> -&gt; gives an error!! (&quot;error while loading shared libraries: libfoo.so: cannot open shared object file ...&quot;)<br />
+we <em>also</em> have to tell bash where to look for foo...</p>
+<p><code>LD_LIBRARY_PATH=. ./wrk</code><br />
+creates environment variable for bash to use, so that when it goes before the solar deity to ask it to run the program, it has all the info!<br />
+now it is working :)</p>
+<h1>2025-10-29</h1>
+<p>hypothetical memory map (a lot more going on under the hood of course):</p>
+<pre><code>-----
+stack     &lt;--grows with function calls, variable assignments
+----- 3A
+ v
+
+ ^
+-----
+heap      &lt;--dynamically allocated variables (malloc, calloc, etc.)
+----- 2A
+data      &lt;--global variables, string literals, static variables (fixed size)
+----- 1A
+code      &lt;--this is where the os puts our code!
+----- 0A
+</code></pre>
+<ul>
+<li>
+<p>addresses go (from bottom to top) low to high</p>
+</li>
+<li>
+<p>this space is viewable to us a a contiguous block of memory (so far as we are concerned, as the process running this space)</p>
+<ul>
+<li>not actually a contiguous block of physical memory (it is contiguous <em>virtual</em> memory!!!)</li>
+</ul>
+</li>
+<li>
+<p>the kernel (os) allocates memory for the address space of a process</p>
+<ul>
+<li>from where??</li>
+<li>the OS is an imperfect solar deity (only has so much short term memory - RAM, i.e. &quot;the memory&quot;)</li>
+<li>as a practical matter, we might have enough memory to use but not enough contiguous space to fit a large block without breaking it up
+<ul>
+<li>virtual memory (allows us to split it up, isolation allows multiple processes to coexist safely)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>physical memory - actual RAM in the system, typically from address <code>0</code> up to the total capacity (e.g., 0–32 GB).</p>
+</li>
+<li>
+<p>virtual memory - the full range of possible memory addresses that the CPU can reference (much larger)</p>
+<ul>
+<li>a process gets a contiguous block of virtual memory, but addresses in virtual memory might map to different blocks across physical memory</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i = 48;
+    int j = 54;
+    int k = 62;
+
+    int *p = &amp;i; // most people write it like this. But the star is not acting on p!
+    int* q = &amp;j; // this is a bit more legibly accurate
+
+    printf(&quot;%d\n&quot;, i);
+    printf(&quot;%p\n&quot;, &amp;i);
+
+    printf(&quot;%d\n&quot;, *p);
+    printf(&quot;%p\n&quot;, p); // p holds an address
+    printf(&quot;%p\n&quot;, &amp;p); // but p also has an address
+    return(0);
+}
+</code></pre>
+<p>Stack (hypothetical, assuming ints and pointers are 1 byte):</p>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Address</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>i</td>
+<td>Ox3F</td>
+<td>48</td>
+</tr>
+<tr>
+<td>j</td>
+<td>Ox3E</td>
+<td>54</td>
+</tr>
+<tr>
+<td>k</td>
+<td>Ox3D</td>
+<td>62</td>
+</tr>
+<tr>
+<td>p</td>
+<td>Ox3C</td>
+<td>0x3F</td>
+</tr>
+<tr>
+<td>q</td>
+<td>Ox3B</td>
+<td>0x3E</td>
+</tr>
+<tr>
+<td></td>
+<td>0x3A</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>0x39</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>0x38</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><code>&amp;</code> is &quot;address of&quot;<br />
+<code>*</code> is &quot;value pointed to by&quot;</p>
+<h1>2025-10-31</h1>
+<h3>Makefiles</h3>
+<p>A Makefile automates compilation by encoding build rules so you can just run <code>make</code>.</p>
+<ul>
+<li>Only rebuilds what changed (timestamp-based)</li>
+<li>Encodes dependencies explicitly</li>
+<li>Standardizes the build process</li>
+</ul>
+<p>Basic structure:</p>
+<pre><code>target: dependencies
+ &lt;TAB&gt; command
+
+</code></pre>
+<ul>
+<li>target: what you’re building</li>
+<li>dependencies: files it depends on</li>
+<li>command: how to build it (MUST be tab-indented)</li>
+</ul>
+<h3>The <code>all</code> Target</h3>
+<p>By convention, <code>all</code> means &quot;build everything&quot;.</p>
+<pre><code class="language-makefile">all: libfoo.so wrk
+
+libfoo.so: foo.c
+	gcc -fPIC -shared -o libfoo.so foo.c
+
+wrk: wrk.c foo.h libfoo.so
+	gcc -o wrk wrk.c -lfoo -L.
+
+clean:
+	rm -f wrk libfoo.so
+</code></pre>
+<p>When you run <code>make</code> on its own:</p>
+<ol>
+<li>Make defaults to the first target (<code>all</code>)</li>
+<li>It checks whether each dependency exists and is up to date</li>
+<li>It rebuilds only what changed</li>
+<li><code>all</code> usually has no commands — it’s just an alias</li>
+</ol>
+<h3>Shared Libraries (<code>.so</code>)</h3>
+<ul>
+<li>Shared libraries live on disk and are loaded at runtime!</li>
+<li>Their code is not copied into the executable!</li>
+<li>Library code is typically mapped read-only into memory</li>
+<li>Multiple programs can share the same loaded library</li>
+</ul>
+<p>Build a shared library:<br />
+<code>gcc -fPIC -shared -o libfoo.so foo.c</code></p>
+<ul>
+<li><code>-fPIC</code>: position-independent code (required for shared libs)</li>
+<li><code>-shared</code>: produce a <code>.so</code></li>
+</ul>
+<h3>Static Compilation (Contrast)</h3>
+<ul>
+<li>Static linking copies library code into the executable</li>
+<li>Can be useful for compatibility or deprecated libraries</li>
+<li>Not best practice for general use</li>
+</ul>
+<p>Example:<br />
+<code>gcc -static main.c</code></p>
+<p>Result:</p>
+<ul>
+<li>Larger binary</li>
+<li>No runtime dependency on shared libraries</li>
+</ul>
+<h3>C Declarations (Historical Note)</h3>
+<ul>
+<li>Older C style required declarations at the top of functions</li>
+<li>This was considered best practice for a long time</li>
+<li>Modern C allows mixed declarations and code</li>
+</ul>
+<h1>2025-11-03</h1>
+<h3>Recap</h3>
+<p>&quot;compiling&quot; refers to the build process from human code to machine-readable code</p>
+<p>what happens when we run an executable?</p>
+<ul>
+<li>
+<p>creates a new address space</p>
+</li>
+<li>
+<p>takes executable code form long term storage</p>
+</li>
+<li>
+<p>copies instructions into code and data segment of the memory space</p>
+</li>
+<li>
+<p>code and data segment are READ ONLY</p>
+</li>
+<li>
+<p>heap and stack are READ+WRITE</p>
+<ul>
+<li>heap grows upward</li>
+<li>stack grows downward (as you add local variables/function calls, it moves toward lower addresses)</li>
+</ul>
+</li>
+</ul>
+<h3>Arrays in Memory / Function Calls</h3>
+<p>Stack (hypothetical, assuming ints and pointers are 1 byte):</p>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Address</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(foo creates) a</td>
+<td>Ox3F</td>
+<td>65 (ary[2]??)</td>
+</tr>
+<tr>
+<td></td>
+<td>Ox3E</td>
+<td>ary[1]</td>
+</tr>
+<tr>
+<td>(bar creates) ary</td>
+<td>Ox3D</td>
+<td>ary[0]</td>
+</tr>
+<tr>
+<td></td>
+<td>Ox3C</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Ox3B</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>0x3A</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>0x39</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>0x38</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>this simplified memory table doesn't show all the details of other variables created
+<ul>
+<li>that's why below, we needed to access index 30 in class</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void bar()
+{
+    char ary[2];
+    printf(&quot;bar: %p\n&quot;, (&amp;ary[30])); // the address of ary[30] is the same as the address of a !!!
+    ary[30] = 66;
+}
+
+void foo()
+{
+    int a = 65;
+    bar();
+    printf(&quot;foo: %p\n&quot;, &amp;a);
+    printf(&quot;bar: %d\n&quot;, a);
+}
+
+int main()
+{
+    foo();
+    return(0);
+}
+</code></pre>
+<ul>
+<li>terrible coding practice, but very instructive!</li>
+</ul>
+<p>Key points:</p>
+<ul>
+<li>Arrays declared in a function live on the stack</li>
+<li>Stack frames are logically separate but reuse the same memory locations</li>
+<li>When a function returns, its stack space is reclaimed</li>
+</ul>
+<p>Implication:</p>
+<ul>
+<li>Array index out-of-bounds errors can reach into adjacent stack frames</li>
+<li>Bugs with unpredictable behavior often indicate uninitialized memory</li>
+</ul>
+<h3>Strings in memory</h3>
+<ul>
+<li>recall, a string is just an array of characters</li>
+<li>and characters are nothing more than integers that we chose to represent certain symbols</li>
+</ul>
+<pre><code class="language-c">foo() {
+	char s[4] = &quot;abc&quot;;
+	char *t = &quot;def&quot;;
+	char *q = malloc(4*sizeof(char));
+	q[1] = 'a';
+	
+}
+</code></pre>
+<p>(HYPOTHETICAL, ASSUMING INTS AND POINTERS ARE 1 BYTE)<br />
+Stack:</p>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Address</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>Ox3F</td>
+<td>'\0'</td>
+</tr>
+<tr>
+<td></td>
+<td>Ox3E</td>
+<td>'c'</td>
+</tr>
+<tr>
+<td></td>
+<td>Ox3D</td>
+<td>'b'</td>
+</tr>
+<tr>
+<td>s</td>
+<td>Ox3C</td>
+<td>'a'</td>
+</tr>
+<tr>
+<td>t</td>
+<td>Ox3B</td>
+<td>0x1C</td>
+</tr>
+<tr>
+<td>q</td>
+<td>0x3A</td>
+<td>0x29</td>
+</tr>
+</tbody>
+</table>
+<p>Heap (remember, grows up):</p>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Address</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>Ox2F</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Ox2E</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Ox2D</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Ox2C</td>
+<td>--</td>
+</tr>
+<tr>
+<td></td>
+<td>Ox2B</td>
+<td>--</td>
+</tr>
+<tr>
+<td></td>
+<td>0x2A</td>
+<td>a</td>
+</tr>
+<tr>
+<td></td>
+<td>0x29</td>
+<td>--</td>
+</tr>
+</tbody>
+</table>
+<p>Data Segment (compiler puts variables in here - location is implementation dependent):</p>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Address</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>Ox1F</td>
+<td>'\0'</td>
+</tr>
+<tr>
+<td></td>
+<td>Ox1E</td>
+<td>'f'</td>
+</tr>
+<tr>
+<td></td>
+<td>Ox1D</td>
+<td>'e'</td>
+</tr>
+<tr>
+<td></td>
+<td>Ox1C</td>
+<td>'d'</td>
+</tr>
+<tr>
+<td></td>
+<td>Ox1B</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>0x1A</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Remember: data segment is READ-ONLY!</p>
+<pre><code class="language-c">t[1] = 'q';
+</code></pre>
+<ul>
+<li>the behavior of this is undefined/implementation dependent</li>
+<li>sometimes the compiler gives an error, sometimes there is an error at runtime, or sometimes it just drops the assignment silently and does nothing.</li>
+<li>sometimes this might actually work!  In that case, the compiler silently creates stack space, copies over from the data segment, modifies it, and then changes the pointer t to point to an address in the stack.  (can cause a whole lot of confusion)</li>
+</ul>
+<h3>Example: reading a line into a buffer</h3>
+<pre><code class="language-c">#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+int readline(FILE *fp, char *buf, int maxlen)
+{
+    char c;
+    int i = 0;
+
+    while(i&lt;maxlen &amp;&amp; (c = fgetc(fp)) != '\n')
+    {
+        buf[i] = c;
+        i++;
+    }
+
+    return(i);
+}
+
+int main()
+{
+    FILE *fp;
+
+    fp = fopen(&quot;test.txt&quot;, &quot;r&quot;);
+
+    int maxlen = 128;
+    char *buf = malloc(maxlen * sizeof(char));
+
+    int r = readline(fp, buf, maxlen);
+
+    printf(&quot;read %d bytes: %s\n&quot;, r, buf);
+
+    return(0);
+}
+</code></pre>
+<ul>
+<li>the buffer is allocated in the heap</li>
+<li>functions are working collaboratively to modify the same space!</li>
+</ul>
+<h1>2025-11-05</h1>
+<h3>reading in multiple lines in C</h3>
+<p>why don't we just do <code>char[20000][4000]</code> ?</p>
+<ul>
+<li>memory is cheap after all!</li>
+<li>but not good practice</li>
+</ul>
+<pre><code class="language-c">char** foo() {
+	int maxlen = 3;
+	char* linesA[4];
+	linesA[0] = malloc(maxlen*sizeof(char));
+	linesA[0][0] = 'w';
+	
+	char ** linesB = malloc(4*sizeof(char*));
+	linesB[0] = malloc(maxlen*sizof(char));
+	linesB[0][0] = 'q';
+	
+	return linesB;
+}
+
+void bar() {
+	char **strings = foo();
+}
+</code></pre>
+<ul>
+<li>maybe LinesA is good, if we have strings of different lengths and want to be able to access</li>
+<li>but as soon as foo returns, the pointers in the stack disappear
+<ul>
+<li>memory leak!</li>
+</ul>
+</li>
+<li>alternative: with LinesB, we store both the pointers and the strings in the heap!
+<ul>
+<li>then if we return linesB from foo, no memory is lost!</li>
+</ul>
+</li>
+</ul>
+<p>(HYPOTHETICAL, ASSUMING INTS AND POINTERS ARE 1 BYTE)<br />
+Stack:</p>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Address</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>Ox3F</td>
+<td>--</td>
+</tr>
+<tr>
+<td></td>
+<td>Ox3E</td>
+<td>--</td>
+</tr>
+<tr>
+<td></td>
+<td>Ox3D</td>
+<td>--</td>
+</tr>
+<tr>
+<td>linesA</td>
+<td>Ox3C</td>
+<td>0x26</td>
+</tr>
+<tr>
+<td>linesB</td>
+<td>Ox3B</td>
+<td>0x29</td>
+</tr>
+<tr>
+<td></td>
+<td>0x3A</td>
+<td></td>
+</tr>
+<tr>
+<td>Heap (remember, grows upward.  Labels don't actually exist, but just for clarity):</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Address</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>Ox2F</td>
+<td>--</td>
+</tr>
+<tr>
+<td></td>
+<td>Ox2E</td>
+<td>--</td>
+</tr>
+<tr>
+<td>linesB[0]</td>
+<td>Ox2D</td>
+<td>'q'</td>
+</tr>
+<tr>
+<td></td>
+<td>Ox2C</td>
+<td>--</td>
+</tr>
+<tr>
+<td></td>
+<td>Ox2B</td>
+<td>--</td>
+</tr>
+<tr>
+<td></td>
+<td>0x2A</td>
+<td>--</td>
+</tr>
+<tr>
+<td>linesB</td>
+<td>0x29</td>
+<td>0x2D</td>
+</tr>
+<tr>
+<td></td>
+<td>0x28</td>
+<td>--</td>
+</tr>
+<tr>
+<td></td>
+<td>0x27</td>
+<td>--</td>
+</tr>
+<tr>
+<td>linesA[0]</td>
+<td>0x26</td>
+<td>'w'</td>
+</tr>
+</tbody>
+</table>
+<h3>Let's look at some code:</h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void does_work(char ** msg)
+{
+	msg[0] = malloc(3 * sizeof(char));
+	msg[0][0] = 'a';
+	msg[0][1] = 'b';
+	msg[0][2] = '\0';
+
+	msg[1] = malloc(2 * sizeof(char));
+	msg[1][0] = 'c';
+	msg[1][1] = '\0';
+}
+
+void print_work(char ** msg)
+{
+	printf(&quot;%s\n&quot;, msg[0])
+	printf(&quot;%s\n&quot;, msg[1])
+}
+
+int main()
+{
+	char **msg;
+	msg = malloc(2 * sizeof(char *));
+
+	does_work(msg);
+	print_work(msg);
+
+	return(0);
+}
+</code></pre>
+<p><strong>great exam question:</strong> &quot;draw a hypothetical memory map of this C code&quot;</p>
+<h3>Reading multiple lines</h3>
+<pre><code class="language-c">#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+int readline(FILE *fp, char *buf, int maxlen)
+{
+    char c;
+    int i = 0;
+
+    while(i&lt;maxlen &amp;&amp; (c = fgetc(fp)) != '\n')
+    {
+        buf[i] = c;
+        i++;
+
+        if (c == EOF)
+        {
+            i = -1;
+            break;
+        }
+    }
+
+    return(i);
+}
+
+int main()
+{
+    int n;
+    int i = 0;
+    FILE *fp;
+
+    fp = fopen(&quot;test.txt&quot;, &quot;r&quot;);
+
+    int maxlen = 128;
+    int maxlines = 100;
+    char **lines = malloc(maxlines * sizeof(char *));
+    char *buf;// = malloc(maxlen * sizeof(char));
+
+    while(n!=-1)
+    {
+        buf = malloc(maxlen * sizeof(char));
+        n = readline(fp, buf, maxlen);
+        //if we wanted our lines to be _exactly_ as big as the strings they hold, we could do:
+        //buf2 = malloc(n * sizeof(char)); // (then lines[i] = buf2;)
+        // we could have also done a the computationally expensive task of finding
+        // out how long the line is before backing up the pointer and reading it
+        // but memory is cheap! so better to just to the `buf2` approach^
+        lines[i] = buf;
+        i++;
+    }
+
+    //int r = readline(fp, buf, maxlen);
+    //printf(&quot;read %d bytes: %s\n&quot;, r, buf);
+
+    return(0);
+}
+</code></pre>
+<h1>2025-11-07</h1>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct {
+	int wingspan;
+	int canfly;
+	char *name;
+} bird;
+
+int main() {
+	bird duck;
+	duck.wingspan = 24;
+	duck.canfly = 1;
+	duck.name = &quot;daffy&quot;;
+	
+	bird *duckB = malloc(sizeof(bird));
+	(*duckB).wingspan = 32;
+	duckB-&gt;wingspan = 32; // equivalent
+	
+	return 0;
+}
+</code></pre>
+<h3>Where is duck?</h3>
+<ul>
+<li>in C, nothing like objects in python</li>
+<li>all it is is the variables stuck together sequentially (by order of declaration) in memory</li>
+</ul>
+<p>(HYPOTHETICAL, ASSUMING INTS AND POINTERS ARE 1 BYTE)<br />
+Stack:</p>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Address</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>duck.wingspan</td>
+<td>0x3F</td>
+<td>27</td>
+</tr>
+<tr>
+<td>duck.canfly</td>
+<td>0x3E</td>
+<td>1</td>
+</tr>
+<tr>
+<td>duck.name</td>
+<td>0x3D</td>
+<td>0x1C (address in data section)</td>
+</tr>
+<tr>
+<td>duckB</td>
+<td>0x3C</td>
+<td>0x26</td>
+</tr>
+<tr>
+<td></td>
+<td>0x3B</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>0x3A</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Heap:</p>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Address</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>0x2A</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>0x29</td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td>0x28</td>
+<td></td>
+</tr>
+<tr>
+<td>canfly</td>
+<td>0x27</td>
+<td></td>
+</tr>
+<tr>
+<td>wingspan</td>
+<td>0x26</td>
+<td>32</td>
+</tr>
+</tbody>
+</table>
+<h3>Let's create a new file format!</h3>
+<ul>
+<li>Just like types, file formats are nothing but figments of our imagination (just made up ways of storing bytes on a disk)</li>
+</ul>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct {
+	int wingspan;
+	int canfly;
+} bird;
+
+int main() {
+	bird duck;
+	duck.wingspan = 24;
+	duck.canfly = 1;
+	FILE *fp = fopen(&quot;duck.brd&quot;, &quot;wb&quot;); // wb is &quot;write bytes&quot;, rb is &quot;read bytes&quot;
+	
+	// 4 arguments: memory address, how much memory to write, how many times, where to write (file pointer)
+	fwrite(&amp;duck, sizeof(duck), 1, fp);
+	
+	fclose(fp);
+	return 0;
+}
+</code></pre>
+<p>this gives us:<br />
+<code>-rw-rw----+  1 mficco fa25-cse-20289.01    8 Nov 11 16:29 duck.brd</code><br />
+notice it is 8 bytes! (two ints, each 4 bytes)</p>
+<pre><code>$ xxd duck.brd
+00000000: 1800 0000 0100 0000                      ........
+</code></pre>
+<ul>
+<li>if we put the name back in the struct, writing the struct directly would just give us a 16 byte file including the address of the name in the data segment</li>
+<li>so, we write each variable individually:</li>
+</ul>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct {
+    int wingspan;
+    int canfly;
+    char *name;
+    int namelen;
+} bird;
+
+int main() {
+    bird duck;
+    duck.wingspan = 24;
+    duck.canfly = 1;
+    duck.name = &quot;donald&quot;;
+    duck.namelen = strlen(duck.name);
+
+    FILE *fp = fopen(&quot;duck.brd&quot;, &quot;wb&quot;);
+    fwrite(&amp;duck.wingspan, sizeof(int), 1, fp);
+    fwrite(&amp;duck.canfly, sizeof(int), 1, fp);
+    fwrite(&amp;duck.namelen, sizeof(int), 1, fp);
+    fwrite(duck.name, duck.namelen*sizeof(char), 1, fp);
+
+    fclose(fp);
+    return 0;
+}
+</code></pre>
+<p>this gives us:</p>
+<pre><code>$ xxd duck.brd
+00000000: 1800 0000 0100 0000 0600 0000 646f 6e61  ............dona
+00000010: 6c64                                     ld
+</code></pre>
+<h3>Function Pointers!</h3>
+<ul>
+<li>&quot;Ducks don't just sit there! They do stuff!&quot;</li>
+</ul>
+<blockquote>
+<p>&quot;So, a lot of times you'll hear people say things like, 'C is not an object-oriented language'. Heard that before? But don't worry, 'Python is an object-oriented language'. You know what? That statement has no meaning! It doesn't mean anything for the language to be object-oriented. What does that even mean? It doesn't mean anything. You write programs in an object-oriented fashion. You write programs in a functional form, or whatever. Okay? But the language itself has nothing to do with whether it's object-oriented or not. Yes, some languages automatically support object-oriented features more easily. I guess that's what they mean when they say it's an object-oriented language, but there's nothing, like...there's no reason that C is not an object-oriented language, really. It's just that you don't know how to write C in an object-oriented way. That's what that means. Try to throw shade on C when it's really your own fault!</p>
+</blockquote>
+<ul>
+<li>Recall that functions are just bytes in memory (cpu instructions, stored in the code section)</li>
+<li>We can make a pointer point to those bytes! (pointer holds the memory address of the function)</li>
+</ul>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct {
+    int wingspan;
+    int canfly;
+    char *name;
+    int namelen;
+    void (*noise)(); // &quot;not all birds make the same noise&quot;
+} bird;
+
+void chirp() {
+    printf(&quot;chirp!!!!!!!!!\n&quot;);
+}
+
+void quack() {
+    printf(&quot;quack!!!!!!!!!\n&quot;);
+}
+
+int main() {
+    bird duck;
+    duck.wingspan = 24;
+    duck.canfly = 1;
+    duck.name = &quot;daffy&quot;;
+    quack();
+
+    // we doin't write void *fcn() because it could be confusing
+    // () just matches the parameters list
+    void (*fcn)() = &amp;quack;
+
+    // we can do all kinds of things now!
+    // we invoke (dereference) the function pointer by:
+    (*fcn)();
+
+    // we can store it in a struct
+    duck.noise = &amp;quack;
+    // and then call it just like this!
+    duck.noise();
+
+    return 0;
+}
+</code></pre>
+<ul>
+<li>We can then pass our duck struct around like an object!  This is essentially object oriented programming!</li>
+<li>Next class we will continue with function pointers (and passing self!!)</li>
+</ul>
+<h1>2025-11-10</h1>
+<p>Snow Day!</p>
+<h1>2025-11-12</h1>
+<h3>the &quot;self&quot; is an illusion</h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct bird bird;
+
+struct bird {
+    int wingspan;
+    int canfly;
+    char *name;
+    int namelen;
+    void (*noise)(bird *);
+} bird;
+
+void chirp(bird *self) {
+    printf(&quot;chirp!!!!!!!!!\n&quot;);
+}
+
+void quack(bird *self) {
+    printf(&quot;quack!!!!!!!!! %s\n&quot;, self-&gt;name);
+}
+
+int main() {
+    bird sparrow;
+    sparrow.wingspan = 8;
+    sparrow.canfly = 1;
+    sparrow.name = &quot;sparrow&quot;;
+    sparrow.noise = &amp;chirp;
+    duck.noise();
+
+    return 0;
+}
+</code></pre>
+<ul>
+<li>recall, <code>&amp;chirp</code> and <code>&amp;quack</code> are addresses in the code segment!</li>
+</ul>
+<p>Why are function pointers important?</p>
+<ol>
+<li>we can make proto-object like things in C (see code above)</li>
+<li>avoids repetitive code for similar operations (see code below)</li>
+</ol>
+<pre><code class="language-c">void arry_op(int *ary, int arylen, int (*fcn)(int))
+{
+    int i;
+    for(i=0; i&lt;arylen; i++)
+    {
+        ary[i] = (*fcn)(ary[i]);
+    }
+}
+
+int mult_five(int a)
+{
+    return(a*5);
+}
+
+int sub_six(int a) {
+    return(a-6);
+}
+</code></pre>
+<ul>
+<li>in codebases you might see functions named <code>generic</code> or with <code>_op</code>
+<ul>
+<li>allow for extensibility! users can write functions that are used by library (think writing custom backward function for pytorch)</li>
+</ul>
+</li>
+</ul>
+<h1>2025-11-14</h1>
+<h3>What is a segfault anyway?</h3>
+<p>An error that means you tried to read or write memory that you're not allowed to read or write</p>
+<ul>
+<li>operating system gives you a contiguous block of virtual memory</li>
+<li>metaphor: reserved parking spots
+<ul>
+<li>you can't park your car in a spot where someone else is already parked!
+<ul>
+<li>would cause a big issue!</li>
+</ul>
+</li>
+<li>you also can't park your car in someone's spot when you're not there!
+<ul>
+<li>won't cause any physical issues, but technically, is an error!</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>NOT ALLOWED; &quot;you have a fault on the memory segment&quot;</li>
+</ul>
+<h3>Palindrome Finder</h3>
+<p>(writing the program with some intentional bugs to find)</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+int is_pal(char *s) {
+    char *head = s;
+    char *tail = s + strlen(s);
+
+    while(*head == *tail) {
+        head++;
+        tail--;
+    }
+
+    if(head &gt;= tail)
+        return 1;
+
+    return 0;
+}
+
+int main() {
+    char *buf = malloc(24 * sizeof(char));
+    fgets(buf, 24, stdin);
+
+    printf(&quot;%d\n&quot;, is_pal(buf));
+
+    return(0);
+}
+</code></pre>
+<p>Something's wrong...let's debug!</p>
+<p><code>gcc -g -o pal pal.c</code></p>
+<ul>
+<li>embeds source code in the executable</li>
+<li>actually incurs a small cost to the execution time</li>
+</ul>
+<p>we can now use it with gdb!</p>
+<p>let's set a break point: <code>b 7</code><br />
+then we run the program: <code>run</code> (and type in our input to stdin)<br />
+to execute next line: <code>n</code><br />
+we can print values:<br />
+<code>p *head</code><br />
+<code>p *tail</code><br />
+<code>p tail</code><br />
+Now we see our issue! (tail initially points to <code>\0</code>)<br />
+We also need to &quot;chomp&quot; the <code>\n</code> character that is captured by <code>fgets</code></p>
+<p>But we're not done...<br />
+...if we run <code>valgrind ./pal</code> we get a bunch of issues!</p>
+<ul>
+<li>Ok great, let's also add <code>free</code> to fix the memory leak:</li>
+</ul>
+<pre><code class="language-c">int is_pal(char *s) {
+    char *head = s;
+    char *tail = s + strlen(s) - 1; // &lt;---
+
+    while(*head == *tail) {
+        head++;
+        tail--;
+
+        if(head &gt;= tail) // &lt;---
+            break;
+    }
+
+    if(head &gt;= tail)
+        return 1;
+
+    return 0;
+}
+
+void chomp(char *s) { // &lt;---
+    if(s[strlen(s)-1] == '\n') {
+        s[strlen(s)-1] = '\0';
+    }
+}
+
+int main() {
+    char *buf = malloc(24 * sizeof(char));
+    fgets(buf, 24, stdin);
+
+    chomp(buf); // &lt;---
+
+    printf(&quot;%d\n&quot;, is_pal(buf));
+
+    free(buf); // &lt;---
+
+    return 0;
+}
+</code></pre>
+<p>But we're still getting a bunch of issues!</p>
+<ul>
+<li>Notice how our code is inefficient, because for palindromes it double checks past the middle</li>
+<li>tail will keep moving down, and head will keep moving down, until they happen upon some value that makes them differ</li>
+<li>Not an issue...until the <code>tail</code> runs out of the bottom of the heap!
+<ul>
+<li>the compiler often puts a little space between the data and heap segments to account for this :)
+<ul>
+<li>we didn't used to have it like this, but again, memory is cheap nowadays!</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>errors in valgrind we will see:</p>
+<p>&quot;invalid read of size 1&quot;</p>
+<ul>
+<li>tail is pointing to some space out of allocated memory
+<ul>
+<li>(head might be too, depending on size of buffer)</li>
+</ul>
+</li>
+</ul>
+<p>&quot;conditional jump or move depends on uninitialized values&quot;</p>
+<ul>
+<li>in our while loop, we are comparing pointers that point to uninitialized values</li>
+</ul>
+<p>to fix: we break as soon as head &gt;= tail:</p>
+<pre><code class="language-c">int is_pal(char *s) {
+    char *head = s;
+    char *tail = s + strlen(s) - 1;
+
+    while(*head == *tail) {
+        head++;
+        tail--;
+
+        if(head &gt;= tail) // &lt;---
+            break;
+    }
+
+    if(head &gt;= tail)
+        return 1;
+
+    return 0;
+}
+
+</code></pre>
+<h1>2025-11-17</h1>
+<p>An example of a memory anti-pattern in C:</p>
+<pre><code class="language-c">readline(fp, malloc(...), len);
+// not only do we not free the allocated space, we never tracked it to begin with!
+</code></pre>
+<p>Another one:</p>
+<pre><code class="language-c">// in a loop to read each line...
+	char *buf = malloc(...);
+	char *splits[27];
+	//...
+	dino-&gt;name = splits[5];
+	//...
+	for (int i=0; i&lt;numsplits; i++) {
+		free(split[i])	
+	}
+	// this is wrong; we don't want to free stuff in each dino before we use it!
+</code></pre>
+<p>Note that this code would still work! We deallocated the space but the values are still there</p>
+<ul>
+<li>analogy: leave your car parked, until your parking pass expires. The parking spot is no longer allocated to you, but your car is still there!</li>
+</ul>
+<h3>Recap: What happens when you run a program</h3>
+<ul>
+<li>
+<p>if I am bash, I ask the OS (kernel) to:</p>
+<ul>
+<li>create a memory space (copy code from disk)</li>
+<li>run the program
+<ul>
+<li>strict rules: code in code segment is only authorized to access memory in its memory space (else segfault!)</li>
+</ul>
+</li>
+<li>assign me as the parent process</li>
+</ul>
+</li>
+<li>
+<p>You don't &quot;open&quot; a file</p>
+<ul>
+<li>you go before the kernel and prostrate yourself (jk lol)</li>
+<li>the kernel will decide if you are allowed to do that process</li>
+<li>to read/write, you ask and then the kernel does it on your behalf</li>
+</ul>
+</li>
+<li>
+<p>to ask the kernel, you use a system call (<code>syscall</code>)</p>
+</li>
+<li>
+<p>looked at (https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md)</p>
+</li>
+</ul>
+<pre><code class="language-c">#include &lt;fcntl.h&gt;
+#incldue &lt;unistd.h&gt;
+#include &lt;sys/syscall.h&gt;
+#include &lt;sys/types.h&gt;
+// notice: no stdio.h! we are going to ask the kernel directly
+
+int main() {
+	char buf[24] = &quot;yay notre dame!\n&quot;;
+	
+	int fd;
+	
+	fd = syscall(SYS_open, &quot;example.txt&quot;, O_RDRW);
+	
+	syscall(SYS_write, fd, &amp;buf, 24);
+	
+	syscall(SYS_close, fd);
+}
+</code></pre>
+<ul>
+<li>We're used to <code>FILE *fp = fopen();</code></li>
+<li>What is a FILE pointer?</li>
+<li>It is just an integer to index into the the &quot;open file table&quot;:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>fid</th>
+<th>name</th>
+<th>path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>...</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p>The program that tells the OS how to access the file is called a driver</p>
+</li>
+<li>
+<p>Be aware that when when we use <code>malloc()</code>, we are doing a syscall with:</p>
+<ul>
+<li>brk: moves heap up and gives you back the pointer</li>
+<li>mmap: more complicated stuff to allocate bigger chunks of memory</li>
+</ul>
+</li>
+<li>
+<p>parent process can't run or modify anything within child directly</p>
+</li>
+<li>
+<p>instead, it asks the kernel to send a signal to the child</p>
+</li>
+<li>
+<p>the child can be configured to execute functions upon receiving a signal</p>
+</li>
+</ul>
+<p>in kernel, there is an ivt (interrupt vector table):</p>
+<table>
+<thead>
+<tr>
+<th>process</th>
+<th>signal</th>
+<th>function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5000</td>
+<td>13</td>
+<td>foo()</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>child process 5000 must ask the kernel to route this signal to the function</li>
+</ul>
+<h1>2025-11-19</h1>
+<p>final exam topics on C (approx. 70%):</p>
+<ul>
+<li>
+<p>memory management and program structure</p>
+</li>
+<li>
+<p>function pointers</p>
+</li>
+<li>
+<p>system calls</p>
+</li>
+<li>
+<p>signals/inter-process communication (ipc) &lt;- TODAY!</p>
+</li>
+<li>
+<p>multiprocessing + threading</p>
+</li>
+<li>
+<p>sockets in C</p>
+</li>
+<li>
+<p>language bindings<br />
+(remaining 30% on prev. topics not tested)</p>
+</li>
+<li>
+<p>Story of Jimmy Bozart and the <a href="https://en.wikipedia.org/wiki/Hollow_Nickel_Case">Hollow Nickel Case</a></p>
+</li>
+<li>
+<p>Dead drop communication:</p>
+<ul>
+<li>method of covert communication where two people leave and pick up a message or item from a secret, prearranged location without ever meeting</li>
+</ul>
+</li>
+<li>
+<p>We do this between processes!</p>
+<ul>
+<li>The receiver process asks the kernel to make an entry in the ivt, so that when the signal is sent to the kernel, the kernel runs a specified function</li>
+<li>The sender (parent) can then ask kernel to send this signal to the receiver process (so long as they are in same user space)</li>
+<li>A function runs in the <em>receiver's</em> memory space</li>
+<li>This function could then read/write data in a file (dead drop), thus enabling communication between processes only by sending signals</li>
+</ul>
+</li>
+</ul>
+<p><code>signalrecv.c</code></p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;signal.h&gt;
+
+void handle_sig(int sig) {
+    printf(&quot;got signal %d\n&quot;, sig);
+    char buf[24];
+    FILE *fp = fopen(&quot;msg.txt&quot;, &quot;r&quot;);
+    if(fgets(buf, 24, fp) != NULL)
+    {
+        printf(&quot;%s\n&quot;, buf);
+    }
+    fclose(fp);
+}
+
+int main() {
+    // signal is just a wrapper for a syscall
+    signal(SIGUSR1, handle_sig);
+
+    while(1) { }
+
+    return(0);
+}
+</code></pre>
+<ul>
+<li>let's run <code>ps ef</code> to find the process id</li>
+<li>then we run <code>kill -10 &lt;PID&gt;</code> to send this signal (10 aka <code>SIGUSR1</code>)</li>
+<li>...let's write a program to do this for us:</li>
+</ul>
+<p><code>sendsig.c</code></p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;unistd.h&gt;
+
+int main(int argc, char *argv[]) {
+    // kill is just a wrapper for a syscall
+    kill(1769796, SIGUSR1);
+
+    return(0);
+}
+</code></pre>
+<p>this doesn't have to be in C! <code>sendsig.py</code>:</p>
+<pre><code class="language-python">import os
+import signal
+
+pid = 1772661
+
+with open(&quot;msg.txt&quot;, &quot;w&quot;) as fp: # here we write a dead drop message!!
+    fp.write(&quot;secret!!!&quot;)
+
+os.kill(pid, signal.SIGUSR1)
+</code></pre>
+<p>The point is, we aren't communicating with the program ourselves. It is through the kernel!</p>
+<ul>
+<li>Note: Dead drop inter-process communication with signals is slow. (have to write and read from disk)</li>
+</ul>
+<hr />
+<p>in ivt, there are more things that are kept track of (other than process, fig, fcn that we loosely described earlier)</p>
+<ul>
+<li>if you're busy doing something important, and someone calls you, you want to know <em>who</em> is calling you</li>
+</ul>
+<p>kernel also keeps track of program/execution context (the things which the program is doing at that particular time)</p>
+<ul>
+<li>because you want to be able to return to your task easily after being interrupted!</li>
+</ul>
+<p><code>signalrecv2.c</code></p>
+<pre><code class="language-c">// context is important for threading, knowing which thread to pick back up
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;signal.h&gt;
+
+void handle_sigusr1(int sig, siginfo_t *siginfo, void *context) {
+    printf(&quot;got signal %d from pid %d from uid %d\n&quot;, sig, siginfo-&gt;si_pid, siginfo-&gt;si_uid);
+
+    char buf[24];
+    FILE *fp = fopen(&quot;msg.txt&quot;, &quot;r&quot;);
+
+    if (fgets(buf, 24, fp) != NULL) {
+        printf(&quot;%s\n&quot;, buf);
+    }
+
+    fclose(fp);
+}
+
+int main() {
+    struct sigaction act1;
+        act1.sa_sigaction = &amp;handle_sigusr1;
+        act1.sa_flags = SA_SIGINFO;
+
+    sigaction(SIGUSR1, &amp;act1, NULL);
+
+    while(1) { }
+
+    return(0);
+}
+</code></pre>
+<h1>2025-11-21</h1>
+<p>Today we will be covering threads! Real threads! (Not those phony Python/Ray threads which are actually super-heavy-duty processes that communicate via super-heavy-duty sockets.)</p>
+<h3>first: what exactly is a void pointer?</h3>
+<pre><code class="language-c">int main() {
+    int x = 42;
+    int *p = &amp;x;
+    p++; // adds to the pointer the size of the type of the value to which it points!
+
+    // But...if you have to deal with contiguous blocks of memory whose size you don't know:
+    void *p2 = &amp;x;
+    // Now, this is NOT ALLOWED:
+    p2++;
+    // To use a void pointer, we must first cast it, and then dereference:
+    int y = *(int *)p2;
+
+    // interestingly, we can create and array of void pointers! (same size of any other pointer)
+    void *ary[6];
+    ary[0] = &amp;x;
+    long l = 9182374;
+    ary[1] = &amp;l;
+}
+</code></pre>
+<h3>What is a thread?</h3>
+<ul>
+<li>It is a new stack! We just &quot;stack&quot; them on the top :)</li>
+<li>all part of the same memory segment (they all share the same heap, data, and code sections)</li>
+</ul>
+<pre><code> (etc)
+------------
+| STACK t1 |
+-----v------ &lt;- our new thread!
+|          |
+------------
+| STACK t0 |
+-----v------
+|          |
+|          |
+-----^------
+|   HEAP   |
+------------
+|   DATA   |
+------------
+|   CODE   |
+------------
+</code></pre>
+<ul>
+<li>remember that these are virtual address spaces, so the stacks might not literally be right on top of each other. The kernel handles all that for us.</li>
+<li>our program can't just make new stacks...we must ask the kernel through system calls!</li>
+</ul>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;limits.h&gt;
+#include &lt;pthread.h&gt;
+
+#define NT 4
+
+typedef struct {
+    int tn;
+} threadarg;
+
+int rets[NT];
+
+void * threadfcn(void *varg) {
+    threadarg *arg = (threadarg *) varg;
+
+    printf(&quot;in threadfcn %d\n&quot;, arg-&gt;tn);
+
+    int i = 0;
+    for(int j=0; j&lt;INT_MAX; j++) i++;
+
+    rets[arg-&gt;tn] = i;
+}
+
+int main() {
+    int i;
+
+    pthread_t tid[NT];
+    threadarg targs[NT];
+
+    for(i=0; i&lt;NT; i++)
+        targs[i].tn = i;
+
+    for(i=0; i&lt;NT; i++) {
+        // pthread_create is a wrapper for a bunch of syscalls
+        pthread_create(&amp;tid[i], NULL, threadfcn, (void *) &amp;targs[i]);
+    }
+
+    for(i=0; i&lt;NT; i++) {
+        pthread_join(tid[i], NULL);
+        printf(&quot;thread %d returned %d\n&quot;, i, rets[i]);
+    }
+
+    return(0);
+}
+</code></pre>
+<ul>
+<li>
+<p>why <code>void *</code>?</p>
+<ul>
+<li>Thread start routines use <code>void *</code> so they can accept and return a pointer to any type of data</li>
+<li>this lets us pass arbitrary arguments and results between threads.</li>
+</ul>
+</li>
+<li>
+<p>we do not have control over the order in which the threads are run!</p>
+</li>
+<li>
+<p>the threads are running in a completely different stack!  How are we going to return anything?!</p>
+<ul>
+<li>to return anything from stack to stack, we would need help from the kernel</li>
+</ul>
+</li>
+<li>
+<p>Or...we need to have a common space that each thread can access</p>
+</li>
+<li>
+<p>We create a global that lives in the data segment!</p>
+<ul>
+<li>one of the few appropriate uses of globals in C!</li>
+</ul>
+</li>
+<li>
+<p>How do we avoid concurrency problems?  We will just give each thread a unique space to write to :)</p>
+<ul>
+<li>otherwise we need lock mechanisms, etc. to deal with concurrency problems (will see later in Operating Systems!)</li>
+</ul>
+</li>
+</ul>
+<h3>gdb with threads</h3>
+<ul>
+<li>we can still use gdb!</li>
+</ul>
+<ol>
+<li>set a breakpoint in the thread function</li>
+<li><code>info threads</code> to see our threads (thread 1 is main)</li>
+<li><code>run</code>: gdb will stop us at breakpoint in first thread</li>
+<li><code>finish</code> to let that thread return</li>
+<li><code>continue</code> to move on and stop in the next thread at the same breakpoint</li>
+</ol>
+<h1>2025-11-24</h1>
+<ul>
+<li>Mysterious numbers being transmitted over radio</li>
+<li>Where were they from?  The British Royal Air Force on the southern tip of Cyprus!</li>
+<li>Meant to transmit signals to British spies in Soviet Union</li>
+<li>Claude Shannon, Manhattan Project</li>
+<li>Encoding images in sound</li>
+</ul>
+<h3>4 reasons we want to use C</h3>
+<ul>
+<li>others use it! (need to use libraries, etc.) - m3a</li>
+<li>file formats! (have easy access to bytes and bits, file system, etc.) - m3b</li>
+<li>fast! (crucial for some niche applications) - m3c</li>
+<li>device drivers! (interface between hardware device and kernel) - m3d</li>
+</ul>
+<blockquote>
+<p>Described milestone assignments (m3c, m3d)</p>
+</blockquote>
+<ul>
+<li>Talked about Russian illegals program :)</li>
+</ul>
+<h1>2025-12-01</h1>
+<h3>Recall:</h3>
+<pre><code>------------
+| STACK t1 |
+-----v------ &lt;- our new thread!
+|          |
+------------
+| STACK t0 |
+-----v------
+|          |
+|          |
+-----^------
+|   HEAP   |
+------------
+|   DATA   |
+------------
+|   CODE   |
+------------
+</code></pre>
+<ul>
+<li>
+<p>in order to create new thread, we must ask the kernel via a system call</p>
+</li>
+<li>
+<p>kernel adds it to the top</p>
+</li>
+<li>
+<p>two advantages:</p>
+<ul>
+<li>really quick: all the kernel has to do is allocate more memory</li>
+<li>simplifies data access: t1 can access the same heap, data, and code sections</li>
+</ul>
+</li>
+<li>
+<p><code>pthread_create(...)</code> is a wrapper for this system call to kernel</p>
+<ul>
+<li>recall that all that we had to do was modify an array <code>rets</code> in the data segment (being careful to ensure no overwriting occurs)</li>
+</ul>
+</li>
+<li>
+<p>In our example from two classes ago, the memory for <code>rets</code> was trivial (4 ints)</p>
+<ul>
+<li>simplest way to return from threads; common bc memory is cheap</li>
+</ul>
+</li>
+<li>
+<p>But what if we were extremely constrained in memory, or had a lot of data to return?</p>
+<ul>
+<li>we would need to control access so multiple threads don't write at same time (concurrency/race condition)</li>
+</ul>
+</li>
+</ul>
+<p>Threads being able to access the same memory space is a double edged sword:</p>
+<ul>
+<li>it is great to be able to write/read very easily/quickly to the same data, but...</li>
+<li>...what happens if thread t1 crashes?
+<ul>
+<li>the problem is not contained!  It could affect other threads and crash the whole program!</li>
+</ul>
+</li>
+<li>...what if we don't trust the thread?</li>
+</ul>
+<p>we want to isolate t1 and t0.<br />
+instead of threading, we want...</p>
+<h3>...Multiprocessing!</h3>
+<p>Instead of asking the kernel to make a new thread stack, we can ask it to clone our memory space!</p>
+<ul>
+<li>this is a whole new process, with its own stack, heap, data, and code segments</li>
+<li>called <code>fork()</code></li>
+</ul>
+<p>when we call fork, it makes an identical copy. That includes the stack! The function that is currently running is in the stack!<br />
+So all that stuff, the chain of function invocations, is also duplicated.<br />
+That means that the clone wakes up, and it just starts executing, right? It doesn't know the difference.<br />
+But the clone doesn't know any better, becuase it has the same memories!</p>
+<p>Only one way to find out which one is the parent, and which one is the child:</p>
+<ul>
+<li>the kernel will return the child's process id to the parent (stored in cpid)</li>
+<li>but when the child runs <code>fork()</code> in its stack frame, the kernel will return 0!</li>
+</ul>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/wait.h&gt;
+
+int main() {
+    int pid = getpid();
+    printf(&quot;my pid: %d\n&quot;, pid);
+
+    int cpid = fork();
+
+    // what would we happen if we did:
+    //
+    // for (int i=0; i&lt;100; i++) cpid = fork();
+    //
+    // &quot;fork bomb&quot;!
+
+    if(cpid == 0) {
+        // I am the child / clone
+        printf(&quot;help help I just realized I am the clone!!??\n&quot;);
+
+        return 0;
+    } else {
+        // I am the parent / original
+        printf(&quot;child pid: %d\n&quot;, cpid);
+
+        // collect return value of child
+        int r = wait(NULL); // if we didn't have this, we would notice our child become a zombie!
+
+        while(1) { }
+    }
+
+    return 0;
+}
+</code></pre>
+<p>Let's go and modify our previous thread program to use <code>fork</code> instead of <code>pthread_create</code>:</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;limits.h&gt;
+#include &lt;pthread.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/wait.h&gt;
+
+#define NT 4
+
+typedef struct {
+    int tn;
+} threadarg;
+
+// int rets[NT];
+
+void * threadfcn(void *varg) {
+    threadarg *arg = (threadarg *) varg;
+
+    printf(&quot;in threadfcn %d\n&quot;, arg-&gt;tn);
+
+    int i = 0;
+    int j;
+    for(j=0; j&lt;INT_MAX; j++)
+        i++;
+
+    //rets[arg-&gt;tn] = i;
+    // ^we can't do this!!
+    // each child process has a different data segment!!!
+    // the only way that we can share data is through a shared location like a temporary file on disk
+
+    char *fn = malloc(128 * sizeof(char));
+    sprintf(fn, &quot;tmp_%d.bin&quot;, getpid());
+    FILE *fp = fopen(fn, &quot;wb&quot;);
+    fwrite(&amp;i, sizeof(int), 1, fp);
+    fclose(fp);
+    free(fn);
+}
+
+int main() {
+    int i;
+    int r;
+    int cpid;
+    int wres;
+
+    //pthread_t tid[NT];
+    threadarg targs[NT];
+
+    for(i=0; i&lt;NT; i++)
+        targs[i].tn = i;
+
+    for(i=0; i&lt;NT; i++) {
+        cpid = fork();
+        if(cpid == 0) {
+            // &quot;Oh! I'm the clone, so I must go do work!&quot;
+            threadfcn((void *) &amp;targs[i]);
+            return 0; // VERY IMPORTANT TO RETURN IMMEDIATELY AFTER!
+        }
+        //pthread_create(&amp;tid[i], NULL, threadfcn, (void *) &amp;targs[i]);
+    }
+
+    for(i=0; i&lt;NT; i++) {
+        // order varies, unlike pthread_join where we wait on a specific thread id
+        // (just whichever child process happens to finish)
+        wres = wait(NULL); // becuase we pass NULL, wres will get cpid
+
+        char *fn = malloc(128 * sizeof(char));
+        sprintf(fn, &quot;tmp_%d.bin&quot;, wres);
+        FILE *fp = fopen(fn, &quot;rb&quot;);
+        fread(&amp;r, sizeof(int), 1, fp);
+        fclose(fp);
+        remove(fn); // delete file
+        free(fn);
+
+        //pthread_join(tid[i], NULL);
+        //printf(&quot;child %d returned %d\n&quot;, i, rets[i]);
+        printf(&quot;child %d returned %d\n&quot;, i, r);
+    }
+
+    return(0);
+}
+</code></pre>
+<ul>
+<li>closing demo: multiprocessing with <code>fork</code> is way slower than multithreading!!</li>
+<li>when is the cost in time worth it? see next class...</li>
+</ul>
+<h1>2025-12-03</h1>
+<h3>ipv4 tcp internet socket</h3>
+<ul>
+<li>
+<p>two computers (different kernels, running different processes) want to communicate with each other.</p>
+</li>
+<li>
+<p>they can't just spontaneously</p>
+</li>
+<li>
+<p>65k port numbers on each computer as entrypoints from the network</p>
+</li>
+<li>
+<p>process goes to kernel and says, &quot;I would like to make myself available to recieve a connection&quot;</p>
+</li>
+<li>
+<p>kernel creates a socket, and gives back socket id number to process</p>
+</li>
+<li>
+<p>that socket is assigned to a specific port number</p>
+</li>
+<li>
+<p>the process then <code>bind()</code>s and <code>listen()</code>s to the socket</p>
+</li>
+<li>
+<p>any data that goes through the specified port is routed to the process</p>
+</li>
+<li>
+<p>the kernel knows it is student10, but the network over which it communicates does not</p>
+<ul>
+<li>connections are routed via ip addresses!</li>
+</ul>
+</li>
+<li>
+<p>DNS keeps a table of hosts and ip addresses</p>
+</li>
+</ul>
+<p>kernel has &quot;sockaddress_in&quot; data structure contains ip address and hostname (asks DNS and comes back)</p>
+<ul>
+<li>both client and server have a port number!</li>
+</ul>
+<h3>Let's start in python:</h3>
+<p>recall our <code>client.py</code> program we wrote earlier:</p>
+<pre><code class="language-python">import socket
+
+HOST = &quot;student10.cse.nd.edu&quot;  # Server IP (localhost for testing)
+PORT = 9999        # Must match the server’s port
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect((HOST, PORT))
+    message = &quot;Hello, MD! Oct.1 2025 - from systems programming class&quot;
+    s.sendall(message.encode())
+    print(f&quot;Sent: {message}&quot;)
+    gotmesg = s.recv(1024)
+    print(gotmesg.decode())
+</code></pre>
+<h3>Now in C:</h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;math.h&gt;
+#include &lt;limits.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;netinet/in.h&gt;
+
+void print_banner(int sockfd)
+{
+    int n;
+    int buflen = 2048;
+    char buf[buflen];
+
+    memset(buf, 0, buflen);
+    n = read(sockfd, buf, buflen-1);
+
+    if(n &lt; 0)
+    {
+        perror(&quot;could not read&quot;);
+        exit(1);
+    }
+
+    printf(&quot;recv: %s\n&quot;, buf);
+
+    //memset(buf, 0, buflen);
+    //sprintf(buf, &quot;hi!&quot;);
+    n = write(sockfd, buf, strlen(buf));
+
+    if(n &lt; 0)
+    {
+        perror(&quot;could not write&quot;);
+        exit(1);
+    }
+}
+
+int main(int argc, char *argv[])
+{
+    int sockfd, portno, n;
+    struct sockaddr_in serv_addr;
+    struct hostent *server;
+
+    int buflen = 32;
+    char buf[buflen];
+
+    portno = atoi(argv[2]);
+    server = gethostbyname(argv[1]);
+
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+
+    if(sockfd &lt; 0)
+    {
+        perror(&quot;could not create the socket&quot;);
+        exit(1);
+    }
+
+    bzero((char *) &amp;serv_addr, sizeof(serv_addr));
+    serv_addr.sin_family = AF_INET;
+    bcopy((char *)server-&gt;h_addr, (char *)&amp;serv_addr.sin_addr.s_addr, server-&gt;h_length);
+    serv_addr.sin_port = htons(portno);
+
+    if(connect(sockfd, (struct sockaddr*)&amp;serv_addr, sizeof(serv_addr)) &lt; 0)
+    {
+        perror(&quot;socket could not connect&quot;);
+        exit(1);
+    }
+
+    // do something with socket
+    print_banner(sockfd);
+
+    close(sockfd);
+
+    return 0;
+}
+</code></pre>
+<h1>2025-12-05</h1>
+<blockquote>
+<p>A class like Data Structures looks inward. Systems Programming (this class) looks outward</p>
+</blockquote>
+<p>Last time we were talking about client-side sockets in C</p>
+<ul>
+<li>A socket is just &quot;my end&quot; of a network connection</li>
+<li>A network connection is like a telephone call</li>
+<li>The access points are the ports and sockets</li>
+<li>Remember, &quot;each side of a telephone call must have a phone&quot;!</li>
+<li>each socket has a port number and an ip address</li>
+</ul>
+<p>So, last time we were talking about &quot;dialing&quot;</p>
+<p>Today we will look at server-side!<br />
+<strong>Bind, Listen, Accept</strong></p>
+<pre><code class="language-c">#include &lt;errno.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+
+void handle_incoming_conn(int cl)
+{
+    int buflen = 256;
+    int rc;
+    char *buf = malloc(buflen * sizeof(char));
+    memset(buf, 0, buflen);
+
+    while((rc = read(cl, buf, buflen-1)) &gt; 0)
+    {
+        printf(&quot;read %d bytes: %s\n&quot;, rc, buf);
+        memset(buf, 0, buflen);
+    }
+
+    free(buf);
+
+    close(cl);
+}
+
+void handle_sigchld(int sig)
+{
+    wait(NULL);
+}
+
+int main()
+{
+    int sock, port, t, cl, cpid;
+
+    sock = socket(AF_INET, SOCK_STREAM, 0);
+
+    port = 8003;
+
+    signal(SIGCHLD, &amp;handle_sigchld);
+
+    struct sockaddr_in addr;
+    addr.sin_family = AF_INET;
+    addr.sin_addr.s_addr = INADDR_ANY;
+    addr.sin_port = htons(port);
+
+    t = bind(sock, (struct sockaddr *) &amp;addr, sizeof(addr));
+
+    if(t &lt; 0)
+    {
+        perror(&quot;could not bind&quot;);
+        return -1;
+    }
+
+    listen(sock, 5);
+
+    while(1)
+    {
+        cl = accept(sock, NULL, NULL);
+
+        cpid = fork();
+
+        if(cpid == 0)
+        {
+            handle_incoming_conn(cl);
+            return 0;
+        } else
+        {
+            close(cl);
+        }
+    }
+
+    close(sock);
+
+    return 0;
+}
+</code></pre>
+<ul>
+<li>
+<p>remember when we did this in python? remember that when we &quot;pick up the phone&quot;, a new phone materializes!</p>
+</li>
+<li>
+<p>i.e, upon accepting, the kernel creates a new socket through which we handle the incoming connection</p>
+</li>
+<li>
+<p>But...(like in python) we have an issue: our program is a single-threaded process, so we can only handle one connection at a time</p>
+</li>
+<li>
+<p>We could create a new thread, but we don't want to do this!!!</p>
+<ul>
+<li>if one connection causes the program to crash, everyone</li>
+</ul>
+</li>
+<li>
+<p>Example scenario: everyone in the classroom connects, and it's a multithreaded client socket program</p>
+<ul>
+<li>Every thread will share the same data and heap</li>
+<li>If we have a malicious user who gains control over their stack, they could access sensitive information in the heap</li>
+</ul>
+</li>
+<li>
+<p>We need to use multiprocessing instead of multithreading (need to use <code>fork</code> instead of <code>p_thread</code>)!</p>
+</li>
+<li>
+<p>both parent and child will close connection to socket independently!</p>
+</li>
+<li>
+<p>we can use <code>telnet</code> to open a TCP connection and type bytes back and forth</p>
+</li>
+<li>
+<p>We have another issue!</p>
+</li>
+</ul>
+<p><code>SIGCHLD</code> - whenever a child stops or is terminated, the kernel will send this signal to the parent</p>
+<ul>
+<li>&quot;remember to clean up your zombie children&quot; :)</li>
+</ul>
+<h1>2025-12-08</h1>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/L%C3%B3tus_Bridge">Lótus Bridge</a><br />
+on one side of the bridge, people drive on the left, and on the other, they drive on the right!</p>
+</blockquote>
+<ul>
+<li>C is great for many things!  For example, device drivers!  But say we needed to write a driver, but don't want to write our whole program in C!<br />
+concept: language binding (the glue/interface that will connect the worlds of different languages, like the Lotus bridge)</li>
+</ul>
+<p>libgeodist.c: (pretend this is a complicated c program to interface with a device or parallelize lots of things)</p>
+<pre><code class="language-c">#include &lt;math.h&gt;
+#include &lt;string.h&gt;
+
+#include &quot;libgeodist.h&quot;
+
+#define pi 3.14159265358979323846
+
+double deg2rad(double deg) { return (deg * pi / 180); }
+double rad2deg(double rad) { return (rad * 180 / pi); }
+
+double geodist(double lat1, double lon1, double lat2, double lon2) {
+    double theta, dist;
+    if ((lat1 == lat2) &amp;&amp; (lon1 == lon2)) {
+        return 0;
+    } else {
+        theta = lon1 - lon2;
+        dist = sin(deg2rad(lat1)) * sin(deg2rad(lat2)) + cos(deg2rad(lat1)) * cos(deg2rad(lat2)) *    cos(deg2rad(theta));
+        dist = acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        return (dist);
+    }
+}
+
+int palindrome(char *s) {
+    char *head = s;
+    char *tail = s + strlen(s) - 1;
+
+    while(head &lt; tail &amp;&amp; *head == *tail) {
+        head++;
+        tail--;
+    }
+
+    if(head &gt;= tail)
+        return 1;
+
+    return 0;
+}
+</code></pre>
+<ul>
+<li>
+<p>marshalling - converting data from one format to another (different from casting, which may be a lossy conversion - e.g. float to int)</p>
+</li>
+<li>
+<p>This is how libraries like numpy or pytorch can do things really fast in python (with small fixed cost to marshall data)</p>
+</li>
+<li>
+<p>Hey! palindrome has pointers! How do we interface with it in python?</p>
+<ul>
+<li>Just like the other variables, there is a char pointer ctype!</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>anecdote about living in germany and saying a hyperbole -- translated correctly, but not appreciated in cultural context</p>
+</blockquote>
+<ul>
+<li>we also need to marshall data in a &quot;cultural&quot; manner - it's not very pythonic to return 1/0 for true/false</li>
+</ul>
+<p>cgeodist.py:</p>
+<pre><code class="language-python">import pathlib
+import ctypes
+
+class cgeodist:
+    def __init__(self):
+        self.libname = pathlib.Path().absolute() / &quot;libgeodist.so&quot;
+        self.c_lib = ctypes.CDLL(self.libname)
+
+    def geodist(self, lat1, lng1, lat2, lng2):
+        lat1 = ctypes.c_double(lat1)
+        lng1 = ctypes.c_double(lng1)
+        lat2 = ctypes.c_double(lat2)
+        lng2 = ctypes.c_double(lng2)
+
+        self.c_lib.geodist.restype = ctypes.c_double
+        ret = self.c_lib.geodist(lat1, lng1, lat2, lng2)
+        return ret
+
+    def palindrome(self, word):
+        word = word.encode('utf-8')
+        word = ctypes.c_char_p(word)
+
+        self.c_lib.palindrome.restype = ctypes.c_int
+        ret = self.c_lib.palindrome(word)
+
+        if(ret == 1):
+            ret = True
+        else:
+            ret = False
+
+        return ret
+</code></pre>
+<p>now we can use our c library as a python library!</p>
+<pre><code class="language-python">from cgeodist import *
+
+gd = cgeodist()
+
+dist = gd.geodist(41.643274, -86.382732, 52.382344, 11.348448)
+print(dist)
+
+p = gd.palindrome(&quot;civic&quot;)
+print(p)
+</code></pre>
+<p>Why would we use language bindings? If you have to access another language for something:</p>
+<ol>
+<li>Special file format</li>
+<li>Device driver</li>
+<li>Speed (parallelization, access to gpu, etc.)</li>
+</ol>
+<p>&quot;marshalling is the thing that you do to connect, technically and culturally, one language's parts to another.&quot;</p>
+<h1>2025-12-10</h1>
+<p>Final Exam Review<br />
+<a href="CSE20289FinalExamPractice.pdf">CSE20289 Final Exam Practice</a></p>
+
+            </main>
+
+            <footer>
+                <section>
+                    <p>Content licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, code under <a href="https://opensource.org/licenses/MIT">MIT</a>.  Last <a href="https://github.com/maxficco/maxficco.com">updated</a> 2026 by Max Ficco.</p>
+                </section>
+            </footer>
+        </div>
+    </body>
+</html>
