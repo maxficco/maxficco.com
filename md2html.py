@@ -38,7 +38,14 @@ if __name__ == "__main__":
         print("Usage: ./md2html.py input.md [output.html]")
         sys.exit(1)
 
-    md_file = sys.argv[1]
-    html_file = sys.argv[2] if len(sys.argv) > 2 else md_file.replace(".md", ".html")
+    if sys.argv[1] == "-F":
+        from pathlib import Path
+        folder_path = Path(sys.argv[2])
+        for file_path in folder_path.iterdir():
+            if file_path.is_file():
+                build_page(file_path.name, file_path.name.replace(".md", ".html"))
+    else:
+        md_file = sys.argv[1]
+        html_file = sys.argv[2] if len(sys.argv) > 2 else md_file.replace(".md", ".html")
 
-    build_page(md_file, html_file)
+        build_page(md_file, html_file)
